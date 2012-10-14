@@ -1,0 +1,176 @@
+body,
+html,
+div, ul {
+     margin: 0;
+     padding:0;
+}
+body {
+	background: url("resources/tiny_grid.png") 0px -3px;
+	font-family: Helvetica, arial;	
+}
+header {
+	width: 100%;
+	background:white;
+	margin: 24px 27px 1px 27px;
+	padding: 18px 25px 18px 25px;
+	font-size: 34px;
+	font-weight: bold;	
+}
+/**********************************************************
+Applist
+**********************************************************/
+ul#applist {
+	text-decoration: none;
+	list-style-type: none;
+}
+	ul#applist li{
+		float: left;
+		overflow: hidden;
+		position: relative;		
+	}
+	ul#applist li.placeholder{		
+		background: none;		
+	}	
+	
+		ul#applist li a {				
+			display: block;
+			text-decoration: none;
+			color: black;
+		}
+		ul#applist li a#addapp {				
+			opacity: 0.25;
+		}	
+		ul#applist li a#addapp:hover,
+		ul#applist li a#addapp:hover {				
+			opacity: 1;
+		}
+			ul#applist li a section {			
+			}				
+				
+			ul#applist li a h2{
+				text-align: center;
+				display: block;				
+				margin: 0px auto 0 auto;				
+			}
+		.largetile {
+			width: 200px;
+			height: 200px;
+			
+		}
+			ul#applist li.largetile a {
+				width: 200px;
+				height: 200px;
+			}
+				ul#applist li.largetile a section {
+				height: 150px;
+				width: 200px;
+				}
+				ul#applist li.largetile a h2{
+					font-size: 24px;
+				}					
+		.smalltile {
+			width: 100px;
+			height: 100px;			
+		}
+			ul#applist li.smalltile a {
+				width: 100px;
+				height: 100px;
+			}
+			ul#applist li.smalltile a h2{
+				font-size: 17px;
+			}
+				ul#applist li.smalltile a section {
+					height: 75px;
+					width: 100px;
+					background-size: 50px !important;
+				}
+/***********Appoptions************************************/
+section#appoptions {	
+	float: right;
+	display: block;
+	position: relative;
+	
+}
+	section#appoptions div#trash {
+		height: 40px;
+		width: 40px;		
+		position: relative;
+		float: right;
+		background: url('resources/noun_project_3823.svg') no-repeat;
+		background-size: auto 40px; 
+		opacity: 0;
+	}
+	section#appoptions div#trash.ondrag {
+		opacity: 1;
+	}
+	section#appoptions div#trash.onhover {
+		background: url('resources/noun_project_3058.svg') no-repeat;
+		background-size: auto 40px; 
+	}
+/**********************************************************
+Liblist
+**********************************************************/		
+ul#liblist {
+	text-decoration: none;
+	list-style-type: none;
+}
+	ul#liblist li{
+		float: left;
+		overflow: hidden;
+		position: relative;		
+	}	
+		ul#liblist li a {				
+			display: block;
+			text-decoration: none;
+			color: black;
+		}
+		ul#liblist li a#addapp {				
+			opacity: 0.25;
+		}	
+		ul#liblist li a#addapp:hover,
+		ul#liblist li a#addapp:hover {				
+			opacity: 1;
+		}
+		ul#liblist li a.owned{
+			opacity: 0.5;
+		}
+			ul#liblist li a section {			
+			}				
+				
+			ul#liblist li a h2{
+				text-align: center;
+				display: block;				
+				margin: 0px auto 0 auto;				
+			}
+		.largetile {
+			width: 200px;
+			height: 200px;
+			
+		}
+			ul#liblist li.largetile a {
+				width: 200px;
+				height: 200px;
+			}
+				ul#liblist li.largetile a section {
+				height: 150px;
+				width: 200px;
+				}
+				ul#liblist li.largetile a h2{
+					font-size: 24px;
+				}					
+		.smalltile {
+			width: 100px;
+			height: 100px;			
+		}
+			ul#liblist li.smalltile a {
+				width: 100px;
+				height: 100px;
+			}
+			ul#liblist li.smalltile a h2{
+				font-size: 17px;
+			}
+				ul#liblist li.smalltile a section {
+					height: 75px;
+					width: 100px;
+					background-size: 50px !important;
+				}		

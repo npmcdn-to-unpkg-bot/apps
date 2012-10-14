@@ -1,0 +1,299 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Helvetica, arial;
+	background:#333;
+	color:#fcef55;
+}
+::-webkit-input-placeholder {
+color:#fff;
+}
+
+:-moz-placeholder {  
+color:#fff;  
+}
+header {
+	width: 100%;
+	height:180px;
+	background:url(grafiken/header.png) no-repeat;
+	background-position: 0 -100px;
+	background-size:cover;
+	position: fixed;
+	top: 0px;
+	z-index: 1;
+	box-shadow:0 1px 2px rgba(0,0,0,0.7);
+}
+	header #vorhang {
+	height:80px;
+	width:100%;
+	background:url(grafiken/vorhang.png) repeat-x;
+	background-position: 0 -70px;
+	}
+	header nav {
+	position:relative;
+	top:0px;
+	left:20px;
+	}
+	header a{				
+		color: black;
+		float: left;
+		font-weight: bold;
+		margin: 5px 20px 5px 10px;
+	}
+		header a img{
+			height: 32px;
+			margin-left:15px;
+		}
+		header nav #watchlist img {
+			margin-left:25px;
+		}
+		header a span{		
+			margin: 5px 0px 0 0px;
+			color:#fff;
+			font-size:2em;
+			text-shadow:0 1px 2px rgba(0,0,0,1);
+			font-family:Myriad Pro;
+		}
+		header a span:hover {
+		text-decoration:underline;
+		}
+	header form{
+		position:relative;
+		top:0px;
+		right:20px;
+		float:right;
+	}
+		header form #query{
+			width: 200px;
+			border: 1px solid black;
+			padding: 5px;
+			border-radius:8px;
+			border:none;
+			box-shadow:inset 0 1px 2px rgba(0,0,0,0.4), 0 1px 2px rgba(255,255,255,0.35);
+			background:rgba(0,0,0,0.15);
+			color:#fff;
+			text-shadow:0 1px 2px rgba(0,0,0,0.5);
+			font-family:Tahoma;
+			outline:none;
+		}
+		header form #submit{
+			height: 0px;
+			width: 0px;
+			border: none;
+			opacity:0;
+			/*background: url("http://thebluneproject.de/aufbau/pictograms/search.svg") no-repeat;
+			background-size: 20px 20px;
+			color: white;
+			cursor: pointer; */
+			padding: 0px;
+			margin: 0px;
+		}
+		header #header-info {
+		position:relative;
+		top:27px;
+		left:5px;
+		}
+		header #header-info h3 {
+		color:rgba(255,255,255,1);
+		text-shadow:0 1px 2px black;
+		font-size:0.93em;
+		font-family:Myriad Pro;
+		font-weight:normal;
+		}
+#mode {
+	position: relative;
+	top: 170px;
+	z-index: 0;	
+}
+#mode h1 {
+font-size:3em;
+font-weight:300;
+font-family:Myriad Pro;
+margin-left:10px;
+}
+#mode h1 span {
+font-size:0.5em;
+}
+	#mode #result_movie {
+		margin:auto;
+		width:95%;
+	}
+		#mode #result_movie li {
+			float: left;
+			margin:10px 10px 50px 10px;
+			background:url(grafiken/li-bg.png);
+			border:5px solid #124F75;
+			outline:5px solid #0F5D8E;
+			padding:0 5px 5px 5px;
+			width:280px;
+		}
+			#mode #result_movie li a{
+			color: black;
+			}
+				#mode #result_movie li a #thumbnail-box {
+					width:280px;
+					height:280px;
+					overflow:hidden;
+					box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+				}	
+				#mode #result_movie li a .img-overlay {
+				margin:0 0 -284px 0;
+				position:relative;
+				z-index:2;
+				}
+				#mode #result_movie li a img{
+					min-width: 280px;
+				}
+				#mode #result_movie li a #movie_short_info {
+				padding-bottom:7px;
+				}
+				#mode #result_movie li a #movie_short_info span:first-child{
+					text-align:center;
+					color:#fff;
+					font-weight:bold;
+					text-shadow:0 1px 2px rgba(0,0,0,0.7);
+					font-family:Myriad Pro;
+					padding-top:7px;
+					height:40px;
+					display:block;
+					overflow:hidden;
+				}
+				#mode #result_movie li a #movie_short_info span:last-child {
+				font-size:0.7em;
+				font-family:Helvetica, Arial;
+				font-weight:normal;
+				display:block;
+				text-align:center;
+				color:#fff;
+				text-shadow:0 1px 2px rgba(0,0,0,0.45);
+				}
+				
+	#mode ul#result_person {
+		position: relative;
+	}
+		#mode ul#result_person li {
+			float: left;
+			margin: 5px;
+		}
+			#mode ul#result_person li a{
+				width: 140px;
+				color: black;
+				display: block;	
+			}
+				#mode ul#result_person li a img{				
+					height: 210px;
+					width: 140px;
+					box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+				}
+				#mode ul#result_person li a div#personname{	
+					height: 40px;
+					overflow: hidden;
+					text-align:center;
+					color:#fff;
+					font-weight:bold;
+					font-family:Myriad Pro;
+				}				
+@media screen and (max-width: 730px) {
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: Helvetica, arial;
+	}
+	header {
+		width: 100%;
+		height:90px;
+		background:url(grafiken/header_handy.png) no-repeat;
+		background-position:0 0;
+		position:fixed;
+		top: 0px;
+		display:block;
+	}	
+	 header #vorhang {
+	 display:none;
+	 }
+	  header nav {
+		margin:auto;
+		width: 220px;
+		float:none;
+		position:relative;
+		top:0;
+	  }
+		header nav a{				
+			color: black;
+			float: left;
+			font-weight: bold;
+			margin:5px 5px 5px 5px;
+		}	
+		header nav a img {
+			margin-left:15px;
+		}
+		header nav #watchlist img {
+			margin-left:25px;
+		}
+		header nav span {
+		font-size:1em;
+		}
+		header form{
+			width:95%;
+			margin:20px auto 0 auto;
+			float:none;
+			top:0;
+			right:0;
+			position:relative;
+		}		
+				header form #query{
+					width:97%;
+				}
+				header form #submit{
+					height:0;
+					width:0;
+					border:none;
+					opacity:0;
+					/*background: url("http://thebluneproject.de/aufbau/pictograms/search.svg") no-repeat;
+					background-size: 20px 20px;
+					color: white;
+					cursor: pointer;
+					float: right; */
+					padding:0;
+					margin:0;
+				}
+		header #header-info {
+		display:none;
+		}
+	#mode {
+		position: relative;
+		top:85px;
+		text-align:center;
+	}
+	#mode h1 {
+	font-size:2em;
+	}
+	#mode h1 span {
+	font-size:0.5em;
+	}
+	#mode #result_movie {
+	margin:0;
+	width:auto;
+	}
+	#mode #result_movie li {
+	width:138px;
+	margin:5px;
+	border:3px solid #124F75;
+	outline:3px solid #0F5D8E;
+	padding:3px;
+	}
+	#mode #result_movie li a  .img-overlay {
+	display:none;
+	}
+	#mode #result_movie li a #thumbnail-box {
+	width:138px;
+	height:138px;
+	}
+	#mode #result_movie li a #movie_short_info {
+	border-bottom:none;
+	padding:1px 1px 5px 1px;
+	}
+	#mode #result_movie li #ticketborder {
+	display:none;
+	}
+}

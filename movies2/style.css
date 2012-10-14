@@ -1,0 +1,71 @@
+body,
+html,
+div, 
+ul,
+input{
+    margin: 0;
+    padding:0;
+	border: 0;
+	text-decoration: none;
+	border-radius: none;
+	-webkit-appearance: none;
+	outline: 0;
+}
+body {
+	background: black;
+}
+header#searchheader {
+	width: 100%;
+	height: 50px;	
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+	header#searchheader form#searchform {
+	}
+		header#searchheader form#searchform input {
+			background: lightgray url("resources/search2.png") no-repeat right;
+			height: 50px;
+			width: 100%;
+			font-size: 24px;
+			box-shadow: 0px 0px 5px black inset;
+		}
+		ul.ui-autocomplete {
+			width: 100% !important;
+			background: white;
+		}
+			ul.ui-autocomplete li {
+			}
+			ul.ui-autocomplete li:nth-child(odd){
+				background: grey;
+			}
+			ul.ui-autocomplete li:nth-child(even){
+				background: lightgrey;
+			}
+				ul.ui-autocomplete li  a{
+				}
+		.ui-autocomplete-loading { 
+			/*insert style for loading input field here*/
+		}
+
+footer#menu {
+}
+		section#checkin {
+			width: 150px;
+			height: 75px;
+			background: lightgrey;
+			position: fixed;
+			bottom: 50px;
+			margin: 0 auto;
+			border-top-left-radius: 75px;
+			border-top-right-radius: 75px;
+		}
+		section#bottombar {
+			width: 100%;
+			height: 50px;
+			background: lightgray;
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+		}
+		

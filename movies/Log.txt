@@ -1,0 +1,19 @@
+--- 29.07 ---
+Scrollen verhindern
+Css bearbeitet
+html bearbeitet
+
+....great!(23:43)
+
+--- 30.07 ---
+Ein paar neue Grafiken hinzugefügt
+ - Der Vorhang wird noch besser bearbeitet
+ 
+ ...badam!(18:12)...mache auch hoffentlich gleich was :D
+
+--- 31.07 ---
+ ...wie wärs wenn mit nem glossy background für den body, so mit eher dunkleren farbtönen?? könntest du
+	ja machen wenn du zeit hast. Bin auch gerade dabei nen loader gif zu machen für die live search :P
+
+--- 2.08 ---
+CSS und Image Overlay

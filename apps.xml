@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<apps>
+	<app id="1">
+		<name>Movies</name>
+		<url>http://movies.thebluneproject.de/</url>
+		<iconurl>http://www.thebluneproject.de/apps/resources/drama.svg</iconurl>
+		<description>Movies is the best way to organize your viewing experience. Manage your personal files. keep a watchlist. Be reminded when a movie you want to see is broadcasted....</description>
+	</app>	
+	<app id="2">
+		<name>Personal Record</name>
+		<url>http://apps.thebluneproject.de/personalrecord/</url>
+		<iconurl>http://www.thebluneproject.de/apps/resources/person.svg</iconurl>
+		<description>Add and edit your basic Information according to your changing environment.</description>
+	</app>	
+	<app id="3">
+		<name>Movies2</name>
+		<url>http://www.thebluneproject.de/apps/movies2/index.php</url>
+		<iconurl>http://www.thebluneproject.de/apps/resources/drama.svg</iconurl>
+		<description>Movies is the best way to organize your viewing experience. Manage your personal files. keep a watchlist. Be reminded when a movie you want to see is broadcasted....</description>
+	</app>	
+</apps>
