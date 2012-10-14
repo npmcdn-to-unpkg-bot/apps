@@ -18,64 +18,42 @@
 		
 	</head>
 	<body onload="adjust()" onresize="adjust()">
-		<section id="folder">
-			<div id="label">
-				<div id="top">
+		<div id="paperwork">
+			<div id="paperworkbackground">
+				<div class="paper" id="still">					
 				</div>
-				<div id="bottom">
-					<div id="border">
-					</div>
+				<div class="paper" id="left">
 				</div>
-				<span class="rotate">Personal Record</span>
-			</div>
-			<div id="foldercontent">
-				<div id="paperwork">
-					<div id="paperworkbackground1">
-						<div class="paper">					
-						</div>
-						<div class="paper" id="left">
-						</div>
-						<div class="paper" id="right">
-						</div>	
-					</div>
-					<div id="paperworkbackground2">
-						<div class="paper">					
-						</div>
-						<div class="paper" id="left">
-						</div>
-						<div class="paper" id="right">
-						</div>	
-					</div>	
-					<div id="paperworkcontent1">
-						<form>
-							<label for="firstname">First Name:</label>
-							<input type="text" id="firstname" name="firstname" />
-						<br>
-							<label for="lastname">Last Name:</label>
-							<input type="text" id="lastname" name="lastname" />			
-						<br>	
-							<label for="birthday">Date of Birth:</label>
-							<input type="date" id="birthday" name="birthday" />
-						<br>	
-							<label for="gender">Gender:</label>
-							<input type="text" id="gender" name="gender" />
-						<br>	
-							<label for="email">Email:</label>
-							<input type="email" id="email" name="email" />
-						<br>	
-							<label for="telephone">Telephone:</label>
-							<input type="tel" id="telephone" name="telephone" />
-						<br>	
-							<label for="homepage">Homepage:</label>
-							<input type="url" id="homepage" name="homepage" />
-						<br>	
-							<button onclick="save()">Save</button>
-						</form>
-					</div>									
-					<div style="clear: both"></div>
-				</div>
-			</div>
+				<div class="paper" id="right">
+				</div>	
+			</div>					
+			<div id="paperworkcontent">
+				<form>
+						<label for="firstname">First Name:</label>
+						<input type="text" id="firstname" name="firstname" />
+					<br>
+						<label for="lastname">Last Name:</label>
+						<input type="text" id="lastname" name="lastname" />			
+					<br>	
+						<label for="birthday">Date of Birth:</label>
+						<input type="date" id="birthday" name="birthday" />
+					<br>	
+						<label for="gender">Gender:</label>
+						<input type="text" id="gender" name="gender" />
+					<br>	
+						<label for="email">Email:</label>
+						<input type="email" id="email" name="email" />
+					<br>	
+						<label for="telephone">Telephone:</label>
+						<input type="tel" id="telephone" name="telephone" />
+					<br>	
+						<label for="homepage">Homepage:</label>
+						<input type="url" id="homepage" name="homepage" />
+					<br>	
+						<button onclick="save()">Save</button>
+				</form>
+			</div>									
 			<div style="clear: both"></div>
-		</section>
+		</div>	
 	</body>
 </html>

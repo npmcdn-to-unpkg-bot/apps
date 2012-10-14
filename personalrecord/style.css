@@ -7,98 +7,47 @@ div, ul {
 	 border: 0;
 }
 body {
-background: /*url("resources/wood.jpg")*/ black;
+background: url("resources/bluegrid.jpg") black;
 font-family: x-files, arial;
 }
-/****************************************
-Folder
-****************************************/
-section#folder {
-	width: 100%;
-	margin: 0px auto 0 auto;
-	position: relative;
-}
-	section#folder div#label {		
-		height: 250px;		
-		float: left;	
-		position:relative;
-	}
-		section#folder div#label div#top {	
-			height: 200px;
-			width: 100%;
-			background: #E4C180;
-			border-top-left-radius: 25px;
-			border-bottom-left-radius: 25px;
-		}
-		section#folder div#label div#bottom {	
-			height: 50px;
-			width: 100%;
-			background: #E4C180;
-		}
-			section#folder div#label div#bottom div#border {	
-			height: 50px;
-			width: 100%;
-			border-top-right-radius: 25px;
-			background: black;
-			}
-		section#folder div#label span {
-			position: absolute;
-			top: 80px;
-			
-			-webkit-transform: rotate(-90deg); 
-			-moz-transform: rotate(-90deg);	
-		}
-		
-	section#folder div#foldercontent {
-		height: 800px;		
-		float: left;
-		background: #E4C180;
-		border-bottom-left-radius: 50px;
-		max-width: 1500px;
-	}
 /****************************************
 Paperwork
 ****************************************/
 div#paperwork {		
-	margin: 10px;
-	padding: 0px 0 0px 0px;
+	max-width: 750px;
+	margin: 10px auto 10px auto;
 	position: relative;	
 	z-index: 1;
-}
-	div#paperwork div#paperworkbackground2 {
-		display: none;
+}	
+	div#paperwork div#paperworkbackground div.paper{	
+		height: 100%;		
+		background: white;
+		position: absolute;		
+		max-width: 750px;
+		box-shadow: 0px 0px 15px black;
+		-moz-box-shadow: 0px 0px 15px black;
+		-webkit-box-shadow: 0px 0px 15px black;
+		box-shadow: 0px 0px 15px black;
+	}	
+	div#still {
+		z-index: 3;
+	}	
+	div#left {		
+		z-index: 2;		
+		-webkit-transform: rotate(0.5deg);
+		-moz-transform: rotate(0.5deg);
+		-o-transform: rotate(0.5deg);
+		-ms-transform: rotate(0.5deg);
 	}
-	div#paperwork div#paperworkbackground2 div.paper{
-		left: 750px;
+	div#right {
+		z-index: 1;		
+		-webkit-transform: rotate(-0.8deg);
+		-moz-transform: rotate(-0.8deg);
+		-o-transform: rotate(-0.8deg);
+		-ms-transform: rotate(-0.8deg);
 	}
-		div.paper {	
-			height: 100%;		
-			background: white;
-			position: absolute;		
-			max-width: 730px;
-			z-index: 3;
-			box-shadow: 0px 0px 15px black;
-			-moz-box-shadow: 0px 0px 15px black;
-			-webkit-box-shadow: 0px 0px 15px black;
-			box-shadow: 0px 0px 15px black;
-		}	
-		div#left {
-			z-index: 2;		
-			-webkit-transform: rotate(0.5deg);
-			-moz-transform: rotate(0.5deg);
-			-o-transform: rotate(0.5deg);
-			-ms-transform: rotate(0.5deg);
-
-		}
-		div#right {
-			z-index: 1;		
-			-webkit-transform: rotate(-0.8deg);
-			-moz-transform: rotate(-0.8deg);
-			-o-transform: rotate(-0.8deg);
-			-ms-transform: rotate(-0.8deg);
-
-		}
-	div#paperworkcontent1 {
+	div#paperworkcontent {
+		max-width: 750px;
 		position: relative;
 		z-index: 4;		
 	}

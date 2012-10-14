@@ -1,45 +1,15 @@
 function adjust () {
 	//kleinauflösende Anzeiggeräte ausschließen
-	if(window.innerWidth >= 500) {
-		//ermitteln, ob Displaymaße hochformat/querformat besitzen
-		if(window.innerWidth < window.innerHeight) {
-			//Wenn Bildschirm im Hochformat soll nur eine "Seite" des PersonalRecord angezeigt werden
-			//ermitteln der labelbreite sowie abziehen des "px" strings
-			labelwidth = Math.round(window.innerWidth/15);			
-			$('#label').css('width',labelwidth);
-			labelwidth = $('#label').css('width')
-			labelwidthnumber = labelwidth.replace('px','');
-			//berechnung der eigentlichen contentbreite durch abzug der labelbreite
-			folderwidth = window.innerWidth-labelwidthnumber;
+	if(window.innerWidth >= 500) {		
 			//setzen der Breite
-			$('#foldercontent').css('width',folderwidth);
+			$('#paperworkcontent').css('width',window.innerWidth);
 			//setzen der Höhe
 			folderheight = window.innerHeight;			
-			$('#foldercontent').css('height',folderheight);
+			$('#paperworkcontent').css('height',window.innerHeight);
 			//
 			//Dasselbe nun für paperwork aber reduziert um jeweils 20
 			//
-			$('.paper').css('width',folderwidth-20);
-			$('.paper').css('height',folderheight-20);
-		} else {
-			//Wenn Bildschirm im Querformat sollen zwei "Seiten" des PersonalRecord angezeigt werden
-			//ermitteln der labelbreite sowie abziehen des "px" strings
-			labelwidth = Math.round(window.innerWidth/15);			
-			$('#label').css('width',labelwidth);
-			labelwidth = $('#label').css('width')
-			labelwidthnumber = labelwidth.replace('px','');
-			//berechnung der eigentlichen contentbreite durch abzug der labelbreite
-			folderwidth = window.innerWidth-labelwidthnumber;
-			//setzen der Breite minus einem sicherheitsabzug, da scrollbars entstehen können
-			$('#foldercontent').css('width',folderwidth-20);
-			//setzen der Höhe
-			folderheight = window.innerHeight;			
-			$('#foldercontent').css('height',folderheight);
-			//
-			//Dasselbe nun für paper aber reduziert um jeweils 20
-			//
-			$('.paper').css('width',folderwidth-20);
-			$('.paper').css('height',folderheight-20);
-		}
+			$('.paper').css('width',window.innerWidth-20);
+			$('.paper').css('height',window.innerHeight-20);		
 	}
 }
