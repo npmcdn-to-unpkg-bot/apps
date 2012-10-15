@@ -23,60 +23,6 @@ return myMatches;
 function resetAlign () {
 	//testzeile gibt screenbreite aus
 	//$("#Header").html(window.innerWidth);
-	
-	//Überprüft bestimme Größenparameter
-	//hier: ob screenbreite größer 1000px
-	if (window.innerWidth >= 1000) {
-	
-		//festlegung der "tilegröße" auf die im stylesheet notierten Werte
-		for(i = 1; i < document.getElementsByName("alignMe").length; i++)
-		{
-		document.getElementsByName("alignMe")[i].className = "largetile";		
-		}		
-		//Margin dieser Tiles in Abhängigkeit von der Fensterbreite berechnen...
-		//
-		//
-		//
-		//Fortschritt hier.
-		//
-		//
-		//
-		//
-		var newMargin = ((window.innerWidth - 1000) / 10);				
-		//Headerobjekt justieren
-		document.getElementById("Header").style.width = (window.innerWidth - ((2*newMargin))) + "px";					
-		//Tiles per stylesheet angabe festlegen.
-		for(i = 0; i < document.getElementsByName("alignMe").length; i++)
-		{
-		document.getElementsByName("alignMe")[i].style.marginLeft = newMargin + "px";
-		document.getElementsByName("alignMe")[i].style.marginRight = newMargin + "px";
-		}			
-	
-	}	else {
-	
-		//festlegung der "tilegröße" auf 100px
-		for(i = 1; i < document.getElementsByName("alignMe").length; i++)
-		{
-		document.getElementsByName("alignMe")[i].className = "smalltile";		
-		}
-		//Margin einzelner objekte in Abhängigkeit von der Fensterbreite berechnen...
-		var newMargin = ((window.innerWidth - 500) / 10);				
-		//zwischendurch Headerobjekt justieren
-		document.getElementById("Header").style.width = (window.innerWidth - ((2*newMargin))) + "px";
-		//....und per stylesheet angabe festlegen.				
-		for(i = 0; i < document.getElementsByName("alignMe").length; i++)
-		{
-		document.getElementsByName("alignMe")[i].style.marginLeft = newMargin + "px";
-		document.getElementsByName("alignMe")[i].style.marginRight = newMargin + "px";
-		}			
-	
-	}
-}
-
-//Funktion wird onresize getriggert, arrangiert also immer die quadrate optimal.
-function resetAlign2 () {
-	//testzeile gibt screenbreite aus
-	//$("#Header").html(window.innerWidth);
 	//header anpassen
 	$("#Header").css('width', window.innerWidth-104);
 	

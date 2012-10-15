@@ -21,7 +21,7 @@
 		<!-- Meta -->
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">		
 	</head>    
-    <body onload="resetAlign2()" onresize="resetAlign2()">		
+    <body onload="resetAlign()" onresize="resetAlign()">		
 		<header id="Header" name="alignMe">
 			Apps
 			<section id="appoptions">
