@@ -10,8 +10,7 @@
 		<!--Dropbox-->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.5.0/dropbox.min.js"></script>
 		<!-- Javascript -->
-		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>	
-		<script type="text/javascript" src="storage.js"></script>	
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>		
 		<script type="text/javascript" src="script.js"></script>
 		<script type="text/javascript" src="structure.js"></script>
 		<script type="text/javascript" src="functions.js"></script>			

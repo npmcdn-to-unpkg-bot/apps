@@ -60,7 +60,7 @@ $(document).ready(function() {
 		handle: 'section',
 		//start event ruft funktion auf
 		start: function() {
-			resetAlign2();			
+			resetAlign();			
 		},
 		//event, das bei neuanordnung der dom triggert
 		update: function() {

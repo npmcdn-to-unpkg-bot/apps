@@ -19,10 +19,81 @@ return myMatches;
 ///////////////////////////////////////////////////////////
 //	 Funktionen
 ///////////////////////////////////////////////////////////
+////////////////////////////
+//Storage 
+////////////////////////////
+//	
+//Dropbox
+//
+setDropbox = function() {
+	stringToStore = 'dropbox';	
+	localStorage.setItem('Storage',stringToStore);	
+	alert("Dropbox as setting saved");
+	$(location).attr('href','http://apps.thebluneproject.de/');
+}
+	
+////////////////////////////
+//Storage Error Handling
+////////////////////////////	
+var showError = function(error) {
+	if (window.console) {  // Skip the "if" in node.js code.
+		console.error(error);
+	}
+
+	switch (error.status) {
+		case 401:
+			// If you're using dropbox.js, the only cause behind this error is that
+			// the user token expired.
+			// Get the user through the authentication flow again.					
+			alert("error 401: token expired");						
+			break;
+				
+		case 404:
+			// The file or folder you tried to access is not in the user's Dropbox.
+			// Handling this error is specific to your application.
+			break;
+
+		case 507:
+			// The user is over their Dropbox quota.
+			// Tell them their Dropbox is full. Refreshing the page won't help.
+			break;
+
+		case 503:
+			// Too many API requests. Tell the user to try again later.
+			// Long-term, optimize your code to use fewer API calls.
+			break;
+
+		case 400:  
+			// Bad input parameter
+		case 403:  
+			// Bad OAuth request.
+		case 405:  
+			// Request method not expected
+		default:
+			// Caused by a bug in dropbox.js, in your application, or in Dropbox.
+			// Tell the user an error occurred, ask them to refresh the page.
+	}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Funktion wird onresize getriggert, arrangiert also immer die quadrate optimal.
 function resetAlign () {
 	//testzeile gibt screenbreite aus
 	//$("#Header").html(window.innerWidth);
+
 	//header anpassen
 	$("#Header").css('width', window.innerWidth-104);
 	
@@ -58,51 +129,4 @@ function resetAlign () {
 	}
 }
 
-var showError = function(error) {
-		if (window.console) {  // Skip the "if" in node.js code.
-			console.error(error);
-		}
 
-		switch (error.status) {
-			case 401:
-				// If you're using dropbox.js, the only cause behind this error is that
-				// the user token expired.
-				// Get the user through the authentication flow again.
-				alert("error 401: token expired");			
-				break;				
-			case 404:
-				// The file or folder you tried to access is not in the user's Dropbox.
-				// Handling this error is specific to your application.
-				break;
-
-			case 507:
-				// The user is over their Dropbox quota.
-				// Tell them their Dropbox is full. Refreshing the page won't help.
-				break;
-
-			case 503:
-				// Too many API requests. Tell the user to try again later.
-				// Long-term, optimize your code to use fewer API calls.
-				break;
-
-			case 400:  
-				// Bad input parameter
-			case 403:  
-				// Bad OAuth request.
-			case 405:  
-				// Request method not expected
-			default:
-				// Caused by a bug in dropbox.js, in your application, or in Dropbox.
-				// Tell the user an error occurred, ask them to refresh the page.
-		}
-	};
-//	
-//Dropbox
-//
-setDropbox = function() {
-	stringToStore = 'dropbox';	
-	localStorage.setItem('Storage',stringToStore);	
-	alert("Dropbox as setting saved");
-	$(location).attr('href','http://apps.thebluneproject.de/');
-}
-	

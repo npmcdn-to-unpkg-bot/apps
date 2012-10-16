@@ -6,6 +6,8 @@ $(document).ready(function(){
 
 	//erstellen der globalen variablen, in der alle Apps gespeichert werden
 	appArray = [];
+	//Listenobject in variablespeichern
+	libList = $('ul#liblist');
 	
 	//öffnen der XML Datei
 	$.get("apps.xml",{},function(xml){
@@ -23,10 +25,8 @@ $(document).ready(function(){
 			app = new App(name,id,url,iconurl,description);	
 			
 			//einfügen in appArray-Liste für späteren gebrauch
-			appArray.push(app);	
+			appArray.push(app);			
 			
-			//Listenobject in variablespeichern
-			var myList = $('ul#liblist');
 			
 			//hinzufügen eines "<li>"-tags, dessen inhalt bekommt die attribute der jeweiligen app
 			//nötig: Überprüfung ob App bereits hinzugefügt ist, damit keine Doppler entstehen können. 
@@ -42,15 +42,15 @@ $(document).ready(function(){
 					}					
 				};	
 				if(owned) {
-					myList.append($('<li/>').html('<a href="#" class="owned"><section id="icon" style="background: url('+iconurl+') no-repeat; background-size: 100px; background-position: center;"></section><h2>'+name+'</h2></a>'));
+					libList.append($('<li/>').html('<a href="#" class="owned"><section id="icon" style="background: url('+iconurl+') no-repeat; background-size: 100px; background-position: center;"></section><h2>'+name+'</h2></a>'));
 				} else {
-					myList.append($('<li/>').html('<a href="#" onclick="addApp('+id+')"><section id="icon" style="background: url('+iconurl+') no-repeat; background-size: 100px; background-position: center;"></section><h2>'+name+'</h2></a>'));
+					libList.append($('<li/>').html('<a href="#" onclick="addApp('+id+')"><section id="icon" style="background: url('+iconurl+') no-repeat; background-size: 100px; background-position: center;"></section><h2>'+name+'</h2></a>'));
 				}
 			} else {
-				myList.append($('<li/>').html('<a href="#" onclick="addApp('+id+')"><section id="icon" style="background: url('+iconurl+') no-repeat; background-size: 100px; background-position: center;"></section><h2>'+name+'</h2></a>'));
+				libList.append($('<li/>').html('<a href="#" onclick="addApp('+id+')"><section id="icon" style="background: url('+iconurl+') no-repeat; background-size: 100px; background-position: center;"></section><h2>'+name+'</h2></a>'));
 			}
 		});
-		myList.append($('<div style="clear: both"></div>'));		
+		libList.append($('<div style="clear: both"></div>'));		
 	});
 	
 });

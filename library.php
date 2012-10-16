@@ -1,6 +1,3 @@
-<?php
-//$xml_apps = simplexml_load_file('apps.xml');
-?>
 <!DOCTYPE html>
 
 <html lang="de" xml:lang="de" <!--manifest="manifest.appcache"-->
@@ -22,22 +19,11 @@
 		<!-- Meta -->
 		<meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport">
     </head>    
-    <body  onload="resetAlign2()" onresize="resetAlign2()">		
+    <body  onload="resetAlign()" onresize="resetAlign()">		
 		<header id="Header" name="alignMe">
 			Library
 		</header>
-		<ul id="liblist">
-			<?php
-				// for($i = 0; $i < count($xml_apps->app); $i++) {		
-					// echo '<li class="largetile '.$xml_apps->app[$i]->name.'">
-							// <a href="" onclick="Addapp('.$xml_apps->app[$i]->name.')">
-								// <section id="icon" style="background: url('.$xml_apps->app[$i]->iconurl.') no-repeat; background-size: 100px; background-position: center;">
-								// </section>
-								// <h2>'.$xml_apps->app[$i]->name.'</h2>
-							// </a>
-						// </li>';
-				// }
-			?>			
+		<ul id="liblist">				
 		</ul>
     </body>
 	
