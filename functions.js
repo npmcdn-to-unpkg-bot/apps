@@ -104,6 +104,7 @@ function resetAlign () {
 		//festlegung der "tilegröße" auf die im stylesheet notierten Werte
 		$('li').each(function() {
 			$(this).removeClass("smalltile");
+			$(this).removeClass("tinytile");
 			$(this).addClass("largetile");
 		});		
 		//Tiles per stylesheet angabe berechnen und festlegen.
@@ -113,11 +114,12 @@ function resetAlign () {
 			$(this).css('margin-right',newMargin);		
 		});		
 	
-	}	else {
+	}	else if(window.innerWidth >= 500 && window.innerWidth>window.innerHeight) {
 	
 		//festlegung der "tilegröße" auf 100px
 		$('li').each(function() {
 			$(this).removeClass("largetile");
+			$(this).removeClass("tinytile");
 			$(this).addClass("smalltile");
 		});	
 		//Margin der "li"-objekte in Abhängigkeit von der Fensterbreite berechnen und festlegen
@@ -125,6 +127,20 @@ function resetAlign () {
 			var newMargin = ((window.innerWidth - 500) / 10);	
 			$(this).css('margin-left',newMargin);
 			$(this).css('margin-right',newMargin);		
+		});		
+	} else {
+		//festlegung der "tilegröße" auf 100px
+		$('li').each(function() {
+			$(this).removeClass("largetile");
+			$(this).removeClass("smalltile");
+			$(this).addClass("tinytile");
+		});	
+		//Margin der "li"-objekte in Abhängigkeit von der Fensterbreite berechnen und festlegen
+		$('li').each(function() {
+			var newMargin = ((window.innerWidth - 300) / 6);	
+			$(this).css('margin-left',newMargin);
+			$(this).css('margin-right',newMargin);
+			$(this).css('margin-top',10);		
 		});		
 	}
 }

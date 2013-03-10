@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasks xmlns="http://apps.thebluneproject.de">
+	<task id="1">
+		<name>Bett machen</name>
+		<date>Sun Mar 10 2013 22:28:13 GMT+0100</date>
+		<recurring>monthly</recurring>
+		<alert>3</alert>
+	</task>
+</tasks>

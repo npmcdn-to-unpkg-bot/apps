@@ -1,0 +1,83 @@
+div#header {
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: #3A3A3A;
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+	padding: 5px;
+	color: white;
+}
+
+	div#header form#alertform{	
+		position: relative;
+	}
+
+	div#header form#alertform label {
+		border: none;
+		float: left;
+		margin: 0 5px 0 0;
+	}
+
+	div#header form#alertform select {
+		border: none;
+		float: left;
+		margin: 0 15px 0 0;
+	}
+	div#header form#alertform input {
+		border: none;
+		float: left;
+		margin: 0 15px 0 0;
+	}
+		div#header form#alertform input#taskname {
+			width: 400px;			
+		}
+		div#header form#alertform input#taskalert {
+			width: 20px;			
+		}
+
+	div#header form#alertform button {
+		border: none;
+		float: right;
+		margin: 0 15px 0 0;
+	}
+
+div#content {
+	position: relative;
+	top: 35px;
+}
+	div#title {
+		font-weight: bold;
+		border-bottom: 2px solid black;
+		position: relative;
+		overflow: hidden;
+		color: black;
+	}
+		div#title div.name {
+			color: black !important;
+		} 
+		div#title div.duedate {
+			color: black  !important;
+		} 
+		div#title div.recurring {
+			color: black  !important;
+		} 
+	div.name {
+		width: 400px;
+		float: left;
+		position: relative;
+		color: green;
+	}
+	div#content div.duedate {
+		width: 300px;
+		float: left;
+		position: relative;
+		color: green;
+	}
+	div#content div.recurring {
+		width: 100px;
+		float: left;
+		position: relative;
+		color: green;
+	}

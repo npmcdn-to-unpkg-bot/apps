@@ -11,7 +11,7 @@ $('document').ready(function() {
 	myList = $('ul#applist');
 	//Überprüfen ob Apps schon gespeichert wurden
 	if(storedString === null) {
-		myList.html('<h1>Neu hier?</h1> in diesem Browser hast du noch keine Apps zu deiner Startseite hinzugefügt. Bitte wechsle zur <a href="http://apps.thebluneproject.de/library.php">App-Bibliothek</a> und suche dir ein paar aus.');
+		myList.append('<li><a id="addnewapp" href="http://apps.thebluneproject.de/lib.php" title="Add an App"><section id="icon" style="background: url(http://www.thebluneproject.de/apps/resources/plus.svg) no-repeat; background-size: 100px; background-position: center;"></section><h2>Add an App</h2></a></li>');
 	} else {
 		//Array aus Appliste speichern
 		var Apps = storedString.split("&&");		
@@ -32,7 +32,7 @@ $('document').ready(function() {
 			//einfügen eines "<li>"-tags, dessen inhalt bekommt die attribute der jeweiligen App
 			myList.append($('<li id="'+app.id+'" class="app"></li>').html('<a href="'+app.url+'"><section id="icon" style="background: url('+app.iconurl+') no-repeat; background-size: 100px; background-position: center;"></section><h2>'+app.name+'</h2></a>'));		
 		};	
-		myList.append('<li><a id="addapp" href="http://apps.thebluneproject.de/library.php" title="Add an App"><section id="icon" style="background: url(http://www.thebluneproject.de/apps/resources/plus.svg) no-repeat; background-size: 100px; background-position: center;"></section><h2>Add an App</h2></a></li>');
+		myList.append('<li><a id="addapp" href="http://apps.thebluneproject.de/lib.php" title="Add an App"><section id="icon" style="background: url(http://www.thebluneproject.de/apps/resources/plus.svg) no-repeat; background-size: 100px; background-position: center;"></section><h2>Add an App</h2></a></li>');
 	}
 });
 
