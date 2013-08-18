@@ -1,0 +1,519 @@
+body,
+html,
+div, ul {
+     margin: 0;
+     padding:0;
+}
+body {
+	background: #1689dd;
+	font-family: helvetica, arial;
+	overflow: hidden;
+}
+a#cloudlink {
+	width: 100%;
+	height: 100%;
+	display: block;
+	color: white;
+	text-decoration: none;		
+	overflow: hidden;
+}
+
+div#claude,div#errow, div#message {
+	display: block; 
+	width: 100%;
+	height: 33%;
+	overflow: hidden;
+	position: absolute;
+	top: 0px;
+}
+div#errow {
+	height: 37%;
+	top: 33%;
+}
+div#message {
+	height: 33%;
+	top: 67%;
+}
+	img#cloud {			
+		max-width: 90%;
+		max-height: 90%;
+		position: relative;
+		top: 20px;
+		left: 50%;
+		-webkit-transform: translate(-50%,0);
+		-moz-transform: translate(-50%,0);
+		-ms-transform: translate(-50%,0);
+		-o-transform: translate(-50%,0);
+		transform: translate(-50%,0);
+		border: none;					
+	}
+	img#arrow {
+		max-width: 90%;
+		height: 90%;
+		position: relative;
+		top: 50px;
+		left: 50%;
+		-webkit-transform: translate(-50%,0);
+		-moz-transform: translate(-50%,0);
+		-ms-transform: translate(-50%,0);
+		-o-transform: translate(-50%,0);
+		transform: translate(-50%,0);
+		border: none;		
+	}
+	h1#text {
+			display: block;
+			position: relative;			
+			text-align: center;	
+			margin: 75px 0 0 0;
+		}
+		h1#text span#one {
+			position: relative;
+			margin: 0px 0px 0px 40px;
+		}
+		span#two {
+			position: relative;
+			margin: 0px 0px 0px 40px;
+		}
+		span#three {
+			position: relative;
+			margin: 0px 0px 0px 20px;
+		}
+		span#four {
+			position: relative;
+			margin: 0px 0px 0px 20px;
+		}
+/********************************************
+@Media Queries
+*********************************************/	
+/*HEIGHT*/	
+@media (max-height:800px) {
+	div#message {
+		height: 28%;
+		top: 72%;
+	}
+	div#errow {
+		height: 39%;
+	}
+	h1#text {
+		font-size: 26px;
+		margin: 50px 0 0 0;
+	}
+}
+@media (max-height:710px) {
+	h1#text {
+		font-size: 24px;
+		margin: 50px 0 0 0;
+	}
+	div#errow {
+		height: 36%;
+	}
+	div#message {
+		height: 31%;
+		top: 69%;
+	}
+	h1#text span#one {		
+		margin: 0px 0px 0px 0px;
+	}
+	span#two {	
+		margin: 0px 0px 0px 0px;
+	}
+	span#three {
+		margin: 0px 0px 0px 0px;
+	}
+	span#four {
+		margin: 0px 0px 0px 0px;
+	}		
+}
+@media (max-height:625px) {
+	h1#text {
+		font-size: 22px;
+		margin: 40px 0 0 0;
+	}
+	div#message {
+		height: 28%;
+		top: 72%;
+	}
+	div#claude {
+		height: 36%;
+	}
+	div#errow {
+		top: 36%;
+	}
+}
+@media (max-height:575px) {
+	h1#text {
+		font-size: 20px;
+		margin: 30px 0 0 0;
+	}
+	div#message {
+		height: 26%;
+		top: 74%;
+	}
+	div#errow {
+		height: 38%;
+	}
+}
+@media (max-height:550px) {
+	img#arrow {
+		top: 15px;
+		max-height: 80%;
+	}
+	h1#text {
+		font-size: 20px;
+		margin: 20px 0 0 0;
+	}
+	img#cloud {
+		max-height: 80%;
+	}
+	
+}
+@media (max-height:500px) {
+	img#arrow {
+		top: 18px;
+	}
+	h1#text {
+		font-size: 20px;
+		margin: 0px 0 0 0;
+	}
+}
+@media (max-height:475px) {
+	h1#text {
+		font-size: 18px;		
+	}
+}
+@media (max-height:450px) {
+	h1#text {
+		font-size: 16px;		
+	}
+}
+@media (max-height:350px) {
+	div#errow {
+		height: 34%;
+		top: 38%;
+	}
+	img#arrow {
+		top: 14px;
+	}
+	div#claude {
+		height: 38%;
+	}
+	div#message {
+		height: 28%;
+		top: 72%;
+	}
+}
+@media (max-height:300px) {
+	img#arrow {
+		top: 10px;
+	}
+	h1#text {
+		font-size: 14px;		
+	}
+}
+@media (max-height:250px) {
+	h1#text {
+		font-size: 12px;		
+	}
+	img#cloud {
+		max-height: 70%;
+	}
+	img#arrow {
+		top: 5px;
+	}
+}
+@media (max-height:225px) {
+	h1#text {
+		font-size: 10px;		
+	}
+	
+}
+/*WIDTH*/
+@media (max-width:700px) {
+	h1#text span#one {		
+		margin: 0px 0px 0px 0px;
+	}
+	span#two {	
+		margin: 0px 0px 0px 0px;
+	}
+	span#three {
+		margin: 0px 0px 0px 0px;
+	}
+	span#four {
+		margin: 0px 0px 0px 0px;
+	}
+}
+@media (max-width:450px)/* and (max-height: 900px)*/  {
+	h1#text {
+		margin: 50px 2% 0 2%;
+	}
+}
+@media (max-width:400px) {
+	h1#text {
+		font-size: 26px;
+		margin: 100px 2% 0 2%;
+	}
+}
+@media (max-width:350px)  {
+	h1#text {
+		font-size: 24px;
+		margin: 100px 2% 0 2%;
+	}
+	img#arrow {
+		top: 20px;
+	}
+}
+@media (max-width:325px)  {
+	img#arrow {
+		max-height: 75%;
+	}
+	div#errow {
+		height: 35%;
+	}
+	div #message{
+		height: 32%;
+		top: 68%;
+	}
+	h1#text {		
+		margin: 50px 2% 0 2%;
+	}
+}
+@media (max-width:300px) {
+	h1#text {
+		font-size: 22px;		
+	}
+}
+@media (max-width:250px) {
+	h1#text {
+		font-size: 18px;		
+	}
+}
+@media (max-width:215px) {
+	h1#text {
+		font-size: 16px;		
+	}
+}
+/**************************
+Special settings
+***************************/
+@media (max-width:700px) and (max-height: 710px) {
+	h1#text span#one {		
+		margin: 0px 0px 0px 0px;
+	}
+	span#two {	
+		margin: 0px 0px 0px 0px;
+	}
+	span#three {
+		margin: 0px 0px 0px 0px;
+	}
+	span#four {
+		margin: 0px 0px 0px 0px;
+	}
+}
+@media (max-width:450px) and (max-height: 710px)  {
+	h1#text {
+		margin: 50px 2% 0 2%;
+	}
+}
+@media (max-width:400px)  and (max-height: 710px)  {
+	h1#text {
+		font-size: 26px;
+		margin: 50px 2% 0 2%;
+	}
+}
+@media (max-width:350px)  and (max-height: 710px)   {
+	h1#text {
+		font-size: 24px;
+		margin: 50px 2% 0 2%;
+	}
+	img#arrow {
+		top: 20px;
+	}
+}
+/*******************************************************/
+@media (max-width:700px) and (max-height: 625px) {
+	h1#text span#one {		
+		margin: 0px 0px 0px 0px;
+	}
+	span#two {	
+		margin: 0px 0px 0px 0px;
+	}
+	span#three {
+		margin: 0px 0px 0px 0px;
+	}
+	span#four {
+		margin: 0px 0px 0px 0px;
+	}
+}
+@media (max-width:450px) and (max-height: 625px)  {
+	h1#text {
+		margin: 40px 2% 0 2%;
+	}
+}
+@media (max-width:400px)  and (max-height: 625px)  {
+	h1#text {
+		font-size: 22px;
+		margin: 40px 2% 0 2%;
+	}
+}
+@media (max-width:350px)  and (max-height: 625px)   {
+	h1#text {
+		font-size: 22px;
+		margin: 40px 2% 0 2%;
+	}
+	img#arrow {
+		top: 20px;
+	}
+}
+@media (max-width:300px) and (max-height: 625px)  {
+	h1#text {
+		font-size: 20px;
+		margin: 25px 2% 0 2%;
+	}
+}
+@media (max-width:280px) and (max-height: 625px)  {
+	h1#text {
+		font-size: 16px;
+		margin: 25px 2% 0 2%;
+	}
+}
+/*****************************************************/
+@media (max-width:450px) and (max-height: 575px)  {
+	h1#text {
+		margin: 30px 2% 0 2%;
+	}
+}
+@media (max-width:400px)  and (max-height: 575px)  {
+	h1#text {
+		font-size: 20px;
+		margin: 30px 2% 0 2%;
+	}
+}
+@media (max-width:350px)  and (max-height: 575px)   {
+	h1#text {
+		font-size: 20px;
+		margin: 30px 2% 0 2%;
+	}
+	img#arrow {
+		top: 20px;
+	}
+}
+@media (max-width:325px)  and (max-height: 575px)    {
+	
+	h1#text {		
+		margin: 10px 2% 0 2%;
+	}
+}
+@media (max-width:300px) and (max-height: 575px)  {
+	h1#text {
+		font-size: 18px;		
+	}
+}
+/****************************************************/
+@media (max-width:450px) and (max-height: 500px)  {
+	h1#text {
+		margin: 10px 2% 0 2%;
+	}
+}
+/****************************************************/
+@media (max-width:400px) and (max-height: 375px)  {
+	h1#text {
+		font-size: 16px;
+	}
+}
+/****************************************************/
+@media (max-width:400px) and (max-height: 300px)  {
+	h1#text {
+		font-size: 14px;
+	}
+}
+/****************************************************/
+@media (max-width:450px) and (max-height: 250px)  {
+	h1#text {
+		margin: 0;
+	}
+}
+@media (max-width:350px) and (max-height: 250px)  {
+	img#arrow {
+		top: 5px;
+	}
+}
+/****************************************************/
+@media (max-width:400px) and (max-height: 250px)  {
+	h1#text {
+		font-size: 10px;
+	}
+}
+/***********************************************************************
+Animation
+**********************************************************************/
+#cloud.animate {
+	animation-name: splashin;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+@keyframes splashin {
+
+	from {
+		opacity: 0;		
+		left: -50%;		
+	}
+
+	to {
+		opacity: 1;
+		left: 50%;
+	}
+
+}
+div#errow.animate {
+	animation-name: pointin;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+
+@keyframes pointin {
+
+	from {
+		opacity: 0;	
+		top: 100%;	
+	}
+
+	to {
+		opacity: 1;
+		top: 33%;
+	}
+
+}
+div#message.animate {
+	animation-name: flyn;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;	
+	animation-direction: normal;
+	animation-delay: 0s;
+	animation-play-state: running;
+	animation-fill-mode: forwards;
+}
+@keyframes flyn {
+
+	from {
+		opacity: 0;	
+		top: 133%;	
+	}
+
+	to {
+		opacity: 1;
+		top: 67%;
+	}
+
+}

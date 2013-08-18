@@ -17,6 +17,45 @@ header {
 	font-weight: bold;	
 }
 /**********************************************************
+Menu
+**********************************************************/
+a#menulink {
+	diplay: block;
+	height: 40px;
+	width: 40px;
+	background: url('resources/menu.svg') no-repeat;
+	background-size: 40px auto;
+	position: relative;
+	float:left;
+	margin: 0px 25px 0 0;
+}
+a:focus {
+	text-decoration: none;
+}
+/***********Appoptions************************************/
+section#appoptions {	
+	float: right;
+	display: block;
+	position: relative;
+	
+}
+	section#appoptions div#trash {
+		height: 40px;
+		width: 40px;		
+		position: relative;
+		float: right;
+		background: url('resources/noun_project_3823.svg') no-repeat;
+		background-size: auto 40px; 
+		opacity: 0;
+	}
+	section#appoptions div#trash.ondrag {
+		opacity: 1;
+	}
+	section#appoptions div#trash.onhover {
+		background: url('resources/noun_project_3058.svg') no-repeat;
+		background-size: auto 40px; 
+	}
+/**********************************************************
 Applist
 **********************************************************/
 ul#applist {
@@ -65,8 +104,7 @@ ul#applist {
 				height: 150px;
 				width: 200px;
 				}
-				ul#applist li.largetile a h2{
-					display: inline;
+				ul#applist li.largetile a h2{					
 					font-size: 24px;
 				}					
 		.smalltile {
@@ -82,10 +120,9 @@ ul#applist {
 				width: 100px;
 				background-size: 50px !important;
 			}
-			ul#applist li.smalltile a h2{
-				display: inline;
-				height: 75px;
+			ul#applist li.smalltile a h2{						
 				font-size: 17px;
+				
 			}			
 		.tinytile {
 			width: 100px;
@@ -104,30 +141,7 @@ ul#applist {
 			ul#applist li.tinytile a h2{
 				display: none;
 				font-size: 17px;
-			}				
-/***********Appoptions************************************/
-section#appoptions {	
-	float: right;
-	display: block;
-	position: relative;
-	
-}
-	section#appoptions div#trash {
-		height: 40px;
-		width: 40px;		
-		position: relative;
-		float: right;
-		background: url('resources/noun_project_3823.svg') no-repeat;
-		background-size: auto 40px; 
-		opacity: 0;
-	}
-	section#appoptions div#trash.ondrag {
-		opacity: 1;
-	}
-	section#appoptions div#trash.onhover {
-		background: url('resources/noun_project_3058.svg') no-repeat;
-		background-size: auto 40px; 
-	}
+			}
 /**********************************************************
 Liblist
 **********************************************************/		
@@ -163,7 +177,7 @@ ul#liblist {
 				display: block;				
 				margin: 0px auto 0 auto;				
 			}
-		.largetile {
+		ul#liblist li.largetile {
 			width: 200px;
 			height: 200px;
 			
@@ -179,7 +193,7 @@ ul#liblist {
 				ul#liblist li.largetile a h2{
 					font-size: 24px;
 				}					
-		.smalltile {
+		ul#liblist li.smalltile {
 			width: 100px;
 			height: 100px;			
 		}

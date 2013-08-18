@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="de" xml:lang="de">
+	
+	<head>
+		<meta charset="ISO-8859-1" />
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no">
+		
+		<title>Connect to the Cloud</title>
+		
+		<!-- CSS -->
+		<link rel="stylesheet" media="all" type="text/css" href="welcome.css" />		
+		<link rel="stylesheet" href="http://thebluneproject.de/apps/jpreloader-welcome.css" />
+		<!-- Javascript -->
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>	
+		<script type="text/javascript" src="functions.js"></script>	
+		<script type="text/javascript" src="welcome.js"></script>	
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/jquery.noty.js"></script>	
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/layouts/topLeft.js"></script>	
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/themes/default.js"></script>
+		<!--
+		<script type="text/javascript" src="storage.js"></script>		
+		-->
+		<!--Dropbox-->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.5.0/dropbox.min.js"></script>
+		<script type="text/javascript" src="http://thebluneproject.de/apps/jpreloader.js"></script>
+	</head>
+	<body onresize="messen()">	
+		<a id="cloudlink" href="http://apps.thebluneproject.de/chooseCS.html" >
+			<div id="claude">
+				<img id="cloud" src="http://apps.thebluneproject.de/resources/clouds.png">
+			</div>					
+			<div id="errow">
+				<img id="arrow" src="http://apps.thebluneproject.de/resources/arrow.png">
+			</div>
+			<div id="message">
+				<h1 id="text">
+					<span id="one">In order to use this app,<br></span>
+					<span id="two">you'll need to connect<br></span>
+					<span id="three">your device to a<br></span>
+					<span id="four">cloudservice of your choice.</span>
+				</h1>
+			</div>			
+		</a>
+		
+	</body>
+	<script type="text/javascript">
+		   $(document).ready(function() {
+				$('body').jpreLoader({							
+							splashFunction: function() {
+								$("#cloud").addClass('animate');
+								$("#errow").addClass('animate');
+								$("#message").addClass('animate');
+							},
+							loaderVPos: '50%',
+							splashVPos: '0%'
+							
+				});				
+		   });
+	</script>
+</html>

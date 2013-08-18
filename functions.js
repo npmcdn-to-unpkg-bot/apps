@@ -16,6 +16,7 @@ var allEls=document.getElementsByTagName("*"),l=allEls.length;
 for(var i=0;i<l;i++)if(allEls[i].name==str || allEls[i].getAttribute("name")==str)myMatches[myMatches.length]=allEls[i];
 return myMatches;
 }
+
 ///////////////////////////////////////////////////////////
 //	 Funktionen
 ///////////////////////////////////////////////////////////
@@ -29,9 +30,94 @@ setDropbox = function() {
 	stringToStore = 'dropbox';	
 	localStorage.setItem('Storage',stringToStore);	
 	alert("Dropbox as setting saved");
-	$(location).attr('href','http://apps.thebluneproject.de/');
+	$(location).attr('href','http://apps.thebluneproject.de/connectToCs.html');
 }
+ConnectToCloud = function () {
+// aus lokalem Speicher laden
+storage = localStorage.getItem('Storage');
+// überprüfen ob überhaupt eine Voreinstellung vorhanden ist.
+if(storage) {
 	
+	//-->debug
+	// alert("storage vorhanden:"+storage);	
+	switch (storage) {
+		case 'dropbox':			
+			dropbox_authStatus = localStorage.getItem('dropbox_authstatus');
+			// alert("authstatus: "+dropbox_authStatus);
+			
+			if(!dropbox_authStatus) {				
+				localStorage.setItem('dropbox_authstatus','initialized');	
+				//initialization
+				var client = new Dropbox.Client({
+					key: "hm4c58qp6rpysot", secret: "w7cdx6o8p2hyubj"
+				});
+				alert("initialized");
+				//preset driver to the dropbox page
+				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
+				//authentication
+				client.authenticate(function(error, client) {
+					if (error) {
+						return showError(error);  // Something went wrong.
+					}
+				});
+			} else if (dropbox_authStatus === 'initialized') {
+				localStorage.setItem('dropbox_authstatus','finalized');	
+				//continuation
+				var client = new Dropbox.Client({
+					key: "hm4c58qp6rpysot", secret: "w7cdx6o8p2hyubj"
+				});
+				alert("continued");
+				//preset driver to the dropbox page
+				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
+				//authentication
+				client.authenticate(function(error, client) {
+					if (error) {
+						return showError(error);  // Something went wrong.
+					}
+					client.getUserInfo(function(error, userInfo) {
+						if (error) {
+							return showError(error);  // Something went wrong.
+						}
+
+						alert("hello: "+userInfo.name);
+						//Speichern der verwendeten Cloudspeicher Option
+						localStorage.setItem('dropbox_auth', JSON.stringify(client.credentials()));
+						alert("credentials saved:"+JSON.stringify(client.credentials()));
+						
+					});
+				});		
+			} else {				
+				/*
+				// alert((localStorage.getItem('dropbox_auth')));
+				client = new Dropbox.Client(JSON.parse(localStorage.getItem('dropbox_auth')));	
+				// client.authDriver(new Dropbox.Drivers.Redirect());
+				client.authenticate(function(error, client) {
+					if (error) {   
+						return showError(error);
+					}
+					client.getUserInfo(function(error, userInfo) {
+						if (error) {
+							return showError(error);  // Something went wrong.
+						}
+
+						userName = userInfo.name;
+						alert(userName);
+					});	  
+				});	
+				*/				
+			}						
+		break;
+		case 'googledrive':
+		break;
+		case 'skydrive':
+		break;
+	}
+	
+} else {
+	$(location).attr('href','http://apps.thebluneproject.de/welcome.html');
+}
+}
+
 ////////////////////////////
 //Storage Error Handling
 ////////////////////////////	
@@ -74,20 +160,6 @@ var showError = function(error) {
 			// Tell the user an error occurred, ask them to refresh the page.
 	}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Funktion wird onresize getriggert, arrangiert also immer die quadrate optimal.
 function resetAlign () {
@@ -145,4 +217,60 @@ function resetAlign () {
 	}
 }
 
+function trimScreen () {	
+	$("#cloudlink").css('height', window.innerHeight-51);
+	$("#cloudlink").css('width', window.innerWidth-51);
+	
+	$("#cloud").css('height', (window.innerHeight-51)/3);	
+	$("#notification").css('height', ((window.innerHeight-51)*2)/3);
+	
+	cloudWidth = $("#cloud").width();
+	
+	if(window.innerWidth > cloudWidth+51) {
+		$("#cloud").css('width', cloudWidth);
+		$("#cloud").css('margin', '25px auto 0 auto');
+	} else {
+		$("#cloud").css('width', '100%');
+		$("#cloud").css('margin', '25px 0 0 0');		
+	}
+}
+function messen() {
+	$("#messwert").remove();
+	$("#cloudlink").before("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
+}
+function userName() {
+	storage = localStorage.getItem('Storage');
+	if(storage) {
+	
+		//-->debug
+		// alert("storage vorhanden:"+storage);	
+		switch (storage) {
+			case 'dropbox':
+				dropbox_authStatus = localStorage.getItem('dropbox_authstatus');
+				if(dropbox_authStatus === 'finalized') {
+					client = new Dropbox.Client(JSON.parse(localStorage.getItem('dropbox_auth')));	
+					// client.authDriver(new Dropbox.Drivers.Redirect());
+					client.authenticate(function(error, client) {
+						if (error) {   
+							return showError(error);
+						}
+						client.getUserInfo(function(error, userInfo) {
+							if (error) {
+								return showError(error);  // Something went wrong.
+							}
 
+							userName = userInfo.name;
+							alert(userName);
+						});	  
+					});	
+				} else {
+					$(location).attr('href','http://apps.thebluneproject.de/connectToCs.html');
+				}
+			break;
+			case 'googledrive':
+			break;
+			case 'skydrive':
+			break;
+		}
+	}	
+}

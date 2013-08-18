@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////
 function App(name,id,url,iconurl,description) {
 	this.name = name;
-	this.id = id
+	this.id = id;
 	this.url = url;
 	this.iconurl = iconurl;
 	this.description = description;
@@ -18,9 +18,9 @@ function App(name,id,url,iconurl,description) {
 
 
 //löschen des localstorage
-// localStorage.removeItem('Storage');
-// localStorage.removeItem('dropbox_authstatus');
-// alert("done");
+//localStorage.removeItem('Storage');
+//localStorage.removeItem('dropbox_authstatus');
+//alert("done");
 
 
 // Dummyset

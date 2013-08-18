@@ -1,0 +1,33 @@
+ div#content {
+	width: 800px;
+    position: relative;
+	margin: 0 auto;
+    top: 0px;
+	overflow: hidden;
+}
+div#content div#title {	
+	width: 100px;
+	position: relative;	
+	color: gray;
+	font-family: helvetica, arial black, arial;
+	font-size: 20px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+div#content div#budget {
+	position: relative;
+	font-family: helvetica, arial black, arial;
+	font-size: 180px;
+}
+div#content div#add {
+	width: 400px;
+	height: 100px;
+	background: lightgreen;
+	float: left;
+}
+div#content div#subtract {
+	width: 400px;
+	height: 100px;
+	background: darkred;
+	float: right;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="de" xml:lang="de">
+	
+	<head>
+		<meta charset="ISO-8859-1" />
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no">
+		
+		<title>Choose your Cloudservice</title>
+		
+		<!-- CSS -->
+		<link rel="stylesheet" media="all" type="text/css" href="chooseCs.css" />	
+		<link rel="stylesheet" href="http://thebluneproject.de/apps/jpreloader-welcome.css" /
+		<!-- Javascript -->
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>	
+		<script type="text/javascript" src="chooseCs.js"></script>
+		<script type="text/javascript" src="functions.js"></script>	
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/jquery.noty.js"></script>	
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/layouts/topLeft.js"></script>	
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/layouts/top.js"></script>
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/layouts/center.js"></script>
+		<script type="text/javascript" src="http://thebluneproject.de/apps/resources/noty/js/noty/themes/default.js"></script>
+		
+		<!--
+		<script type="text/javascript" src="storage.js"></script>		
+		-->
+		<!--Dropbox-->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.5.0/dropbox.min.js"></script>
+		<script type="text/javascript" src="http://thebluneproject.de/apps/jpreloader.js"></script>
+	</head>
+	<body onload="setmargin()" onresize="setmargin()">
+		<a id="dropbox" class="cs" href="javascript:setDropbox()">
+			<img src="http://apps.thebluneproject.de/resources/dropbox.png">
+		</a>
+		<a id="box" class="cs">
+			<img src="http://apps.thebluneproject.de/resources/box.png">
+		</a>
+		<a id="skydrive" class="cs">
+			<img src="http://apps.thebluneproject.de/resources/skydrive3.png">
+		</a>
+		<a id="googledrive" class="cs">
+			<img src="http://apps.thebluneproject.de/resources/googledrive.png">	
+		</a>
+	</body>
+	<script type="text/javascript">
+		   $(document).ready(function() {
+				$('body').jpreLoader({							
+							splashFunction: function() {
+								/*$("#cloud").addClass('animate');
+								$("#errow").addClass('animate');
+								$("#message").addClass('animate');*/
+							},
+							loaderVPos: '50%',
+							splashVPos: '0%'
+							
+				});				
+		   });
+	</script>
+</html>

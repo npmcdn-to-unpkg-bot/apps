@@ -141,15 +141,23 @@ $(document).ready(function() {
 		}
 	});
  });
- 
+
+$('document').ready(function() {
+	ConnectToCloud();
+	userName();
+});
+
+
 //
 // Cloudspeicher
 //
+/*
 $('document').ready(function() {
 // aus lokalem Speicher laden
 storage = localStorage.getItem('Storage');
 // überprüfen ob überhaupt eine Voreinstellung vorhanden ist.
 if(storage) {
+	
 	//-->debug
 	// alert("storage vorhanden:"+storage);	
 	switch (storage) {
@@ -224,6 +232,8 @@ if(storage) {
 	}
 	
 } else {
-	$(location).attr('href','http://apps.thebluneproject.de/welcome.php');
+	$(location).attr('href','http://apps.thebluneproject.de/welcome.html');
 }
+
 });
+*/
