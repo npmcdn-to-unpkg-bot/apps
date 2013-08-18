@@ -3,6 +3,9 @@
 ///////////////////////////////////////////////////////////
 //Laden der Apps
 $('document').ready(function() {
+//
+// Load and inset the stored applist into the dom
+//
 	//erstellen der globalen variablen, in der die hinzugefügten Apps gespeichert werden
 	appArray = [];
 	//aufrufen der ungeordneten Appliste
@@ -34,13 +37,13 @@ $('document').ready(function() {
 		};	
 		myList.append('<li><a id="addapp" href="http://apps.thebluneproject.de/lib.php" title="Add an App"><section id="icon" style="background: url(http://www.thebluneproject.de/apps/resources/plus.svg) no-repeat; background-size: 100px; background-position: center;"></section><h2>Add an App</h2></a></li>');
 	}
-});
+
 
 //
 // Jquery UI sortable plugin + droppable + jquery touch punch
 //
 
-$(document).ready(function() {
+
     $("#applist").sortable({ 		
 		//Mauszeiger
 		cursor: 'move', 
@@ -140,100 +143,6 @@ $(document).ready(function() {
 			ui.draggable.css("display","none");			
 		}
 	});
- });
-
-$('document').ready(function() {
-	ConnectToCloud();
-	userName();
 });
 
 
-//
-// Cloudspeicher
-//
-/*
-$('document').ready(function() {
-// aus lokalem Speicher laden
-storage = localStorage.getItem('Storage');
-// überprüfen ob überhaupt eine Voreinstellung vorhanden ist.
-if(storage) {
-	
-	//-->debug
-	// alert("storage vorhanden:"+storage);	
-	switch (storage) {
-		case 'dropbox':			
-			dropbox_authStatus = localStorage.getItem('dropbox_authstatus');
-			// alert("authstatus: "+dropbox_authStatus);
-			
-			if(!dropbox_authStatus) {				
-				localStorage.setItem('dropbox_authstatus','initialized');	
-				//initialization
-				var client = new Dropbox.Client({
-					key: "hm4c58qp6rpysot", secret: "w7cdx6o8p2hyubj"
-				});
-				alert("initialized");
-				//preset driver to the dropbox page
-				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
-				//authentication
-				client.authenticate(function(error, client) {
-					if (error) {
-						return showError(error);  // Something went wrong.
-					}
-				});
-			} else if (dropbox_authStatus === 'initialized') {
-				localStorage.setItem('dropbox_authstatus','finalized');	
-				//continuation
-				var client = new Dropbox.Client({
-					key: "hm4c58qp6rpysot", secret: "w7cdx6o8p2hyubj"
-				});
-				alert("continued");
-				//preset driver to the dropbox page
-				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
-				//authentication
-				client.authenticate(function(error, client) {
-					if (error) {
-						return showError(error);  // Something went wrong.
-					}
-					client.getUserInfo(function(error, userInfo) {
-						if (error) {
-							return showError(error);  // Something went wrong.
-						}
-
-						alert("hello: "+userInfo.name);
-						//Speichern der verwendeten Cloudspeicher Option
-						localStorage.setItem('dropbox_auth', JSON.stringify(client.credentials()));
-						alert("credentials saved:"+JSON.stringify(client.credentials()));
-						
-					});
-				});		
-			} else {
-				// alert((localStorage.getItem('dropbox_auth')));
-				client = new Dropbox.Client(JSON.parse(localStorage.getItem('dropbox_auth')));	
-				// client.authDriver(new Dropbox.Drivers.Redirect());
-				client.authenticate(function(error, client) {
-					if (error) {   
-						return showError(error);
-					}
-					client.getUserInfo(function(error, userInfo) {
-						if (error) {
-							return showError(error);  // Something went wrong.
-						}
-
-						userName = userInfo.name;
-						// alert(userName);
-					});	  
-				});		
-			}						
-		break;
-		case 'googledrive':
-		break;
-		case 'skydrive':
-		break;
-	}
-	
-} else {
-	$(location).attr('href','http://apps.thebluneproject.de/welcome.html');
-}
-
-});
-*/
