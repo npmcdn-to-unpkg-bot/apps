@@ -1,0 +1,184 @@
+header {
+	width: 100%;
+	height: 150px;
+	border-bottom: 2px solid black;
+	position: fixed;
+	overflow: hidden;
+}
+	section#logo {
+		font-size: 30px;
+		height: 150px;
+		width: 250px;
+		text-align: center;
+		float: left;
+		overflow: hidden;
+		line-height: 150px;
+		position: relative;
+	}
+	ul#menulist {		
+		position: relative;
+		float: right;
+		margin: 0 50px 0 0;
+		padding: 0 0 0 0;		
+	}
+		ul#menulist li {			
+			width: 100px;
+			text-align: center;
+			font-size: 18px;
+			list-style-type: none;
+			height: 150px;
+			line-height: 150px;
+			position: relative;
+			float: left;
+			opacity: 0.5;
+		}
+		ul#menulist li:hover {
+			opacity: 1;
+		}
+section#devices {
+	position: relative;
+	width: 1200px;
+	height: auto;
+	top: 152px;
+	margin: 0 auto;
+	transition: width 1s ease-out 0s;
+	-moz-transition:  width 1s ease-out 0s;
+	-webkit-transition: width 1s ease-out 0s;
+	-o-transition:  width 1s ease-out 0s;	
+}
+	section#devices section.device {
+		width: 350px;
+		height: 500px;		
+		float: left;		
+		position: relative;
+		margin: 25px;	
+		transition: width 1s ease-out 0s;
+		-moz-transition:  width 1s ease-out 0s;
+		-webkit-transition: width 1s ease-out 0s;
+		-o-transition:  width 1s ease-out 0s;		
+	}
+		section#devices section.device section.preview {
+			width: 350px;
+			height: 350px;				
+			position: relative;		
+			overflow: hidden;
+			transition: width 1s ease-out 0s, height 1s ease-out 0s;
+			-moz-transition:  width 1s ease-out 0s, height 1s ease-out 0s;
+			-webkit-transition: width 1s ease-out 0s, height 1s ease-out 0s;
+			-o-transition:  width 1s ease-out 0s, height 1s ease-out 0s;	
+		}
+			section#devices section#pc section.preview div.deviceframe {
+				width: 298px;
+				height: 186.25px;
+				overflow: hidden;
+				padding: 1px;
+				border: 25px solid black;
+				position: relative;
+				margin: -118.125px 0 0 0;
+				-webkit-border-radius: 25px;
+				-moz-border-radius: 25px;
+				border-radius: 25px;
+				top: 50%;
+			}
+				section#devices section#pc section.preview div.deviceframe div.imagecontainer {
+					position: relative;
+					height: 186.25px;
+					width: 298px;
+					overflow: hidden;
+				}
+					section#devices section#pc section.preview div.deviceframe div.imagecontainer img{		
+						height: 298px;
+						position: relative;
+						margin: -50px 0 0 0;
+					}
+			section#devices section#phone section.preview div.deviceframe {
+				width: 178.8px;
+				height: 298px;
+				overflow: hidden;
+				padding: 1px;
+				border: 25px solid black;
+				position: relative;
+				margin: 0 0 0 -114.4px;
+				-webkit-border-radius: 25px;
+				-moz-border-radius: 25px;
+				border-radius: 25px;
+				left: 50%;
+			}
+				section#devices section#phone section.preview div.deviceframe div.imagecontainer {
+					position: relative;
+					height: 298px;
+					width: 178.8px;
+					overflow: hidden;
+				}
+					section#devices section#phone section.preview div.deviceframe div.imagecontainer img{		
+						height: 320px;
+						position: relative;	
+						margin: 0 0 0 -20px;
+					}
+			section#devices section#tablet section.preview div.deviceframe {
+				width: 223.5px;
+				height: 298px;
+				overflow: hidden;
+				padding: 1px;
+				border: 25px solid black;
+				position: relative;
+				margin: 0 0 0 -136.75px;
+				-webkit-border-radius: 25px;
+				-moz-border-radius: 25px;
+				border-radius: 25px;
+				left: 50%;
+			}
+				section#devices section#tablet section.preview div.deviceframe div.imagecontainer {
+					position: relative;
+					height: 298px;
+					width: 223.5px;
+					overflow: hidden;
+				}
+					section#devices section#tablet section.preview div.deviceframe div.imagecontainer img{		
+						height: 298px;
+						position: relative;
+						margin: 0 0 0 0;
+						border: none;
+					}
+		section#devices section.device label {
+			height: 150px;
+			width: 350px;
+			position: relative;			
+			text-align: center;	
+			display: block;
+			transition: width 1s ease-out 0s, height 1s ease-out 0s;
+			-moz-transition:  width 1s ease-out 0s, height 1s ease-out 0s;
+			-webkit-transition: width 1s ease-out 0s, height 1s ease-out 0s;
+			-o-transition:  width 1s ease-out 0s, height 1s ease-out 0s;	
+		}
+			section#devices section.device label h1 {
+				line-height: 15px;
+			}
+			section#devices section.device label h2 {
+				line-height: 15px;
+				opacity: 0.8;
+			}
+			section#devices section.device label h3 {
+				font-size: 14px;
+				line-height: 15px;
+				opacity: 0.2;
+			}
+/***********************************************************************************************************
+Hovereffect for devices
+***********************************************************************************************************/
+section#devices:hover {
+	width: 1240px;	
+}	
+	section#devices section.device:hover {
+		width: 390px;
+		cursor: pointer;
+	}
+		section#devices section.device:hover section.preview {
+			width: 390px;
+			height: 390px;
+		}
+		section#devices section.device:hover label {
+			width: 390px;	
+			height: 110px;
+		}
+	
