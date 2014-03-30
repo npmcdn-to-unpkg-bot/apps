@@ -185,7 +185,7 @@ function displayData() {
 		transactionInhalt = $("#transactions").html();
 		if(givenDate.getDate()-currentDate.getDate() == 0 ) {			
 			if(transactionInhalt.indexOf('<h1 class="head">Today</h1>') > -1){			
-				$("#transaction").append('');
+				$("#transactions").append('');
 				if(this.getType() == 'revenue'){
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmount()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					} else {
@@ -207,8 +207,8 @@ function displayData() {
 				} else {
 					$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmount()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 				}
-			} else {
-				$("#transaction").append('<h1 class="head">Yesterday</h1>');
+			} else {				
+				$("#transactions").append('<h1 class="head">Yesterday</h1>');
 				if(this.getType() == 'revenue'){
 					$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmount()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 				} else {
@@ -354,5 +354,5 @@ function animateScroll() {
 function reposLabel() {
 	var newLabelWidth = $('#datelabel').width();	
 	$('#date').css('width',newLabelWidth+'px');
-	$('#date').css('left','-'+newLabelWidth+'px');
+	//$('#date').css('left','-'+newLabelWidth+'px');
 }

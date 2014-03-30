@@ -226,6 +226,7 @@ form {
 		top: 5px;
 		cursor: pointer;
 		padding-top: 15px;
+		left: 622px;
 	}
 	form label#datelabel {
 		display: block;
@@ -430,7 +431,7 @@ div.transaction {
 	*/
 }
 div.transaction .amount {
-	width: 50px;
+	width: 85px;
 	position: relative;	
 	overflow: hidden;
 	float: left;
@@ -448,15 +449,392 @@ div.expense {
 /*************************************************
 Media Queries
 **************************************************/
-/* @media (min-width:320px) {
-	input[type=number], input[type=text], div#type, span#text, span#storetext, span#datetext  {
+@media (max-width:1185px) {
+	header {
+		font-size: 28px;
+	}
+}
+@media (max-width:1135px) {
+	header {
+		font-size: 26px;
+	}
+}
+@media (max-width:1100px) {
+	header {
+		font-size: 24px;
+	}
+}
+@media (max-width:1050px) {	
+	form div#type {
+		padding: 13px;
+	}
+	form input[type="number"] {
+		margin-top: 13px;
+	}
+	form span#amounttext {
+		margin-top: 13px;
+	}
+	form span#storetext {
+		padding: 13px;
+	}
+	form input[type="text"] {
+		margin: 13px 13px -2px 13px;
+	}
+	form span#datetext {
+		padding: 13px;
+	}
+	form label#datelabel {
+		padding-top: 13px;
+	}
+	form button#submitter {
+		height: 52px;
+	}
+}
+@media (max-width:1035px) {
+	header {
+		font-size: 22px;
+	}
+}
+@media (max-width:1000px) {
+	form div#type {
+		padding: 10px;
+	}
+	form input[type="number"] {
+		margin-top: 10px;
+	}
+	form span#amounttext {
+		margin-top: 10px;
+	}
+	form span#storetext {
+		padding: 10px 12px 10px 12px;
+	}
+	form input[type="text"] {
+		margin: 10px 10px -2px 10px;
+	}
+	form span#datetext {
+		padding: 10px;
+	}
+	form label#datelabel {
+		padding-top: 10px;
+	}
+	form button#submitter {
+		height: 46px;
+	}
+}
+@media (max-width:970px) {
+	header {
 		font-size: 20px;
 	}
-	input[type=number]  {
-		width: 100px;
+}
+@media (max-width:925px) {
+	header {
+		font-size: 18px;
 	}
-} 
- */
+}
+@media (max-width:890px) {
+	header {
+		font-size: 16px;
+	}
+}
+@media (max-width:840px) {
+	form div#type {
+		padding: 9px;
+	}
+	form input[type="number"] {
+		margin-top: 9px;
+	}
+	form span#amounttext {
+		margin-top: 9px;
+	}
+	form span#storetext {
+		padding: 9px 11px 9px 11px;
+	}
+	form input[type="text"] {
+		margin: 9px 9px -2px 9px;
+	}
+	form span#datetext {
+		padding: 9px;
+	}
+	form label#datelabel {
+		padding-top: 9px;
+	}
+	form button#submitter {
+		height: 44px;
+	}
+}
+@media (max-width:835px) {	
+	form div#type {
+		padding: 8px;
+	}
+	form input[type="number"] {
+		margin-top: 8px;
+	}
+	form span#amounttext {
+		margin-top: 8px;
+	}
+	form span#storetext {
+		padding: 8px 10px 8px 10px;
+	}
+	form input[type="text"] {
+		margin: 8px 8px -2px 8px;
+	}
+	form span#datetext {
+		padding: 8px;
+	}
+	form label#datelabel {
+		padding-top: 8px;
+	}
+	form button#submitter {
+		height: 42px;
+	}
+}
+@media (max-width:820px) {	
+	header {
+		font-size: 14px;
+	}
+}
+@media (max-width:780px) {	
+	header {
+		font-size: 13px;
+	}
+	form div#type {
+		padding: 6px;
+	}
+	form input[type="number"] {
+		margin-top: 6px;
+	}
+	form span#amounttext {
+		margin-top: 6px;
+	}
+	form span#storetext {
+		padding: 6px 9px 6px 9px;
+	}
+	form input[type="text"] {
+		margin: 6px 6px -2px 6px;
+	}
+	form span#datetext {
+		padding: 6px;
+	}
+	form label#datelabel {
+		padding-top: 6px;
+	}
+	form button#submitter {
+		height: 38px;
+	}
+}
+@media (max-width:740px) {	
+	header {
+		font-size: 12px;
+	}
+	form div#type {
+		padding: 5px;
+	}
+	form input[type="number"] {
+		margin-top: 5px;
+	}
+	form span#amounttext {
+		margin-top: 5px;
+	}
+	form span#storetext {
+		padding: 5px 8px 5px 8px;
+	}
+	form input[type="text"] {
+		margin: 5px 5px -2px 5px;
+	}
+	form span#datetext {
+		padding: 5px;
+	}
+	form label#datelabel {
+		padding-top: 5px;
+	}
+	form button#submitter {
+		height: 36px;
+	}
+}
+@media (max-width:720px) {	
+	form div#type {
+		padding: 3px;
+	}
+	form input[type="number"] {
+		margin-top: 3px;
+	}
+	form span#amounttext {
+		margin-top: 3px;
+	}
+	form span#storetext {
+		padding: 3px 8px 3px 8px;
+	}
+	form input[type="text"] {
+		margin: 3px 3px -2px 3px;
+	}
+	form span#datetext {
+		padding: 3px;
+	}
+	form label#datelabel {
+		padding-top: 3px;
+	}
+	form button#submitter {
+		height: 32px;
+	}
+}
+/*************************************************
+Version of search bo that requires Javascript to work/behave correctly. Not my first choice.
+*************************************************/
+@media (max-width:710px) {
+	header {
+		font-size: 18px;
+	}
+		form div#type {
+			width: 65px;
+			text-align: center;
+		}
+		form span#storetext {
+			width: 65px;
+			clear: both;
+			text-align: center;
+			padding: 10px;
+		}
+		form span#datetext {
+			width: 65px;
+			clear: both;
+			text-align: center;
+			padding: 10px;
+		}
+		form label#datelabel {
+			width: 500px;
+			margin-bottom: 10px;
+			padding-top: 10px;
+		}
+		form input#date {
+			left: 117px;
+			top: 110px;
+		}
+		form button#submitter {			
+			display: block;
+			float: right;
+			width: 100%;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+		form input#amount {
+			width: 500px;
+		}
+		form input#store {
+			width: 500px;
+			margin: 10px 0px -2px 20px;
+		}
+		form div#type {
+			padding: 10px;
+		}
+		form input[type="number"] {
+			margin-top: 10px;
+		}
+		form span#amounttext {
+			margin-top: 10px;
+		}
+		form input[type="text"] {
+			margin: 10px 10px -2px 10px;
+		}
+		form button#submitter {
+			height: 46px;
+		}	
+}
+@media (max-width:670px) {
+	form input#amount {
+		width: 450px;
+	}
+	form input#store {
+		width: 450px;
+	}
+	form label#datelabel {
+		width: 450px;
+	}
+}
+@media (max-width:620px) {
+	form input#amount {
+		width: 400px;
+	}
+	form input#store {
+		width: 400px;
+	}
+	form label#datelabel {
+		width: 400px;
+	}	
+}
+@media (max-width:570px) {
+	form input#amount {
+		width: 350px;
+	}
+	form input#store {
+		width: 350px;
+	}
+	form label#datelabel {
+		width: 350px;
+	}	
+}
+@media (max-width:515px) {
+	form input#amount {
+		width: 300px;
+	}
+	form input#store {
+		width: 300px;
+	}
+	form label#datelabel {
+		width: 300px;
+	}	
+}
+@media (max-width:460px) {
+	form input#amount {
+		width: 250px;
+	}
+	form input#store {
+		width: 250px;
+	}
+	form label#datelabel {
+		width: 250px;
+	}	
+}
+@media (max-width:415px) {
+	header {
+		font-size: 16px;
+	}
+	form input#amount {
+		width: 225px;
+		margin-left: 10px;
+	}
+	form input#store {
+		width: 225px;
+		margin: 10px 0px -2px 10px;
+	}
+	form label#datelabel {
+		width: 225px;
+	}	
+}
+@media (max-width:385px) {
+	header {
+		font-size: 14px;
+	}
+	form input#amount {
+		width: 200px;		
+	}
+	form input#store {
+		width: 200px;		
+	}
+	form label#datelabel {
+		width: 200px;
+	}	
+}
+@media (max-width:350px) {
+	form div#type {
+		width: 50px;
+	}
+	form span#storetext {
+		width: 50px;			
+	}
+	form span#datetext {
+		width: 50px;		
+	}
+}
 /*************************************************
 bigscreen settings
 **************************************************
