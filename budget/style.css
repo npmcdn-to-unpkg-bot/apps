@@ -333,7 +333,7 @@ div#blackbar {
 	right: 2%;	
 	top: 675px;
 }
-div#currentbudget {	
+div#currentstatus {	
 	float: left;
 	background: white;
 	min-width: 150px;
@@ -344,7 +344,7 @@ div#currentbudget {
 	padding: 15px;
 	font-weight: bold;
 }
-div#currentbudget .amount {
+div#currentstatus .amount {
 	font-size: 70px;
 	text-align: center;
 	font-weight: bold;	
@@ -385,10 +385,11 @@ div#monthlyrevenues .amount {
 transactions
 ************************************************************************************/
 div#transactions {
+	float: left;
 	height: 150px;
 	overflow-y: scroll;
 	background: white;
-	width: 96%;	
+	width: 46%;	
 	margin:1%;	
 	padding: 1%;
 	resize: vertical
@@ -408,15 +409,43 @@ div#transactions h1 {
 div#transactions h1:not(:first-child) {
 	margin-top: 10px;
 }
+div#rTransactions {
+	float: left;
+	height: 150px;
+	overflow-y: scroll;
+	background: white;
+	width: 46%;	
+	margin:1%;	
+	padding: 1%;
+	resize: vertical
+}
+div#rTransactions h1 {	
+	display: block;
+	width: 100%;
+	position:relative;
+	float: left;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0;	
+	overflow: hidden;
+	border-bottom: 1px solid black;
+}
+div#rTransactions h1:not(:first-child) {
+	margin-top: 10px;
+}
+div#rTransactions div.transaction {
+	width: 350px;
+}
 div.time {
-	width: 10%;
+	width: 65px;
 	position: relative;
 	float: left;	
 	overflow: hidden;
 	margin-left: 20px;
 }
 div.transaction {
-	width: 50%;	
+	width: 250px;
 	position: relative;
 	float: left;	
 	overflow: hidden;
@@ -438,6 +467,8 @@ div.transaction .amount {
 	text-align: right;
 	padding-right: 10px;
 	margin-right: 10px;
+	padding-left: 10px;
+	margin-left: 10px;
 	/*border-right: 1px solid grey;*/
 }
 div.revenue {

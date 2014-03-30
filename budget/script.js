@@ -6,7 +6,7 @@ $('document').ready(function() {
 		$( "form:first" ).submit(function( event ) {			
 			event.preventDefault();			   
 		});		
-		budget = new Budget(0,[]);	
+		budget = new Budget(0,[],[]);	
 		ConnectToCloud();		
 		//datepicker altering text after date has been choosen
 		$("#date").datepicker({

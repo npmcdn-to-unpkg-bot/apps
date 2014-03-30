@@ -15,17 +15,25 @@ var showError = function(error) {
 			localStorage.removeItem('dropbox_authstatus');
 			break;
 				
-		case 404:
+		case 404:			
+			client.writeFile("Me/Budget.json", '{"currentStatus":0,"transactions":[],"recurringTransactions":[]}', function(error, stat) {
+				if (error) {
+					return showError(error);  // Something went wrong.
+				}	
+				ConnectToCloud();
+			});			
 			// The file or folder you tried to access is not in the user's Dropbox.
 			// Handling this error is specific to your application.
 			break;
 
 		case 507:
+			alert("Your Dropbox is full. Please free some space and come back to this app");
 			// The user is over their Dropbox quota.
 			// Tell them their Dropbox is full. Refreshing the page won't help.
 			break;
 
 		case 503:
+			alert("The App is currently overloaded, pls try again later.");
 			// Too many API requests. Tell the user to try again later.
 			// Long-term, optimize your code to use fewer API calls.
 			break;
@@ -98,36 +106,18 @@ if(storage) {
 					client.readdir("/", function(error, entries) {
 						if (error) {
 							return showError(error);  // Something went wrong.
-						}
-						isFilestructure = false;
+						}						
 						$.each(entries, function() {
-							if(this == "Me") {
+							if(this == "Me") {	
 								alert('"Me" found ');
 								client.readdir("Me", function(error, entries) {
 									if (error) {
 										return showError(error);  // Something went wrong.
-									}
-									$.each(entries, function() {
-										if(this == "budget.json") {
-											alert('"budget.json" found');
-											isFilestructure = true;											
-										}
-									});									
+									}																	
 								});									
 							}														
 						});						
-					});	
-					if(!isFilestructure){
-						client.writeFile("Me/budget.json", '{"currentBudget":0,"transactions":[]}', function(error, stat) {
-							if (error) {
-								return showError(error);  // Something went wrong.
-							}
-
-							alert("FileStructure constructed. isFileStructure has: "+isFileStructure);			
-						});	
-					} else {
-						alert('filestructure has been used again!');
-					}
+					});					
 					loadData(displayData);
 				});		
 			} else {				
@@ -139,33 +129,17 @@ if(storage) {
 					client.readdir("/", function(error, entries) {
 						if (error) {
 							return showError(error);  // Something went wrong.
-						}
-						isFilestructure = false;
+						}						
 						$.each(entries, function() {
 							if(this == "Me") {								
 								client.readdir("Me", function(error, entries) {
 									if (error) {
 										return showError(error);  // Something went wrong.
-									}
-									$.each(entries, function() {
-										if(this == "budget.json") {											
-											isFilestructure = true;											
-										}
-									});									
+									}																		
 								});									
 							}														
 						});						
-					});	
-					if(!isFilestructure){
-						alert("file not found. created new budget.json");
-						client.writeFile("Me/budget.json", '{"currentBudget":0,"transactions":[]}', function(error, stat) {
-							if (error) {
-								return showError(error);  // Something went wrong.
-							}
-
-						});	
-					} else {						
-					}
+					});					
 					loadData(displayData);
 				});				
 			}						
@@ -180,13 +154,6 @@ if(storage) {
 	$(location).attr('href','http://apps.thebluneproject.de/welcome.html?origin=budget');
 }
 }								
-
-function isFilestructure(callback){
-	
-}
-function createFilestructure() {
-	
-}
 function getInfo() {
 	alert((localStorage.getItem('dropbox_auth')));
 	client = new Dropbox.Client(JSON.parse(localStorage.getItem('dropbox_auth')));	
@@ -212,7 +179,7 @@ function loadData(callback) {
 		if (error) {   
 			return showError(error);
 		}
-		client.readFile("Me/budget.json", function(error, data) {
+		client.readFile("Me/Budget.json", function(error, data) {
 			if (error) {
 				return showError(error);  // Something went wrong.
 			}			
@@ -220,9 +187,12 @@ function loadData(callback) {
 			data = JSON.parse(data);
 			data.transactions = data.transactions.reverse();
 			$.each(data.transactions, function() {			
-				budget.addTransaction(this.name,this.type,this.amount,this.date, this.turnus);				
-			});				
-			budget.setCurrentBudget(data.currentBudget);		
+				budget.addTransaction(this.name,this.type,this.amount,this.date);				
+			});	
+			$.each(data.recurringTransactions, function() {			
+				budget.addRecurringTransaction(this.name,this.type,this.brutto,this.pays,this.paidBy,this.date);				
+			});	
+			budget.setCurrentStatus(data.currentStatus);		
 			//alert(JSON.stringify(budget));
 			callback();
 		});		
@@ -235,7 +205,7 @@ function saveData(callback) {
 		if (error) {   
 			return showError(error);
 		}
-		client.writeFile("Me/budget.json", JSON.stringify(budget), function(error, stat) {
+		client.writeFile("Me/Budget.json", JSON.stringify(budget), function(error, stat) {
 			if (error) {
 				return showError(error);  // Something went wrong.
 			}
@@ -261,7 +231,7 @@ function addTransaction() {
 		date = new Date();	
 	}
 	alert(date);
-	budget.addTransaction(name,type,amount,date,0);
+	budget.addTransaction(name,type,amount,date);
 	alert("data is: "+JSON.stringify(budget));
 	saveData(displayData);
 }

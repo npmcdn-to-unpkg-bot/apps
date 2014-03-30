@@ -7,7 +7,6 @@
         <link rel="stylesheet" media="all" type="text/css" href="http://www.thebluneproject.de/apps/normalize.css" /> 
 		<link rel="stylesheet" media="all" type="text/css" href="http://apps.thebluneproject.de/budget/style.css" />
 		<link rel="stylesheet" type="text/css" href="http://www.thebluneproject.de/apps/index.pageslide.css">		
-		<link rel="stylesheet" href="http://thebluneproject.de/apps/jpreloader-index.css" />
 		<!-- Meta -->
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">     
 		<!--Dropbox-->
@@ -26,8 +25,6 @@
 		<script src="https://raw.github.com/HubSpot/odometer/v0.4.2/odometer.min.js"></script>
 		<link rel="stylesheet" href="https://raw.github.com/HubSpot/odometer/master/themes/odometer-theme-default.css" />
 		-->
-		<!--JPreloader-->
-		<script type="text/javascript" src="http://thebluneproject.de/apps/jpreloader.js"></script>
 		<!--SVG-FIX-->
 		<script type="text/javascript">
 			$('document').ready(function() {			
@@ -57,22 +54,7 @@
 					});
 				});				
 			});
-		</script>
-		<!--executed Jpreloader script-->
-		<script type="text/javascript">
-		   $(document).ready(function() {
-				$('body').jpreLoader({							
-							splashFunction: function() {								
-							},
-							loaderVPos: '50%',
-							splashVPos: '0%',
-							onetimeLoad: true 
-							
-				},function() {					
-					$(window).scrollTop(25);	
-				});
-		   });
-		</script>
+		</script>		
    </head>    
     <body onload="messen()" onresize="messen()">
 		<header>
