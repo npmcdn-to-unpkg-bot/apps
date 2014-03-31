@@ -239,6 +239,31 @@ form {
 		cursor: pointer;
 		padding-top: 15px;
 	}
+	form label#repeatlabel {
+		width: 42px;
+		display: block;
+		color: black;
+		text-align: center;
+		float: right;
+		opacity: 0.1;
+		position: relative;				
+		cursor: pointer;
+		padding: 5px;
+		background: black;
+		margin-left: 15px;
+	}
+		form label#repeatlabel #repeatimage {
+			height: 46px;
+			width: 42px;
+			position: relative;
+			display: block;
+			left: -2px;
+		}
+			form label#repeatlabel #repeatimage path {
+				fill: white;
+			}
+	form input#repeat {	
+	}
 	form button#submitter {	
 		height: 56px;
 		float: right;
@@ -340,8 +365,8 @@ div#currentstatus {
 	position: relative;
 	overflow: hidden;
 	text-align: center;	
-	margin: 15px;	
-	padding: 15px;
+	margin: 1%;	
+	padding: 1%;
 	font-weight: bold;
 }
 div#currentstatus .amount {
@@ -349,15 +374,32 @@ div#currentstatus .amount {
 	text-align: center;
 	font-weight: bold;	
 }
-div#monthlyexpenses {	
+div#monthlybudget {	
 	float: left;
 	background: white;
 	min-width: 150px;
 	position: relative;
 	overflow: hidden;
 	text-align: center;	
-	margin: 15px;	
-	padding: 15px;
+	margin: 1%;	
+	padding: 1%;
+	font-weight: bold;
+}
+div#monthlybudget .amount {
+	font-size: 70px;
+	text-align: center;
+	font-weight: bold;	
+}
+div#monthlyexpenses {	
+	display: none;
+	float: left;
+	background: white;
+	min-width: 150px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;	
+	margin: 1%;	
+	padding: 1%;
 	font-weight: bold;
 }
 div#monthlyexpenses .amount {
@@ -365,15 +407,16 @@ div#monthlyexpenses .amount {
 	text-align: center;
 	font-weight: bold;
 }
-div#monthlyrevenues {	
+div#monthlyrevenues {
+	display: none;
 	float: left;
 	background: white;
 	min-width: 150px;
 	position: relative;
 	overflow: hidden;
 	text-align: center;	
-	margin: 15px;	
-	padding: 15px;
+	margin: 1%;	
+	padding: 1%;
 	font-weight: bold;
 }
 div#monthlyrevenues .amount {
@@ -434,9 +477,6 @@ div#rTransactions h1 {
 div#rTransactions h1:not(:first-child) {
 	margin-top: 10px;
 }
-div#rTransactions div.transaction {
-	width: 350px;
-}
 div.time {
 	width: 65px;
 	position: relative;
@@ -444,8 +484,18 @@ div.time {
 	overflow: hidden;
 	margin-left: 20px;
 }
-div.transaction {
-	width: 250px;
+div.datemonth {
+	width: 85px;
+	display: block;	
+	position:relative;
+	float: left;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0;	
+	overflow: hidden;	
+}
+div.transaction {	
 	position: relative;
 	float: left;	
 	overflow: hidden;
@@ -480,22 +530,22 @@ div.expense {
 /*************************************************
 Media Queries
 **************************************************/
-@media (max-width:1185px) {
+@media (max-width:1232px) {
 	header {
 		font-size: 28px;
 	}
 }
-@media (max-width:1135px) {
+@media (max-width:1188px) {
 	header {
 		font-size: 26px;
 	}
 }
-@media (max-width:1100px) {
+@media (max-width:1145px) {
 	header {
 		font-size: 24px;
 	}
 }
-@media (max-width:1050px) {	
+@media (max-width:1102px) {	
 	form div#type {
 		padding: 13px;
 	}
@@ -520,13 +570,17 @@ Media Queries
 	form button#submitter {
 		height: 52px;
 	}
+	form label#repeatlabel #repeatimage {
+		height: 42px;
+		width: 38px;		
+	}
 }
-@media (max-width:1035px) {
+@media (max-width:1085px) {
 	header {
 		font-size: 22px;
 	}
 }
-@media (max-width:1000px) {
+@media (max-width:1042px) {
 	form div#type {
 		padding: 10px;
 	}
@@ -551,23 +605,31 @@ Media Queries
 	form button#submitter {
 		height: 46px;
 	}
+	form label#repeatlabel {
+		width: 36px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 36px;
+		width: 32px;	
+		left: 0px;
+	}
 }
-@media (max-width:970px) {
+@media (max-width:1116px) {
 	header {
 		font-size: 20px;
 	}
 }
-@media (max-width:925px) {
+@media (max-width: 972px) {
 	header {
 		font-size: 18px;
 	}
 }
-@media (max-width:890px) {
+@media (max-width:930px) {
 	header {
 		font-size: 16px;
 	}
 }
-@media (max-width:840px) {
+@media (max-width:886px) {
 	form div#type {
 		padding: 9px;
 	}
@@ -592,8 +654,15 @@ Media Queries
 	form button#submitter {
 		height: 44px;
 	}
+	form label#repeatlabel {
+		width: 32px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 34px;
+		width: 28px;		
+	}
 }
-@media (max-width:835px) {	
+@media (max-width:876px) {	
 	form div#type {
 		padding: 8px;
 	}
@@ -618,13 +687,20 @@ Media Queries
 	form button#submitter {
 		height: 42px;
 	}
+	form label#repeatlabel {
+		width: 32px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 32px;
+		width: 26px;		
+	}
 }
-@media (max-width:820px) {	
+@media (max-width:866px) {	
 	header {
 		font-size: 14px;
 	}
 }
-@media (max-width:780px) {	
+@media (max-width:827px) {	
 	header {
 		font-size: 13px;
 	}
@@ -652,8 +728,15 @@ Media Queries
 	form button#submitter {
 		height: 38px;
 	}
+	form label#repeatlabel {
+		width: 26px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 28px;
+		width: 22px;		
+	}
 }
-@media (max-width:740px) {	
+@media (max-width:779px) {	
 	header {
 		font-size: 12px;
 	}
@@ -681,8 +764,15 @@ Media Queries
 	form button#submitter {
 		height: 36px;
 	}
+	form label#repeatlabel {
+		width: 24px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 26px;
+		width: 20px;		
+	}
 }
-@media (max-width:720px) {	
+@media (max-width:752px) {	
 	form div#type {
 		padding: 3px;
 	}
@@ -707,11 +797,18 @@ Media Queries
 	form button#submitter {
 		height: 32px;
 	}
+	form label#repeatlabel {
+		width: 20px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 22px;
+		width: 16px;		
+	}
 }
 /*************************************************
-Version of search bo that requires Javascript to work/behave correctly. Not my first choice.
+Mobile view. Not my first choice.
 *************************************************/
-@media (max-width:710px) {
+@media (max-width:736px) {
 	header {
 		font-size: 18px;
 	}
@@ -741,11 +838,12 @@ Version of search bo that requires Javascript to work/behave correctly. Not my f
 			top: 110px;
 		}
 		form button#submitter {			
+			height: 46px;
 			display: block;
 			float: right;
-			width: 100%;
-			padding-left: 15px;
-			padding-right: 15px;
+			width: 88%;
+			padding-left: 0px;
+			padding-right: 0px;
 		}
 		form input#amount {
 			width: 500px;
@@ -765,10 +863,20 @@ Version of search bo that requires Javascript to work/behave correctly. Not my f
 		}
 		form input[type="text"] {
 			margin: 10px 10px -2px 10px;
-		}
-		form button#submitter {
+		}		
+		form label#repeatlabel {
 			height: 46px;
-		}	
+			float: left;
+			width: 12%;
+			margin: 0;
+			padding: 0;
+			
+		}
+		form label#repeatlabel #repeatimage {
+			height: 60%;
+			width: auto;		
+			margin: 10% auto 0 auto;
+		}
 }
 @media (max-width:670px) {
 	form input#amount {

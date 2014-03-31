@@ -190,7 +190,7 @@ function loadData(callback) {
 				budget.addTransaction(this.name,this.type,this.amount,this.date);				
 			});	
 			$.each(data.recurringTransactions, function() {			
-				budget.addRecurringTransaction(this.name,this.type,this.brutto,this.pays,this.paidBy,this.date);				
+				budget.addRecurringTransaction(this.name,this.type,this.amount,this.date);				
 			});	
 			budget.setCurrentStatus(data.currentStatus);		
 			//alert(JSON.stringify(budget));
@@ -218,7 +218,7 @@ function saveData(callback) {
 function addTransaction() {
 	var name = $("input[type='text']").val();
 	var type = $(".checkboxlabel:visible").attr('for');
-	
+	var repeat = $("input#repeat").val();	
 	var amount = $("input[name='amount']").val();	
 	amount = amount.replace(",", ".");	
 	amount = parseFloat(amount);	
@@ -227,11 +227,16 @@ function addTransaction() {
 	}	
 	
 	var date = $("input[name='date']").val();
+	alert(date);
 	if(!date){
 		date = new Date();	
 	}
-	alert(date);
-	budget.addTransaction(name,type,amount,date);
+	alert('danach: '+date);
+	if(repeat === 'off') {
+		budget.addTransaction(name,type,amount,date);
+	} else { 
+		budget.addRecurringTransaction(name,type,amount,date);
+	}
 	alert("data is: "+JSON.stringify(budget));
 	saveData(displayData);
 }
