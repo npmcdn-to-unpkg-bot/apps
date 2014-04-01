@@ -11,7 +11,7 @@ var showError = function(error) {
 			// If you're using dropbox.js, the only cause behind this error is that
 			// the user token expired.
 			// Get the user through the authentication flow again.					
-			alert("error 401: token expired. You need to authenticate again.");
+			console.log("error 401: token expired. You need to authenticate again.");
 			localStorage.removeItem('dropbox_authstatus');
 			break;
 				
@@ -27,13 +27,13 @@ var showError = function(error) {
 			break;
 
 		case 507:
-			alert("Your Dropbox is full. Please free some space and come back to this app");
+			console.log("Your Dropbox is full. Please free some space and come back to this app");
 			// The user is over their Dropbox quota.
 			// Tell them their Dropbox is full. Refreshing the page won't help.
 			break;
 
 		case 503:
-			alert("The App is currently overloaded, pls try again later.");
+			console.log("The App is currently overloaded, pls try again later.");
 			// Too many API requests. Tell the user to try again later.
 			// Long-term, optimize your code to use fewer API calls.
 			break;
@@ -59,11 +59,11 @@ storage = localStorage.getItem('Storage');
 if(storage) {
 	
 	//-->debug
-	// alert("storage vorhanden:"+storage);	
+	// console.log("storage vorhanden:"+storage);	
 	switch (storage) {
 		case 'dropbox':			
 			dropbox_authStatus = localStorage.getItem('dropbox_authstatus');
-			// alert("authstatus: "+dropbox_authStatus);
+			// console.log("authstatus: "+dropbox_authStatus);
 			
 			var client = new Dropbox.Client({
 					key: "hm4c58qp6rpysot", secret: "w7cdx6o8p2hyubj"
@@ -72,7 +72,7 @@ if(storage) {
 			if(!dropbox_authStatus) {				
 				localStorage.setItem('dropbox_authstatus','initialized');	
 				//initialization				
-				alert("initialized");
+				console.log("initialized");
 				//preset driver to the dropbox page
 				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
 				//authentication
@@ -84,7 +84,7 @@ if(storage) {
 			} else if (dropbox_authStatus === 'initialized') {
 				localStorage.setItem('dropbox_authstatus','finalized');	
 				//continuation				
-				alert("continued");
+				console.log("continued");
 				//preset driver to the dropbox page
 				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
 				//authentication
@@ -97,10 +97,10 @@ if(storage) {
 							return showError(error);  // Something went wrong.
 						}
 						
-						alert("hello: "+userInfo.name);
+						console.log("hello: "+userInfo.name);
 						//Speichern der verwendeten Cloudspeicher Option
 						localStorage.setItem('dropbox_auth', JSON.stringify(client.credentials()));
-						alert("credentials saved:"+JSON.stringify(client.credentials()));
+						console.log("credentials saved:"+JSON.stringify(client.credentials()));
 						
 					});	
 					client.readdir("/", function(error, entries) {
@@ -109,7 +109,7 @@ if(storage) {
 						}						
 						$.each(entries, function() {
 							if(this == "Me") {	
-								alert('"Me" found ');
+								console.log('"Me" found ');
 								client.readdir("Me", function(error, entries) {
 									if (error) {
 										return showError(error);  // Something went wrong.
@@ -155,7 +155,7 @@ if(storage) {
 }
 }								
 function getInfo() {
-	alert((localStorage.getItem('dropbox_auth')));
+	console.log((localStorage.getItem('dropbox_auth')));
 	client = new Dropbox.Client(JSON.parse(localStorage.getItem('dropbox_auth')));	
 	// client.authDriver(new Dropbox.Drivers.Redirect());
 	client.authenticate(function(error, client) {
@@ -185,15 +185,20 @@ function loadData(callback) {
 			}			
 			//JSON.parse needed?!?
 			data = JSON.parse(data);
+			var amount = data.currentStatus.amount;	
+			budget.setCurrentStatusAmount(amount);	
+			var deposits = [];			
+			$.each(data.currentStatus.deposits, function() {				
+				budget.addDeposit(this.name,this.amount);	
+			});			
 			data.transactions = data.transactions.reverse();
 			$.each(data.transactions, function() {			
 				budget.addTransaction(this.name,this.type,this.amount,this.date);				
 			});	
 			$.each(data.recurringTransactions, function() {			
 				budget.addRecurringTransaction(this.name,this.type,this.amount,this.date);				
-			});	
-			budget.setCurrentStatus(data.currentStatus);		
-			//alert(JSON.stringify(budget));
+			});		
+			//console.log(JSON.stringify(budget));
 			callback();
 		});		
 	});	
@@ -210,7 +215,7 @@ function saveData(callback) {
 				return showError(error);  // Something went wrong.
 			}
 
-			alert("saved");
+			console.log("saved");
 			callback();
 		});			
 	});
@@ -224,19 +229,26 @@ function addTransaction() {
 	amount = parseFloat(amount);	
 	if(!$.isNumeric(amount)){		
 		return;
-	}	
-	
-	var date = $("input[name='date']").val();
-	alert(date);
+	}		
+	var date = $("input[name='date']").val();	
 	if(!date){
 		date = new Date();	
-	}
-	alert('danach: '+date);
+	}	
 	if(repeat === 'off') {
 		budget.addTransaction(name,type,amount,date);
 	} else { 
 		budget.addRecurringTransaction(name,type,amount,date);
 	}
-	alert("data is: "+JSON.stringify(budget));
+	if(name === 'Wallet' || name === 'wallet') {
+		if(type == 'expense') {
+			budget.addToDeposit('Wallet',amount);
+			budget.subtractFromDeposit('Bank',amount);
+		} else {
+			budget.addToDeposit('Bank',amount);
+			budget.subtractFromDeposit('Wallet',amount);
+		}
+		
+	}
+	//console.log("data is: "+JSON.stringify(budget));
 	saveData(displayData);
 }

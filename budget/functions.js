@@ -6,7 +6,7 @@ function onExpense() {
 	//$('#type').css('width','20%');
 	//$('input[type=number]').css('margin','0 0 0 5%');
 	//$('input[type=number]').css('width','40%');
-	//alert($(".checkboxlabel:visible").attr('for'));
+	//console.log($(".checkboxlabel:visible").attr('for'));
 	resizePhrase()
 }
 function onRevenue() {
@@ -17,7 +17,7 @@ function onRevenue() {
 	//$('#type').css('width','25%');
 	//$('input[type=number]').css('margin','0 0 0 5%');
 	//$('input[type=number]').css('width','35%');	
-	//alert($(".checkboxlabel:visible").attr('for'));
+	//console.log($(".checkboxlabel:visible").attr('for'));
 	resizePhrase()
 }
 function changeRepeat() {	
@@ -107,15 +107,7 @@ function displayRealTimeClock(id) {
         setTimeout('displayRealTimeClock("'+id+'");','1000');
        
 }
-function displayDateInMonth(d) {
-	var d_names = new Array("Sunday", "Monday", "Tuesday",
-	"Wednesday", "Thursday", "Friday", "Saturday");
-
-	var m_names = new Array("January", "February", "March", 
-	"April", "May", "June", "July", "August", "September", 
-	"October", "November", "December");
-			
-	var curr_day = d.getDay();
+function displayDateInMonth(d) {	
 	var curr_date = d.getDate();
 	var sup = "";
 	if (curr_date == 1 || curr_date == 21 || curr_date ==31)
@@ -135,7 +127,7 @@ function displayDateInMonth(d) {
 		sup = "th";
 		}	
 
-	return(d_names[curr_day] + " " + curr_date + "<sup>"
+	return(curr_date + "<sup>"
 	+ sup + "</sup> ");
 }
 function displayData() {	
@@ -212,7 +204,7 @@ function displayData() {
 	//add blackbar in order to conceal chartbranding - dumme idee
 	//$("#dashboard").append('<div id="blackbar"></div>');
 	//insert dashboard-elements
-	$("#content").append('<div id="currentstatus"><div class="amount">'+budget.getCurrentStatus()+'€</div>Current Status</div>');
+	$("#content").append('<div id="currentstatus" onclick="displayDeposits()"><div class="amount">'+budget.getCurrentStatusAmount()+'€</div>Current Status</div>');
 	$("#content").append('<div id="monthlyexpenses"><div class="amount">'+MonthlyExpenses(new Date())+'€</div>Expenses this Month</div>');
 	$("#content").append('<div id="monthlyrevenues"><div class="amount">'+MonthlyRevenues(new Date())+'€</div>Revenues this Month</div>');
 	$("#content").append('<div id="monthlybudget"><div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget</div>");
@@ -282,14 +274,14 @@ function displayData() {
 	var length = transactionArray.length;
 	for(var i = 0; i < length; i++) {	
 		for( var j = 0; j < length; j++) {
-			alert('i='+i+',j='+j);
-			if(transactionArray[i].getDate() > transactionArray[j].getDate()) {
-				alert('Laufvariablen: i='+i+',j='+j+' .tausche: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
+			//console.log('i='+i+',j='+j);			
+			if(transactionArray[i].getDate() < transactionArray[j].getDate()) {
+				//console.log('Laufvariablen: i='+i+',j='+j+' .tausche: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
 				var tausch = transactionArray[i];
 				transactionArray[i]=transactionArray[j];
 				transactionArray[j]=tausch;
 			} else {
-				alert('Laufvariablen: i='+i+',j='+j+' .tausche nicht: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
+				//console.log('Laufvariablen: i='+i+',j='+j+' .tausche nicht: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
 			}
 		}
 	}
@@ -302,48 +294,10 @@ function displayData() {
 			$("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmount()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
 		}		
 	});	
-	//alert('eingetragen');	
+	//console.log('eingetragen');	
 	//clear div
 	$("#content").append('<div style="clear: both"></div>');
 };
-function updatePhrase(store){	
-	if(!store){
-		store = $("input[type='radio'][name='store']:checked").val();
-	}
-	$("#store span").html(store);	
-}
-function showStores(){
-	$('#stores').css('display','block');
-	calcSL();
-}
-function hideStores(){
-	$('#stores').css('display','none');
-}
-function resizePhrase() {
-	var sum = 0;
-	sum += $('#type').width();	
-	
-	sum += parseInt($('input[type=number]').css('margin-left'),10);	
-	
-	sum += $('input[type=number]').width();	
-	
-	sum += $('#text').width();	
-	
-	sum += $('#storetext').width();	
-	
-	sum += $('#datelabel').width();
-	
-	sum += parseInt($('#storetext').css('margin-left'),10);	
-	
-	sum += $('#datetext').width();
-	sum += 1;
-	$('#phrase').css('width',sum+'px');	
-	//var phraseHeight = $('#adddata').height();
-	//var newMargin = (window.innerHeight-phraseHeight)/2;
-	//$('#adddata').css('margin-top',newMargin);
-	//$('#adddata').css('margin-bottom',newMargin);
-	//callback();
-}
 function messen() {
 	$("#messwert").remove();
 	$("#content").before("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
@@ -357,9 +311,13 @@ function MonthlyExpenses(aDate) {
         && givenDate.getFullYear() == aDate.getFullYear());
 		
 		if(isSameMonth) {			
-			if(this.getType() == 'expense'){
-				sum += this.getAmount();
-			}			
+			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
+			} else {
+				console.log(this.getName());
+				if(this.getType() == 'expense'){
+					sum += this.getAmount();
+				}
+			}
 		}
 	});
 	return sum;
@@ -374,8 +332,12 @@ function DailyExpenses(aDate) {
         && givenDate.getFullYear() == aDate.getFullYear());
 		
 		if(isSameDay) {			
-			if(this.getType() == 'expense'){
-				sum += this.getAmount();
+			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
+			} else {
+				console.log(this.getName());
+				if(this.getType() == 'expense'){
+					sum += this.getAmount();
+				}
 			}
 		}
 	});	
@@ -390,23 +352,15 @@ function MonthlyRevenues(aDate) {
         && givenDate.getFullYear() == aDate.getFullYear());
 		
 		if(isSameMonth) {			
-			if(this.getType() == 'revenue'){
-				sum += this.getAmount();
-			}			
+			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
+			} else {
+				console.log(this.getName());
+				if(this.getType() == 'revenue'){
+					sum += this.getAmount();
+				}
+			}
 		}
 	});
-	return sum;
-}
-function MonthlyBudget() {
-	var sum = 0;
-	$.each(budget.getRecurringTransactions(), function() {		
-		if(this.getType() == 'revenue'){
-			sum += this.getAmount();
-		} else {
-			sum -= this.getAmount();
-		}
-	});
-	sum = sum-MonthlyExpenses(new Date())+MonthlyRevenues(new Date());
 	return sum;
 }
 function DailyRevenues(aDate) {	
@@ -419,22 +373,46 @@ function DailyRevenues(aDate) {
         && givenDate.getFullYear() == aDate.getFullYear());
 		
 		if(isSameDay) {			
-			if(this.getType() == 'revenue'){
-				sum += this.getAmount();
+			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
+			} else {
+				console.log(this.getName());
+				if(this.getType() == 'revenue'){
+					sum += this.getAmount();
+				}
 			}
 		}
 	});	
 	return sum;
 }
-/*
-function animateScroll() {
-	$('body').animate({
-		scrollTop: $("#dashboard").offset().top-50
-	}, 1000);
+function MonthlyBudget() {
+	var sum = 0;
+	$.each(budget.getRecurringTransactions(), function() {		
+		if(this.getType() == 'revenue'){
+			sum += this.getAmount();
+		} else {
+			sum -= this.getAmount();
+		}
+	});
+	console.log(sum)
+	console.log(MonthlyExpenses(new Date()));
+	console.log(MonthlyRevenues(new Date()));
+	sum = sum-MonthlyExpenses(new Date())+MonthlyRevenues(new Date());
+	return sum;
 }
-*/
 function reposLabel() {
 	var newLabelWidth = $('#datelabel').width();	
 	$('#date').css('width',newLabelWidth+'px');
 	//$('#date').css('left','-'+newLabelWidth+'px');
+}
+function displayDeposits() {	
+	var htmlstring = $('#currentstatus').html(); 
+	if (htmlstring.indexOf('<div class="amount">') >= 0) {
+		$('#currentstatus').html(' ');					
+		$.each(budget.getDeposits(), function() {					
+			$('#currentstatus').append('<div class="deposit"><span class="name">'+this.getName()+'</span><span class="amount">'+this.getAmount()+'</span><div style="clear: both"></div></div>');
+		});
+		
+	} else {
+		$('#currentstatus').html('<div class="amount">'+budget.getCurrentStatusAmount()+'€</div>Current Status');
+	}	
 }

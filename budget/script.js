@@ -6,7 +6,7 @@ $('document').ready(function() {
 		$( "form:first" ).submit(function( event ) {			
 			event.preventDefault();			   
 		});		
-		budget = new Budget(0,[],[]);	
+		budget = new Budget(0,[],[],[]);	
 		ConnectToCloud();		
 		//datepicker altering text after date has been choosen
 		$("#date").datepicker({
@@ -14,7 +14,7 @@ $('document').ready(function() {
 				var currentDate = $("#date").datepicker( "getDate" );		
 				$('#date').val(currentDate);
 				$('#datelabel').html(displayDate(currentDate));
-				reposLabel();
+				reposLabel();				
 			}
 		});			
 	}
@@ -28,6 +28,6 @@ $('document').ready(function() {
 	//var budget2 = new Budget(0,[]);
 	//budget2.setCurrentBudget(0.00);
 	//budget2.addTransaction('App-initialisation','Revenue',0,0);	
-	//alert(JSON.stringify(budget2));	
+	//console.log(JSON.stringify(budget2));	
 });
 

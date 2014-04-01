@@ -359,6 +359,7 @@ div#blackbar {
 	top: 675px;
 }
 div#currentstatus {	
+	height: 104px;
 	float: left;
 	background: white;
 	min-width: 150px;
@@ -368,13 +369,24 @@ div#currentstatus {
 	margin: 1%;	
 	padding: 1%;
 	font-weight: bold;
+	cursor: pointer;
 }
-div#currentstatus .amount {
-	font-size: 70px;
-	text-align: center;
-	font-weight: bold;	
-}
+	div#currentstatus div.amount {
+		font-size: 70px;
+		text-align: center;
+		font-weight: bold;	
+	}
+	div#currentstatus div.deposit {
+	
+	}
+		div#currentstatus div.deposit span.name {
+			float: left;
+		}
+		div#currentstatus div.deposit span.amount {
+			float: right;
+		}
 div#monthlybudget {	
+	height: 104px;
 	float: left;
 	background: white;
 	min-width: 150px;
@@ -493,7 +505,8 @@ div.datemonth {
 	font-size: 12px;
 	line-height: 20px;
 	margin: 0;	
-	overflow: hidden;	
+	overflow: hidden;
+	text-align: center;
 }
 div.transaction {	
 	position: relative;
