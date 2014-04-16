@@ -214,30 +214,29 @@ function saveData(callback) {
 			if (error) {
 				return showError(error);  // Something went wrong.
 			}
-
+			
 			console.log("saved");
 			callback();
 		});			
 	});
 }
-function addTransaction() {
+function processInput(callback) {
 	var name = $("input[type='text']").val();
 	var type = $(".checkboxlabel:visible").attr('for');
 	var repeat = $("input#repeat").val();	
 	var amount = $("input[name='amount']").val();	
 	amount = amount.replace(",", ".");	
-	amount = parseFloat(amount);	
+	amount = parseFloat(amount);
+	console.log(amount);
+	amount = amount.toFixed(2);
+	console.log(amount);
+	amount = parseFloat(amount);
 	if(!$.isNumeric(amount)){		
 		return;
 	}		
 	var date = $("input[name='date']").val();	
 	if(!date){
 		date = new Date();	
-	}	
-	if(repeat === 'off') {
-		budget.addTransaction(name,type,amount,date);
-	} else { 
-		budget.addRecurringTransaction(name,type,amount,date);
 	}
 	if(name === 'Wallet' || name === 'wallet') {
 		if(type == 'expense') {
@@ -246,9 +245,19 @@ function addTransaction() {
 		} else {
 			budget.addToDeposit('Bank',amount);
 			budget.subtractFromDeposit('Wallet',amount);
-		}
-		
+		}		
 	}
+	console.log('processed');
+	callback(name,type,repeat,amount,date);
+}
+function addTransaction(name,type,repeat,amount,date) {	
+	console.log('name is'+name);
+	if(repeat === 'off') {
+		console.log(amount);
+		budget.addTransaction(name,type,amount,date);
+	} else { 
+		budget.addRecurringTransaction(name,type,amount,date);
+	}	
 	//console.log("data is: "+JSON.stringify(budget));
 	saveData(displayData);
 }

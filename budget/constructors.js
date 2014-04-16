@@ -35,11 +35,11 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 	}
 	this.subtractFromCurrentStatusAmount = function (amount) {
 		this.currentStatus.amount -= amount;
-		this.currentStatus.amount = this.currentStatus.amount.toFixed(2);
+		this.currentStatus.amount = (Math.round(this.currentStatus.amount * 100)/100).toFixed(2);
 	}
 	this.addToCurrentStatusAmount = function (amount) {
 		this.currentStatus.amount += amount;
-		this.currentStatus.amount = this.currentStatus.amount.toFixed(2);
+		this.currentStatus.amount = (Math.round(this.currentStatus.amount * 100)/100).toFixed(2);
 	}
 	this.addTransaction = function(name, type, amount, date, turnus) {
 		var trans = new Transaction(name, type, amount, date, turnus);
@@ -71,7 +71,7 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 	
 		this.getAmount = function() {
 			return this.amount;
-		}
+		}		
 		this.getDeposits = function() {
 			return this.deposits;
 		}
@@ -102,6 +102,10 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 		this.getAmount = function() {
 			return this.amount;
 		}
+		this.getAmountstring = function() {
+			amount = (Math.round(this.amount * 100)/100).toFixed(2);
+			return amount;
+		}
 		this.getDate = function() {
 			return this.date;
 		}	
@@ -123,6 +127,10 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 		}
 		this.getAmount = function() {
 			return this.amount;
+		}
+		this.getAmountstring = function() {
+			amount = (Math.round(this.amount * 100)/100).toFixed(2);
+			return amount;
 		}
 		this.getDate = function() {		
 			return this.date;
