@@ -319,19 +319,19 @@ div.ui-datepicker-title {
 	margin: 0;	
 }
 label#nettolabel {	
-	background: url("resources/netto.jpg") no-repeat;
+	background: url("/apps/budget/resources/netto.jpg") no-repeat;
 	background-size: contain;	
 }
 label#aldilabel{
-	background: url("resources/aldi.jpg") no-repeat;
+	background: url("/apps/budget/resources/aldi.jpg") no-repeat;
 	background-size: contain;
 }
 label#ikealabel {
-	background: url("resources/ikea.jpg") no-repeat;
+	background: url("/apps/budget/resources/ikea.jpg") no-repeat;
 	background-size: contain;
 }
 label#rewelabel {
-	background: url("resources/rewe.jpg") no-repeat;
+	background: url("/apps/budget/resources/rewe.jpg") no-repeat;
 	background-size: contain;
 }
 label#nettolabel div {
@@ -1004,7 +1004,7 @@ a#menulink {
 	display: block;
 	height: 40px;
 	width: 40px;
-	background: url('http://apps.thebluneproject.de/resources/menu.svg') no-repeat;
+	background: url('/apps/budget/resources/menu.svg') no-repeat;
 	background-size: 40px auto;
 	position: relative;
 	float:left;

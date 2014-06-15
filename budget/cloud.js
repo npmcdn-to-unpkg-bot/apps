@@ -151,7 +151,7 @@ if(storage) {
 	}
 	
 } else {
-	$(location).attr('href','http://apps.thebluneproject.de/welcome.html?origin=budget');
+	$(location).attr('href','/apps/welcome.html?origin=budget');
 }
 }								
 function getInfo() {

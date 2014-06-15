@@ -1,7 +1,7 @@
 $('document').ready(function() {
 	storage = localStorage.getItem('Storage');
 	if(!storage) {
-		window.location = "http://apps.thebluneproject.de/welcome.html?origin=budget";
+		window.location = "/apps/welcome.html?origin=budget";
 	} else {	
 		$( "form:first" ).submit(function( event ) {			
 			event.preventDefault();			   
