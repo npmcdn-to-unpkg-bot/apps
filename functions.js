@@ -96,6 +96,11 @@ function messen() {
 	$("#messwert").remove();
 	$("#cloudlink").before("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
 }
+function setDropbox() {
+  localStorage.setItem('Storage','dropbox');	
+  
+  window.location = "/apps/budget/";
+}
 function userName() {
 	storage = localStorage.getItem('Storage');
 	if(storage) {
@@ -122,7 +127,7 @@ function userName() {
 						});	  
 					});	
 				} else {
-					$(location).attr('href','http://apps.thebluneproject.de/connectToCs.html');
+					$(location).attr('href','/apps/connectToCs.html');
 				}
 			break;
 			case 'googledrive':

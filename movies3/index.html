@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<script src="index_files/jquery.js"></script>
+		<script type="text/javascript" src="index_files/themoviedb.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				theMovieDb.movies.getNowPlaying({},successCB, errorCB)
+			});
+		</script>
+		<script type="text/javascript">
+			function successCB(data) {
+				data = JSON.parse(data);
+				datastring = JSON.stringify(data);
+				//$("body").append(datastring);
+				
+				results = data.results;
+				
+				for ( var i = 0; i < 6; i++ ) {
+					elementid = results[i].id;
+					appendMovieInfo(i);
+					/*
+					picturepath = results[i].backdrop_path;
+					
+					if(picturepath) {
+						
+						$("body").append('<div>');
+						$("body").append('<img src="http://image.tmdb.org/t/p/w500'+picturepath+'">');
+						$("body").append(results[i].title);
+						$("body").append(results[i].vote_average);
+												
+						overview = theMovieDb.movies.getById({"id":elementid }, getdescription, errorCB);
+						$("body").append(data);
+						$("body").append('</div>');
+					*/
+					}
+				}
+				
+			};
+			function appendMovieInfo(id){
+				overview = theMovieDb.movies.getById({"id":elementid }, getdescription, errorCB);
+			}
+			function getdescription(data) {						
+				return data;
+			}
+
+			/*function successCB(data) {
+				data = JSON.parse(data);
+				abc = data.backdrops.length;
+				for ( var i = 0; i < abc; i++ ) {
+					
+				}
+			};*/
+
+			function errorCB(data) {
+				console.log("Error callback: " + data);
+			};
+		</script>
+
+	</head>
+
+	<body>
+	</body>
+</html>
