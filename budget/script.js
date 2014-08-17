@@ -1,3 +1,4 @@
+/**/
 $('document').ready(function() {
 	storage = localStorage.getItem('Storage');
 	if(!storage) {
