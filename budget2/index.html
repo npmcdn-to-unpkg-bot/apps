@@ -1,0 +1,114 @@
+<html lang="de" xml:lang="de">
+  
+  <head>         
+        <title>Budget</title>  
+		<!--Meta-->
+        <meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS -->
+        <link rel="stylesheet" media="all" type="text/css" href="/apps/resources/normalize.css" /> 
+		<link rel="stylesheet" media="all" type="text/css" href="/apps/budget2/style.css" />
+		<!--Dropbox-->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.5.0/dropbox.min.js"></script>
+		<!-- Javascript -->
+        <script src="http://code.jquery.com/jquery-1.7.2.min.js" charset="UTF-8"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" charset="UTF-8"></script>
+		<!--<script src="/apps/budget/script.js" charset="UTF-8"></script> 
+        <script src="/apps/budget/constructors.js" charset="UTF-8"></script>
+		<script src="/apps/budget/functions.js" charset="UTF-8"></script>
+		<script src="/apps/budget/cloud.js" charset="UTF-8"></script>
+		<!--Highchart-->
+		<script src="/apps/resources/Highcharts-3.0.6/js/highcharts.js"></script>
+		<script src="/apps/resources/Highcharts-3.0.6/js/themes/budget.js"></script>
+		<!--SVG-FIX-->
+		<script type="text/javascript">
+			$('document').ready(function() {			
+				/*
+				* Replace all SVG images with inline SVG
+				*/
+				jQuery('img.svg').each(function(){
+					var $img = jQuery(this);
+					var imgID = $img.attr('id');
+					var imgClass = $img.attr('class');
+					var imgURL = $img.attr('src');
+					jQuery.get(imgURL, function(data) {
+						// Get the SVG tag, ignore the rest
+						var $svg = jQuery(data).find('svg');
+						// Add replaced image's ID to the new SVG
+						if(typeof imgID !== 'undefined') {
+							$svg = $svg.attr('id', imgID);
+						}
+						// Add replaced image's classes to the new SVG
+						if(typeof imgClass !== 'undefined') {
+							$svg = $svg.attr('class', imgClass+' replaced-svg');
+						}
+						// Remove any invalid XML tags as per http://validator.w3.org
+						$svg = $svg.removeAttr('xmlns:a');
+						// Replace image with new SVG
+						$img.replaceWith($svg);
+					});
+				});				
+			});
+		</script>	
+	</head>    
+    <body onload="messen()" onresize="messen()">		
+		<div class="row clearfix">
+			<div class="column full">
+				<form>					
+					<div id="type">
+						<div id="checkbox">												
+							<label for="expense" id="expenselabel" class="checkboxlabel" onclick="onRevenue()">Spend</label>
+								<input id="expense" name="verwendung" type="radio" value="expense" autocomplete="off" checked>	
+							<label for="revenue" id="revenuelabel" class="checkboxlabel" onclick="onExpense()">Receive</label>
+								<input id="revenue" name="verwendung" type="radio" value="revenue" autocomplete="off">	
+						</div> 
+					</div>
+					<input id="amount" name="amount" type="number" placeholder="" autocomplete="off" required autofocus>					
+					<span id="amounttext">€</span>
+					<span id="storetext">at</span>
+					<input id="store" name="store" type="text" value="Netto" required>			
+					<span id="datetext"> on </span>
+					<label for="date" id="datelabel" class="datelabel" onclick="$('#date').datepicker('show')"></label>
+					<input id="date" name="date" type="text" value="" autocomplete="off">							
+					<!-- <div id="stores">
+						<label for="netto" id="nettolabel" class="storelabel" onclick="updatePhrase('Netto'),hideStores()"></label>
+						<input id="netto" name="store" type="radio" value="Netto" autocomplete="off" checked>						
+						<label for="aldi" id="aldilabel" class="storelabel" onclick="updatePhrase('Aldi'),hideStores()"></label>
+						<input id="aldi" name="store" type="radio" value="Aldi" autocomplete="off">	
+						<label for="ikea" id="ikealabel" class="storelabel" onclick="updatePhrase('Ikea'),hideStores()"></label>
+						<input id="ikea" name="store" type="radio" value="Ikea" autocomplete="off">						
+						<label for="rewe" id="rewelabel" class="storelabel" onclick="updatePhrase('Rewe'),hideStores()"></label>
+						<input id="rewe" name="store" type="radio" value="Rewe" autocomplete="off">	
+						<div style="clear: both"></div>
+					</div> -->
+					<button id="submitter" onclick="processInput(addTransaction)">Save</button>
+					<label for="repeat"   id="repeatlabel" onclick="changeRepeat()"><img id="repeatimage" class="svg" src="resources/repeat.svg"/></label>
+					<input id="repeat" name="repeat" type="hidden" value="off" autocomplete="off">				
+					<div style="clear: both"></div>	
+				</form>
+				</div>
+		</div>
+		<div class="row clearfix">
+			<div class="column full">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="column fourth">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			</div>
+			<div class="column fourth">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="column half">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			</div>
+			<div class="column half">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			</div>
+		</div>		
+	</body>
+</html>

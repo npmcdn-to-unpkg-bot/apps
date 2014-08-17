@@ -1,0 +1,1132 @@
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+body {
+font-family: helvetica, arial;	
+font-size: 30px;
+background: none repeat scroll 0 0 #f5f5f5;
+}
+/************************************************************************************
+Gird-Settings
+************************************************************************************/
+.clearfix:before,
+.clearfix:after {
+content: " ";
+display: table;
+}
+ 
+.clearfix:after {
+clear: both;
+}
+ 
+.clearfix {
+*zoom: 1;
+}
+
+@media (min-width: 40rem) {
+.column {
+float: left;
+padding: 1rem;
+background: white;
+background-clip: content-box
+}
+.column.full { width: 100%; }
+.column.two-thirds { width: 66.7%; }
+.column.half { width: 50%; }
+.column.third { width: 33.3%; }
+.column.fourth { width: 25%; }
+.column.flow-opposite { float: right; }
+}
+textarea, input,a,a:active, a:focus, input:focus{ 
+	outline: none;
+	box-shadow:none
+	-webkit-appearance: none;
+    border-radius: 0;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+label {		
+	position: relative;
+	display: block;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+label:hover {
+	cursor: pointer;
+}
+div#messwert {
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+	z-index:100;
+}
+div#content {
+	width: 100%;
+    position: relative;	   
+	overflow: hidden;
+}
+header {		
+	width: 98%;
+	position: relative;
+	background: white;
+	color: black;
+	font-family: Helvetica, arial black, arial;
+	font-size: 30px;	
+	overflow: hidden;
+	z-index: 99;
+	margin: 1%;		
+}
+a {
+	color: black;
+	text-decoration: none;
+}
+/************************************************************************************
+Actual Current Budget - Sizes and spacing like on big screen?
+************************************************************************************/
+/* div#currentbudget {
+	display: inline-block;
+	position: relative;	
+	font-weight: bold;	
+	float: right;	
+	color: black;
+	max-width: 2544px;
+	margin: 0 15px 0 0px;	
+}
+div#currentbudget div#amount {
+	font-size: 36px;
+	float: right;
+	display: inline-block;
+	line-height: 60px;	
+}
+div#currentbudget div#trend {
+	position: relative;
+	float: right;
+}
+div#currentbudget div#trendup {
+	position: relative;	
+	float: right;
+	margin-left: 5px;
+	top: 5px;
+}
+div#currentbudget div#trendup span {
+	float: left;
+	position: relative;
+	font-size: 20px;
+	color: #a8d786;
+	display: inline-block;
+	line-height: 30px;
+}
+div#currentbudget div#trendup #up {
+	float: left;
+	height: 15px;
+	width: 15px;
+	position: relative;
+	margin: 7px 3px 0 0;
+	left: 0px;
+	
+}
+#up path {
+    fill: #a8d786;
+}
+div#currentbudget div#trenddown {
+	position: relative;
+	float: right;
+}
+div#currentbudget div#trenddown span {
+	position: relative;
+	font-size: 20px;
+	color: #e95f5a;
+	display: inline-block;
+	line-height: 30px;	
+	float: left;
+	top: -5px;
+}
+div#currentbudget div#trenddown #down {
+	float: left;
+	height: 15px;
+	width: 15px;
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); /* IE 9 
+	-webkit-transform:rotate(180deg); /* Safari and Chrome 
+	position: relative;
+	top: 2px;
+	left: -3px;
+}
+#down path {
+    fill: #e95f5a;
+} */
+/************************************************************************************
+Expenses, income input form.
+************************************************************************************/
+form {		
+	position: relative;	
+	line-height: 26px;
+	margin: 0 0 0 0;
+}
+	form div#type {		
+		background: black;
+		position: relative;
+		float: left;
+		color: white;		
+		padding: 15px;
+	}
+		form div#type div#checkbox {	
+			width: 100%;
+			position: relative;	
+			color: black;	
+		}
+			form div#type div#checkbox label {
+				color: white;
+			}
+				form div#type div#checkbox label#expenselabel {	
+					display: block;					
+				}
+				form div#type div#checkbox label#revenuelabel {	
+					display: none;
+				}
+			form div#type div#checkbox input[type=radio] {
+				position: absolute;
+				top: -9999px;
+				left: -9999px;
+			}
+	form span {
+		float: left;
+		position: relative;
+		display: block;	
+	}
+	form span#amounttext {
+	}	
+	form input[type=number] {		
+		height: 30px;
+		background: white;
+		width: 150px;
+		float: left;	
+		margin-left: 20px;		
+		color: black;
+		border: none;
+		border-bottom: 2px solid black;
+		text-align: right;
+		margin-top: 15px;
+		margin-bottom: -2px;		
+	}
+	form span#amounttext {
+		margin-right: 10px;
+		margin-left: 10px;
+		margin-top: 15px;
+	}
+	form span#storetext {
+		background: black;
+		color: white;
+		display: block;		
+		padding: 15px;
+	}
+	form input[type=text] {		
+		height: 30px;
+		width: 150px;
+		text-align: center;
+		border: none;
+		border-bottom: 2px solid black;
+		margin-left: 15px;
+		margin-right: 15px;		
+		float: left;
+		position: relative;
+		display: block;	
+		margin-top: 15px;
+		margin-bottom: -2px;
+		
+	}
+	form span#datetext {
+		background: black;
+		color: white;
+		display: block;		
+		padding: 15px;
+	}
+	form input#date {	
+		background: #F5F5F5;
+		float: left;	
+		color: black;
+		border: none;
+		border-bottom: 2px solid black;	
+		letter-spacing: 0.00000000000000000000000000000000001em;
+		text-align: center;
+		opacity: 1;
+		position: absolute;
+		opacity: 0;		
+		top: 5px;
+		cursor: pointer;
+		padding-top: 15px;
+		left: 622px;
+	}
+	form label#datelabel {
+		display: block;
+		color: black;
+		text-align: center;
+		float: left;
+		opacity: 1;
+		position: relative;
+		margin-left: 15px;		
+		cursor: pointer;
+		padding-top: 15px;
+	}
+	form label#repeatlabel {
+		width: 52px;
+		display: block;
+		color: black;
+		text-align: center;
+		float: right;
+		opacity: 0.1;
+		position: relative;				
+		cursor: pointer;
+		padding: 5px;
+		background: black;
+		margin-left: 15px;
+	}
+		form label#repeatlabel #repeatimage {
+			height: 46px;
+			width: 42px;
+			position: relative;
+			display: block;
+			left: -2px;
+		}
+			form label#repeatlabel #repeatimage path {
+				fill: white;
+			}
+	form input#repeat {	
+	}
+	form button#submitter {	
+		height: 56px;
+		float: right;
+		color: white;
+		background: black;	
+		display: block;
+		position: relative;
+		border: none;		
+	}
+/************************************************************************************
+Jquery UI Datepicker
+************************************************************************************/
+div#ui-datepicker-div {	
+	display: none;
+	background: white;
+	position: relative;
+	border: 2px solid black;
+	padding: 2px;
+}
+	div#ui-datepicker-div  table.ui-datepicker-calendar {
+		width: 100%;
+		position: relative;
+	}
+	div#ui-datepicker-div td {
+		text-align: center;
+	}
+a.ui-datepicker-prev {
+	float: left;
+	position: relative;
+	cursor: pointer;
+}
+	a.ui-datepicker-prev span {
+		font-weight: bold;
+	}
+a.ui-datepicker-next {
+	float: right;
+	position: relative;
+	cursor: pointer;
+}
+	a.ui-datepicker-next span {
+		font-weight: bold;
+	}
+div.ui-datepicker-title {
+	width: 100%;
+	position: relative;
+	clear: both;
+	text-align: center;
+}
+
+/* label.storelabel {
+	width: 25%;	
+	float: left;
+	margin: 0;	
+}
+label#nettolabel {	
+	background: url("/apps/budget/resources/netto.jpg") no-repeat;
+	background-size: contain;	
+}
+label#aldilabel{
+	background: url("/apps/budget/resources/aldi.jpg") no-repeat;
+	background-size: contain;
+}
+label#ikealabel {
+	background: url("/apps/budget/resources/ikea.jpg") no-repeat;
+	background-size: contain;
+}
+label#rewelabel {
+	background: url("/apps/budget/resources/rewe.jpg") no-repeat;
+	background-size: contain;
+}
+label#nettolabel div {
+	display: block;
+} */
+/************************************************************************************
+Dashboard
+************************************************************************************/
+div#chart {
+	background: white;
+	width: 96%;
+	height: 200px;
+	position: relative;
+	float: left;
+	margin:1%;	
+	padding: 1%;
+}
+div#blackbar {
+	display: none; /* attempt to hide chart branding @media needed to work!(now just in 480x320*/
+	background: white;
+	width: 100px;
+	height: 10px;
+	position: absolute;
+	right: 2%;	
+	top: 675px;
+}
+div#currentstatus {	
+	height: 104px;
+	float: left;
+	background: white;
+	min-width: 150px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;	
+	margin: 1%;	
+	padding: 1%;
+	font-weight: bold;
+	cursor: pointer;
+}
+	div#currentstatus div.amount {
+		font-size: 70px;
+		text-align: center;
+		font-weight: bold;	
+	}
+	div#currentstatus div.deposit {
+	
+	}
+		div#currentstatus div.deposit span.name {
+			float: left;
+		}
+		div#currentstatus div.deposit span.amount {
+			float: right;
+		}
+div#monthlybudget {	
+	height: 104px;
+	float: left;
+	background: white;
+	min-width: 150px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;	
+	margin: 1%;	
+	padding: 1%;
+	font-weight: bold;
+}
+div#monthlybudget .amount {
+	font-size: 70px;
+	text-align: center;
+	font-weight: bold;	
+}
+div#monthlyexpenses {	
+	display: none;
+	float: left;
+	background: white;
+	min-width: 150px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;	
+	margin: 1%;	
+	padding: 1%;
+	font-weight: bold;
+}
+div#monthlyexpenses .amount {
+	font-size: 70px;
+	text-align: center;
+	font-weight: bold;
+}
+div#monthlyrevenues {
+	display: none;
+	float: left;
+	background: white;
+	min-width: 150px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;	
+	margin: 1%;	
+	padding: 1%;
+	font-weight: bold;
+}
+div#monthlyrevenues .amount {
+	font-size: 70px;
+	text-align: center;
+	font-weight: bold;
+}
+/************************************************************************************
+transactions
+************************************************************************************/
+div#transactions {
+	float: left;
+	height: 150px;
+	overflow-y: scroll;
+	background: white;
+	width: 46%;	
+	margin:1%;	
+	padding: 1%;
+	resize: vertical
+}
+div#transactions h1 {	
+	display: block;
+	width: 100%;
+	position:relative;
+	float: left;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0;	
+	overflow: hidden;
+	border-bottom: 1px solid black;
+}
+div#transactions h1:not(:first-child) {
+	margin-top: 10px;
+}
+div#rTransactions {
+	float: left;
+	height: 150px;
+	overflow-y: scroll;
+	background: white;
+	width: 46%;	
+	margin:1%;	
+	padding: 1%;
+	resize: vertical
+}
+div#rTransactions h1 {	
+	display: block;
+	width: 100%;
+	position:relative;
+	float: left;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0;	
+	overflow: hidden;
+	border-bottom: 1px solid black;
+}
+div#rTransactions h1:not(:first-child) {
+	margin-top: 10px;
+}
+div.time {
+	width: 65px;
+	position: relative;
+	float: left;	
+	overflow: hidden;
+	margin-left: 20px;
+}
+div.datemonth {
+	width: 85px;
+	display: block;	
+	position:relative;
+	float: left;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0;	
+	overflow: hidden;
+	text-align: center;
+}
+div.transaction {	
+	position: relative;
+	float: left;	
+	overflow: hidden;
+	color: black;
+	/*
+	-moz-box-shadow: 0 1px  3px #888;
+	-webkit-box-shadow: 0 1px 3px #888;
+	box-shadow: 0 1px 3px #888;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	*/
+}
+div.transaction .amount {
+	width: 85px;
+	position: relative;	
+	overflow: hidden;
+	float: left;
+	text-align: right;
+	padding-right: 10px;
+	margin-right: 10px;
+	padding-left: 10px;
+	margin-left: 10px;
+	/*border-right: 1px solid grey;*/
+}
+div.revenue {
+	color: green;
+}
+div.expense {
+	color: red;
+}
+/*************************************************
+Media Queries
+**************************************************/
+@media (max-width:1232px) {
+	header {
+		font-size: 28px;
+	}
+}
+@media (max-width:1188px) {
+	header {
+		font-size: 26px;
+	}
+}
+@media (max-width:1145px) {
+	header {
+		font-size: 24px;
+	}
+}
+@media (max-width:1102px) {	
+	form div#type {
+		padding: 13px;
+	}
+	form input[type="number"] {
+		margin-top: 13px;
+	}
+	form span#amounttext {
+		margin-top: 13px;
+	}
+	form span#storetext {
+		padding: 13px;
+	}
+	form input[type="text"] {
+		margin: 13px 13px -2px 13px;
+	}
+	form span#datetext {
+		padding: 13px;
+	}
+	form label#datelabel {
+		padding-top: 13px;
+	}
+	form button#submitter {
+		height: 52px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 42px;
+		width: 38px;		
+	}
+}
+@media (max-width:1085px) {
+	header {
+		font-size: 22px;
+	}
+}
+@media (max-width:1042px) {
+	form div#type {
+		padding: 10px;
+	}
+	form input[type="number"] {
+		margin-top: 10px;
+	}
+	form span#amounttext {
+		margin-top: 10px;
+	}
+	form span#storetext {
+		padding: 10px 12px 10px 12px;
+	}
+	form input[type="text"] {
+		margin: 10px 10px -2px 10px;
+	}
+	form span#datetext {
+		padding: 10px;
+	}
+	form label#datelabel {
+		padding-top: 10px;
+	}
+	form button#submitter {
+		height: 46px;
+	}
+	form label#repeatlabel {
+		width: 36px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 36px;
+		width: 32px;	
+		left: 0px;
+	}
+}
+@media (max-width:1116px) {
+	header {
+		font-size: 20px;
+	}
+}
+@media (max-width: 972px) {
+	header {
+		font-size: 18px;
+	}
+}
+@media (max-width:930px) {
+	header {
+		font-size: 16px;
+	}
+}
+@media (max-width:886px) {
+	form div#type {
+		padding: 9px;
+	}
+	form input[type="number"] {
+		margin-top: 9px;
+	}
+	form span#amounttext {
+		margin-top: 9px;
+	}
+	form span#storetext {
+		padding: 9px 11px 9px 11px;
+	}
+	form input[type="text"] {
+		margin: 9px 9px -2px 9px;
+	}
+	form span#datetext {
+		padding: 9px;
+	}
+	form label#datelabel {
+		padding-top: 9px;
+	}
+	form button#submitter {
+		height: 44px;
+	}
+	form label#repeatlabel {
+		width: 32px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 34px;
+		width: 28px;		
+	}
+}
+@media (max-width:876px) {	
+	form div#type {
+		padding: 8px;
+	}
+	form input[type="number"] {
+		margin-top: 8px;
+	}
+	form span#amounttext {
+		margin-top: 8px;
+	}
+	form span#storetext {
+		padding: 8px 10px 8px 10px;
+	}
+	form input[type="text"] {
+		margin: 8px 8px -2px 8px;
+	}
+	form span#datetext {
+		padding: 8px;
+	}
+	form label#datelabel {
+		padding-top: 8px;
+	}
+	form button#submitter {
+		height: 42px;
+	}
+	form label#repeatlabel {
+		width: 32px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 32px;
+		width: 26px;		
+	}
+}
+@media (max-width:866px) {	
+	header {
+		font-size: 14px;
+	}
+}
+@media (max-width:827px) {	
+	header {
+		font-size: 13px;
+	}
+	form div#type {
+		padding: 6px;
+	}
+	form input[type="number"] {
+		margin-top: 6px;
+	}
+	form span#amounttext {
+		margin-top: 6px;
+	}
+	form span#storetext {
+		padding: 6px 9px 6px 9px;
+	}
+	form input[type="text"] {
+		margin: 6px 6px -2px 6px;
+	}
+	form span#datetext {
+		padding: 6px;
+	}
+	form label#datelabel {
+		padding-top: 6px;
+	}
+	form button#submitter {
+		height: 38px;
+	}
+	form label#repeatlabel {
+		width: 26px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 28px;
+		width: 22px;		
+	}
+}
+@media (max-width:779px) {	
+	header {
+		font-size: 12px;
+	}
+	form div#type {
+		padding: 5px;
+	}
+	form input[type="number"] {
+		margin-top: 5px;
+	}
+	form span#amounttext {
+		margin-top: 5px;
+	}
+	form span#storetext {
+		padding: 5px 8px 5px 8px;
+	}
+	form input[type="text"] {
+		margin: 5px 5px -2px 5px;
+	}
+	form span#datetext {
+		padding: 5px;
+	}
+	form label#datelabel {
+		padding-top: 5px;
+	}
+	form button#submitter {
+		height: 36px;
+	}
+	form label#repeatlabel {
+		width: 24px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 26px;
+		width: 20px;		
+	}
+}
+@media (max-width:752px) {	
+	form div#type {
+		padding: 3px;
+	}
+	form input[type="number"] {
+		margin-top: 3px;
+	}
+	form span#amounttext {
+		margin-top: 3px;
+	}
+	form span#storetext {
+		padding: 3px 8px 3px 8px;
+	}
+	form input[type="text"] {
+		margin: 3px 3px -2px 3px;
+	}
+	form span#datetext {
+		padding: 3px;
+	}
+	form label#datelabel {
+		padding-top: 3px;
+	}
+	form button#submitter {
+		height: 32px;
+	}
+	form label#repeatlabel {
+		width: 20px;
+	}
+	form label#repeatlabel #repeatimage {
+		height: 22px;
+		width: 16px;		
+	}
+}
+/*************************************************
+Mobile view. Not my first choice.
+*************************************************/
+@media (max-width:736px) {
+	header {
+		font-size: 18px;
+	}
+		form div#type {
+			width: 65px;
+			text-align: center;
+		}
+		form span#storetext {
+			width: 65px;
+			clear: both;
+			text-align: center;
+			padding: 10px;
+		}
+		form span#datetext {
+			width: 65px;
+			clear: both;
+			text-align: center;
+			padding: 10px;
+		}
+		form label#datelabel {
+			width: 500px;
+			margin-bottom: 10px;
+			padding-top: 10px;
+		}
+		form input#date {
+			left: 117px;
+			top: 110px;
+		}
+		form button#submitter {			
+			height: 46px;
+			display: block;
+			float: right;
+			width: 88%;
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+		form input#amount {
+			width: 500px;
+		}
+		form input#store {
+			width: 500px;
+			margin: 10px 0px -2px 20px;
+		}
+		form div#type {
+			padding: 10px;
+		}
+		form input[type="number"] {
+			margin-top: 10px;
+		}
+		form span#amounttext {
+			margin-top: 10px;
+		}
+		form input[type="text"] {
+			margin: 10px 10px -2px 10px;
+		}		
+		form label#repeatlabel {
+			height: 46px;
+			float: left;
+			width: 12%;
+			margin: 0;
+			padding: 0;
+			
+		}
+		form label#repeatlabel #repeatimage {
+			height: 60%;
+			width: auto;		
+			margin: 10% auto 0 auto;
+		}
+}
+@media (max-width:670px) {
+	form input#amount {
+		width: 450px;
+	}
+	form input#store {
+		width: 450px;
+	}
+	form label#datelabel {
+		width: 450px;
+	}
+}
+@media (max-width:620px) {
+	form input#amount {
+		width: 400px;
+	}
+	form input#store {
+		width: 400px;
+	}
+	form label#datelabel {
+		width: 400px;
+	}	
+}
+@media (max-width:570px) {
+	form input#amount {
+		width: 350px;
+	}
+	form input#store {
+		width: 350px;
+	}
+	form label#datelabel {
+		width: 350px;
+	}	
+}
+@media (max-width:515px) {
+	form input#amount {
+		width: 300px;
+	}
+	form input#store {
+		width: 300px;
+	}
+	form label#datelabel {
+		width: 300px;
+	}	
+}
+@media (max-width:460px) {
+	form input#amount {
+		width: 250px;
+	}
+	form input#store {
+		width: 250px;
+	}
+	form label#datelabel {
+		width: 250px;
+	}	
+}
+@media (max-width:415px) {
+	header {
+		font-size: 16px;
+	}
+	form input#amount {
+		width: 225px;
+		margin-left: 10px;
+	}
+	form input#store {
+		width: 225px;
+		margin: 10px 0px -2px 10px;
+	}
+	form label#datelabel {
+		width: 225px;
+	}	
+}
+@media (max-width:385px) {
+	header {
+		font-size: 14px;
+	}
+	form input#amount {
+		width: 200px;		
+	}
+	form input#store {
+		width: 200px;		
+	}
+	form label#datelabel {
+		width: 200px;
+	}	
+}
+@media (max-width:350px) {
+	form div#type {
+		width: 50px;
+	}
+	form span#storetext {
+		width: 50px;			
+	}
+	form span#datetext {
+		width: 50px;		
+	}
+}
+/*************************************************
+bigscreen settings
+**************************************************
+header {	
+	width: 100%;
+	position: fixed;
+	background: white;
+	color: gray;
+	font-family: Helvetica, arial black, arial;
+	font-size: 20px;	
+	overflow: hidden;
+	z-index: 99;
+}
+a#menulink {
+	display: block;
+	height: 40px;
+	width: 40px;
+	background: url('/apps/budget/resources/menu.svg') no-repeat;
+	background-size: 40px auto;
+	position: relative;
+	float:left;
+	margin: 10px 25px 0 15px;
+}
+header span {
+	font-size: 36px;
+	color: black;
+	line-height: 60px;	
+}
+a {
+	color: black;
+	text-decoration: none;
+}
+div#currentbudget {
+	display: inline-block;
+	position: relative;	
+	font-weight: bold;	
+	float: right;	
+	color: black;
+	max-width: 2544px;
+	margin: 0 15px 0 25px;	
+}
+div#currentbudget div#amount {
+	font-size: 36px;
+	float: right;
+	display: inline-block;
+	line-height: 60px;	
+}
+div#currentbudget div#trend {
+	position: relative;
+	float: right;
+}
+div#currentbudget div#trendup {
+	position: relative;	
+	float: right;
+	margin-left: 5px;
+	top: 5px;
+}
+div#currentbudget div#trendup span {
+	float: left;
+	position: relative;
+	font-size: 20px;
+	color: #a8d786;
+	display: inline-block;
+	line-height: 30px;
+}
+div#currentbudget div#trendup #up {
+	float: left;
+	height: 15px;
+	width: 15px;
+	position: relative;
+	margin: 7px 3px 0 0;
+	left: 0px;
+	
+}
+#up path {
+    fill: #a8d786;
+}
+div#currentbudget div#trenddown {
+	position: relative;
+	float: right;
+}
+div#currentbudget div#trenddown span {
+	position: relative;
+	font-size: 20px;
+	color: #e95f5a;
+	display: inline-block;
+	line-height: 30px;	
+	float: left;
+	top: -5px;
+}
+div#currentbudget div#trenddown #down {
+	float: left;
+	height: 15px;
+	width: 15px;
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); /* IE 9 
+	-webkit-transform:rotate(180deg); /* Safari and Chrome 
+	position: relative;
+	top: 2px;
+	left: -3px;
+}
+#down path {
+    fill: #e95f5a;
+}
+*/
