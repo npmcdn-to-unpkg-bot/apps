@@ -34,7 +34,7 @@ clear: both;
 float: left;
 padding: 1rem;
 background: white;
-background-clip: content-box
+background-clip: content-box;
 }
 .column.full { width: 100%; }
 .column.two-thirds { width: 66.7%; }
@@ -95,12 +95,18 @@ a {
 	text-decoration: none;
 }
 div#addpaym {
-	background: #F5F5F5;
+	width: 68px;
+	height: 68px;
+	background: #F5F5F5 content-box;	
+	transition: all 0.6s ease-in-out 0s;
 }
+
 	div#addpaym #addimage {
-		width: 30px;
-		height: 30px;
+		width: 36px;
+		height: 36px;
 		fill: black;
+		transition: all 0.6s ease-in-out 0s;	
+		padding: 3px;
 	}
 /************************************************************************************
 Actual Current Budget - Sizes and spacing like on big screen?

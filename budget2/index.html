@@ -47,6 +47,8 @@
 						if(typeof imgFUNCTION !== 'undefined') {
 							$svg = $svg.attr('onclick', imgFUNCTION);
 						}
+						//Add HTML5 draggable attribute						
+						$svg = $svg.attr('draggable', "false");
 						// Remove any invalid XML tags as per http://validator.w3.org
 						$svg = $svg.removeAttr('xmlns:a');
 						// Replace image with new SVG
@@ -58,10 +60,8 @@
 	</head>    
     <body onload="messen()" onresize="messen()">		
 		<div class="row clearfix">
-			<div class="column full">
-				<div id="addpaym">
-					<img id="addimage" onclick="expandform()" class="svg" src="resources/add.svg"/>
-				</div>
+			<div id="addpaym" class="column">				
+				<img id="addimage" onclick="expandform()" class="svg" src="resources/add.svg"/>				
 				<!--
 				<form>					
 					<div id="type">
