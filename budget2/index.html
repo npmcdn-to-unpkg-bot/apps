@@ -13,8 +13,8 @@
 		<!-- Javascript -->
         <script src="http://code.jquery.com/jquery-1.7.2.min.js" charset="UTF-8"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" charset="UTF-8"></script>
-		<!--<script src="/apps/budget/script.js" charset="UTF-8"></script> 
-        <script src="/apps/budget/constructors.js" charset="UTF-8"></script>
+		<script src="/apps/budget2/script.js" charset="UTF-8"></script> 
+        <!-- <script src="/apps/budget/constructors.js" charset="UTF-8"></script>
 		<script src="/apps/budget/functions.js" charset="UTF-8"></script>
 		<script src="/apps/budget/cloud.js" charset="UTF-8"></script>
 		<!--Highchart-->
@@ -31,6 +31,7 @@
 					var imgID = $img.attr('id');
 					var imgClass = $img.attr('class');
 					var imgURL = $img.attr('src');
+					var imgFUNCTION = $img.attr('onclick');
 					jQuery.get(imgURL, function(data) {
 						// Get the SVG tag, ignore the rest
 						var $svg = jQuery(data).find('svg');
@@ -41,6 +42,10 @@
 						// Add replaced image's classes to the new SVG
 						if(typeof imgClass !== 'undefined') {
 							$svg = $svg.attr('class', imgClass+' replaced-svg');
+						}
+						//Add replaced image's functions tot the new SVG
+						if(typeof imgFUNCTION !== 'undefined') {
+							$svg = $svg.attr('onclick', imgFUNCTION);
 						}
 						// Remove any invalid XML tags as per http://validator.w3.org
 						$svg = $svg.removeAttr('xmlns:a');
@@ -54,6 +59,10 @@
     <body onload="messen()" onresize="messen()">		
 		<div class="row clearfix">
 			<div class="column full">
+				<div id="addpaym">
+					<img id="addimage" onclick="expandform()" class="svg" src="resources/add.svg"/>
+				</div>
+				<!--
 				<form>					
 					<div id="type">
 						<div id="checkbox">												
@@ -80,13 +89,14 @@
 						<label for="rewe" id="rewelabel" class="storelabel" onclick="updatePhrase('Rewe'),hideStores()"></label>
 						<input id="rewe" name="store" type="radio" value="Rewe" autocomplete="off">	
 						<div style="clear: both"></div>
-					</div> -->
+					</div> 
 					<button id="submitter" onclick="processInput(addTransaction)">Save</button>
 					<label for="repeat"   id="repeatlabel" onclick="changeRepeat()"><img id="repeatimage" class="svg" src="resources/repeat.svg"/></label>
 					<input id="repeat" name="repeat" type="hidden" value="off" autocomplete="off">				
 					<div style="clear: both"></div>	
 				</form>
-				</div>
+				-->
+			</div>
 		</div>
 		<div class="row clearfix">
 			<div class="column full">

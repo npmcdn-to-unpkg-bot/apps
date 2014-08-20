@@ -66,16 +66,12 @@ if(storage) {
 			dropbox_authStatus = localStorage.getItem('dropbox_authstatus');
 			// console.log("authstatus: "+dropbox_authStatus);
 			
-			var client = new Dropbox.Client({
-					key: "hm4c58qp6rpysot", secret: "w7cdx6o8p2hyubj"
-			});
+			var client = new Dropbox.Client({ key: "hm4c58qp6rpysot" });			
 			
 			if(!dropbox_authStatus) {				
 				localStorage.setItem('dropbox_authstatus','initialized');	
 				//initialization				
-				console.log("initialized");
-				//preset driver to the dropbox page
-				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
+				console.log("initialized");			
 				//authentication
 				client.authenticate(function(error, client) {
 					if (error) {
@@ -85,9 +81,7 @@ if(storage) {
 			} else if (dropbox_authStatus === 'initialized') {
 				localStorage.setItem('dropbox_authstatus','finalized');	
 				//continuation				
-				console.log("continued");
-				//preset driver to the dropbox page
-				client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
+				console.log("continued");				
 				//authentication
 				client.authenticate(function(error, client) {
 					if (error) {

@@ -301,7 +301,7 @@ function displayData() {
 };
 function messen() {
 	$("#messwert").remove();
-	$("#content").before("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
+	$("body").prepend("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
 }
 function MonthlyExpenses(aDate) {
 	var sum = 0;
