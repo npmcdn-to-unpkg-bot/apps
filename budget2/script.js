@@ -15,12 +15,14 @@ function expandform() {
 		$("#addpaym").css('height','100%');
 		$("#addpaym").css('background','white content-box');
 		$("#addimage").css('transform','rotate(45deg)');
+		$("#addimage").css('-webkit-transform','rotate(45deg)');
 		$("#addimage").css('float','right');		
 	} else {
 		$("#addpaym").css('width','68px');
 		$("#addpaym").css('height','68px');
 		$("#addpaym").css('background','#F5F5F5 content-box');
 		$("#addimage").css('transform','none');
+		$("#addimage").css('-webkit-transform','none');
 		$("#addimage").css('float','left');
 	}
 }
