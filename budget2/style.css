@@ -99,6 +99,7 @@ div#addpaym {
 	height: 68px;
 	background: #F5F5F5 content-box;	
 	transition: all 0.6s ease-in-out 0s;
+	overflow: hidden;
 }
 
 	div#addpaym #addimage {
