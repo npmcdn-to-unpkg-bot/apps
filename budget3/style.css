@@ -93,7 +93,8 @@ a {
 	color: black;
 	text-decoration: none;
 }
-div#addpaym {
+div#quicktrans {
+	float:left;
 	width: 68px;
 	height: 68px;
 	background: #F5F5F5 content-box;	
@@ -101,7 +102,23 @@ div#addpaym {
 	overflow: hidden;
 }
 
-	div#addpaym #addimage {
+	div#quicktrans #wallet {
+		width: 36px;
+		height: 36px;
+		fill: black;
+		transition: all 0.6s ease-in-out 0s;	
+		padding: 3px;
+	}
+div#customtrans {
+    float:left;
+	width: 68px;
+	height: 68px;
+	background: #F5F5F5 content-box;	
+	transition: all 0.6s ease-in-out 0s;
+	overflow: hidden;
+}
+
+	div#customtrans #doc {
 		width: 36px;
 		height: 36px;
 		fill: black;
