@@ -64,16 +64,20 @@
 				<img id="exit" class"svg" onclick="newtrans()" src="resources/add.svg">
 				<div style="clear: both"></div>
 				<div id="receipt">
-				  <time contenteditable="true">15.05.2014 19:00:00</time>
+				  <time contenteditable="true" spellcheck="false">15.05.2014 19:00:00</time>
 				  <div style="clear: both"></div>
-				  <header contenteditable="true">Edeka</header>
+				  <header id="transtitle" contenteditable="true" spellcheck="false">Edeka</header>
 				  <div id="tableheader">
-					<div id="left">Qty &nbsp;&nbsp;Item</div>
+					<div id="left">
+						<div id="Qty">qty</div>
+						<div id="Item">item</div>
+						<div style="clear: both"></div>
+					</div>
 					<div id="right">Eur</div>
 					<div style="clear: both"></div>
 				  </div>
 				  <div class="divider"></div>
-				  <ul contenteditable="true" id="itemlist">
+				  <ul contenteditable="true" spellcheck="false" id="itemlist">
 					<li>
 						<div id="left">
 							<div class="qty">1</div>
