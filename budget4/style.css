@@ -4,6 +4,7 @@
 box-sizing: border-box;
 position: relative;
 transition: all 0.6s ease-in-out 0s;
+font-family: helvetica;
 }
 svg {
   fill: currentColor;
@@ -755,7 +756,7 @@ div.expense {
 }
 /*************************************************
 Media Queries
-**************************************************/
+**************************************************
 @media (max-width:1232px) {
 	header {
 		font-size: 28px;
@@ -1033,7 +1034,7 @@ Media Queries
 }
 /*************************************************
 Mobile view. Not my first choice.
-*************************************************/
+*************************************************
 @media (max-width:736px) {
 	header {
 		font-size: 18px;
