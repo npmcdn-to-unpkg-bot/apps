@@ -134,7 +134,7 @@ div#newtrans {
 div#receipt {
   background: white;
   position: relative;
-  width: 300px;  
+  width: 100%;  
   margin: 100px auto 0 auto;
   padding: 10px;
   overflow: hidden;  
@@ -151,7 +151,10 @@ div#receipt {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 /* Cross-browser Variante. Wenn möglich später durch styles ersetzen */
-  S}
+  filter: url(resources/shadow.svg#drop-shadow);
+  -webkit-filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.5));
+  -webkit-filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.5));
+}
 time {
   font-size: 12px;
   color: #5a584c;
@@ -162,6 +165,9 @@ header#transtitle {
   margin: 10px 0 20px 0;
   text-align: center;
   color: #5a584c;
+}
+header#transtitle:active {
+  text-decoration: underline;
 }
 div#tableheader {
   font-size: 10px;
