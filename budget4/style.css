@@ -78,16 +78,6 @@ div#content {
     position: relative;	   
 	overflow: hidden;
 }
-header {		
-	width: 98%;
-	position: relative;
-	background: white;
-	color: black;
-	font-size: 30px;	
-	overflow: hidden;
-	z-index: 99;
-	margin: 1%;		
-}
 a {
 	color: black;
 	text-decoration: none;
@@ -121,21 +111,41 @@ div#newtrans {
 	display: none;
 	padding: 1rem;
 	position: fixed;
-	z-index: 9999;
+	z-index: 99;
 	overflow: hidden;
 }
 	div#newtrans #exit {
 		float: right;
-		width: 30px;
-		height: 30px;
+		width: 36px;
+		height: 36px;
+		padding: 3px;
 		transform: rotate(45deg);
 		-webkit-transform: rotate(45deg);
+	}
+	div#newtrans #edit {
+		float: right;
+		width: 36px;
+		height: 36px;
+		padding: 3px;
+	}
+	div#newtrans #scan {
+		float: right;
+		width: 36px;
+		height: 36px;
+		padding: 3px;
+	}
+	div#newtrans header#newheader {		
+		float: left;		
+		position: relative;
+		overflow: hidden;
+		display: block;
+		font-weight: bold;
 	}
 div#receipt {
   background: white;
   position: relative;
-  width: 100%;  
-  margin: 100px auto 0 auto;
+  width: 300px;  
+  margin: 15px auto 0 auto;
   padding: 10px;
   overflow: hidden;  
   font-size: 14px;
@@ -763,7 +773,20 @@ div.expense {
 }
 /*************************************************
 Media Queries
-**************************************************
+**************************************************/
+@media (max-width:400px) {
+	header#newheader {
+		font-size: 20px;
+		line-height: 30px;
+		padding: 3px;
+	}
+}
+@media (max-width:350px) {
+	div#receipt {
+		width: 100%;
+	}
+}
+/*
 @media (max-width:1232px) {
 	header {
 		font-size: 28px;
