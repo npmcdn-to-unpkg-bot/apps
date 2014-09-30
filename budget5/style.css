@@ -255,65 +255,30 @@ div#total {
 		float: right;
 		text-align: right;		
 	}
-div#submitbuttons {
-  width: 300px;  
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
+div#buttons {
+  width: 100%; 
+  display: -webkit-flex; 
+  display: flex; 
+  justify-content:center;
+  flex-flow: row-reverse;
 }
-	#paybutton, #receivebutton, #cancelbutton {
-		width: 33%;
-		float: left;		
-	}
-	#paybutton div#payimage,#receivebutton div#receiveimage {
-		width: 35px;
-		float: left;
-	}
-	#paybutton span {
-		font-size: 20px;
-		line-height: 57px;
-		float: left;		
-	}
-	#receivebutton span {
-		font-size: 16px;
-		line-height: 57px;
-		float: left;
-	}
-	div#submitbuttons #payarrow,div#submitbuttons #receivearrow {
-		height: 25px;
-		width: 25px;
-		position: relative;
-		top: 0px;
-		left: 2px;		
-		color: #5a584c;
-	}
-	div#submitbuttons #paywallet,div#submitbuttons #receivewallet {
-		height: 32px;
-		width: 32px;
-		position: relative;
-		top: -8px;
-		left: 0px;
-	}
-div#submitbuttons div#save, div#buttons div#cancel {  
-  width: 60px;
+div#buttons div#receive, div#buttons div#cancel, div#buttons div#spend {
+  flex: 1;
+  height: 25px;
+  width: 80px;
   border: 1px solid #5a584c;
   border-radius: 5px;
-  text-align: center;
-  float: right; 
-  padding: 5px 0 5px 0;
+  text-align: center; 
+  line-height: 23px;
   opacity: 0.25;
   font-weight: bold;
   cursor: pointer;
   color: #5a584c;  
-  line-height: 14px;
+  line-height: 20px;
+  margin: 0 4px 0 4px;
 }
-div#submitbuttons div#save:hover, div#buttons div#cancel:hover, div#buttons div#save:active, div#buttons div#cancel:active  {
+div#buttons div#receive:hover, div#buttons div#cancel:hover, div#buttons div#spend:hover, div#buttons div#receive:active, div#buttons div#cancel:active, div#buttons div#spend:active {
 	opacity: 1;
-}
-div#submitbuttons div#save {	
-}
-div#submitbuttons div#cancel {
-  margin: 0 0 0 10px;
 }
 /************************************************************************************
 Actual Current Budget - Sizes and spacing like on big screen?
