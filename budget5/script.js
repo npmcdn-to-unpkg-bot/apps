@@ -1,4 +1,3 @@
-//
 $('document').ready(function() {
 	itemcount = 1;
 	$("#itemlist").keyup(function() {
@@ -52,7 +51,7 @@ function count() {
 function addrow() {
 	itemcount++;
 	$(".addrow").remove();
-	$("#itemlist").append('<tr><td class="qty">0</td><td class="name">InsertItems here<img class="deleterow" src="resources/trash.svg" onclick="deleterow('+itemcount+')" /></td><td class="price">0</td></tr><tr class="addrow" contenteditable="false"><td colspan="3" contenteditable="false" onclick="addrow()">add row</td></tr>');
+	$("#itemlist").append('<tr><td class="qty">0</td><td class="name">InsertItems here</td><td class="trash"><img class="deleterow" src="resources/trash.svg" onclick="deleterow('+itemcount+')" /></td><td class="price">0</td></tr><tr class="addrow" contenteditable="false"><td colspan="3" contenteditable="false" onclick="addrow()">add row</td></tr>');
 }
 function deleterow(number) {
 	$("tr").eq(number-1).remove();
