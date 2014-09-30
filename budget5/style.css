@@ -9,6 +9,17 @@ font-family: helvetica, arial;
 svg {
   fill: currentColor;
 }
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.nodrag {
+	pointer-events: none;
+}
 body {
 font-size: 30px;
 background: none repeat scroll 0 0 #f5f5f5;
@@ -95,6 +106,7 @@ div#addpaym {
 		height: 36px;
 		fill: black;
 		transition: all 0.6s ease-in-out 0s;	
+		cursor: pointer;
 	}
 div.bordercontainer {	
 	border: 3px solid black;
@@ -111,7 +123,7 @@ div#newtrans {
 	padding: 1rem;
 	position: fixed;
 	z-index: 99;
-	overflow: hidden;
+	overflow: hidden;	
 }
 	div#newtrans #exit {
 		float: right;
@@ -119,17 +131,20 @@ div#newtrans {
 		height: 36px;		
 		transform: rotate(45deg);
 		-webkit-transform: rotate(45deg);
+		cursor: pointer;
 	}
 	div#newtrans #edit {
 		float: right;
 		width: 36px;
 		height: 36px;
 		margin: 0 5px 0 0;
+		cursor: pointer;
 	}
 	div#newtrans #scan {
 		float: right;
 		width: 36px;
 		height: 36px;
+		cursor: pointer;
 		margin: 0 5px 0 0;
 	}
 	div#newtrans header#newheader {		
@@ -168,6 +183,9 @@ time {
   color: #5a584c;
   float: left;
 }
+time:focus {
+	outline: none;
+}
 header#transtitle {	
   font-size: 22px;
   margin: 10px 0 20px 0;
@@ -177,26 +195,29 @@ header#transtitle {
 header#transtitle:active {
   text-decoration: underline;
 }
+header#transtitle:focus {
+  outline: none;
+}
 div#tableheader {
   font-size: 10px;
   color: #5a584c;
   margin: 0 0 1px 0;
   cursor: default;
 }
-	div#tableheader div#left {		
+	div#tableheader div#headleft {		
 		width: 80%;
 		float: left;
 	}
-		div#tableheader div#left div#qty{
+		div#tableheader div#headleft div#qty{
 			float: left;
 			width: 10%;
 		}
-		div#tableheader div#left div#item{
+		div#tableheader div#headleft div#item{
 			float: left;
 			width: 70%;
 		}
 		
-	div#tableheader div#right {
+	div#tableheader div#headright {
 		width: 20%;
 		float: right;
 		text-align: right;
@@ -211,35 +232,51 @@ div.divider {
   overflow: hidden;
   opacity: 0.25;
 }
-ul#itemlist {
-	display: block;
+table#itemlist {
+	width: 100%;
+	display: table;
 	position: relative;	
 	list-style-type: none;
 	padding: 0px 0 0 0;
 	margin: 0px 0 0px 0;
 	color: #5a584c;
+	font-size: 14px;
+	table-layout:fixed;
 }
-	ul#itemlist div#left {
-		width: 80%;
-		float: left;
-	}
-	ul#itemlist div#right {
-		width: 20%;
-		float: right;
-		text-align: right;
-	}
-li {
-margin: 2px 0 2px 0;
-transition: all 0.6s ease-in-out 0s;
+table#itemlist:focus {
+	outline: none;
 }
-div.qty {
-	width: 10%;
-	float: left;
-	display: block;
+	table#itemlist td {
+		overflow: hidden;
+	}
+#itemlist tbody {
+	width: 100%;
+}
+.qty {
+	width: 8%;
+	padding-left: 2px;
+}
+.name {
+	width: 77%;
+}
+.price {
+	width: 15%;
+	text-align: right;
+}
+tr.addrow td {
+	text-align: center;
+	opacity: 0.25;
+	font-size: 12px;	
+	cursor: pointer;
+}
+.deleterow {	
 	position: relative;
-	padding-left: 5px;
-	box-sizing: padding-box; 
-	-webkit-box-sizing: padding-box;
+	top: 1px;
+	height: 14px;
+	opacity: 0.2;
+	margin: 0 0 0 2px;
+	padding-top: 2px;
+	cursor: pointer;
 }
 div#total { 
   color: #5a584c;

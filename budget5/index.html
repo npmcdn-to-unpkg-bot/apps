@@ -61,7 +61,7 @@
     <body onload="messen()" onresize="messen()">		
 		<div id="modal">
 			<div id="newtrans">
-				<img id="exit" class="svg" onclick="newtrans()" src="resources/add.svg" />						
+				<img id="exit" class="svg" onclick="modal()" src="resources/add.svg" />						
 				<img id="scan" class="svg" src="resources/scan.svg" />
 				<img id="edit" class="svg" src="resources/edit.svg" />
 				<header id="newheader">New Transaction</header>
@@ -69,69 +69,34 @@
 				<div id="receipt">
 				  <time contenteditable="true" spellcheck="false">15.05.2014 19:00:00</time>				  
 				  <div style="clear: both"></div>
-				  <header id="transtitle" contenteditable="true" spellcheck="false">Edeka</header>
+				  <header id="transtitle" contenteditable="true" spellcheck="false">Store Name</header>
 				  <div id="tableheader">
-					<div id="left">
+					<div id="headleft">
 						<div id="Qty">qty</div>
 						<div id="Item">item</div>
 						<div style="clear: both"></div>
 					</div>
-					<div id="right">Eur</div>
+					<div id="headright">Eur</div>
 					<div style="clear: both"></div>
 				  </div>
 				  <div class="divider"></div>
-				  <ul contenteditable="true" spellcheck="false" id="itemlist">
-					<li>
-						<div id="left">
-							<div class="qty">1</div>
-							SaltlettsSticks
-						</div>
-						<div id="right">
-							1,55
-						</div>
-						<div style="clear: both"></div>
-					</li>
-					<li>
-						<div id="left">
-							<div class="qty">2</div>
-							Fusilli
-						</div>
-						<div id="right">
-							0,49
-						</div>
-						<div style="clear: both"></div>
-					</li>
-					<li>
-						<div id="left">
-							<div class="qty">1</div>
-							Apfelmus
-						</div>
-						<div id="right">
-							0,55
-						</div>
-						<div style="clear: both"></div>
-						</li>
-					<li>
-						<div id="left">
-							<div class="qty">1</div>
-							Eisbergsalat
-						</div>
-						<div id="right">
-							0,69
-						</div>
-						<div style="clear: both"></div>
-					</li>
-				  </ul>			  
+				  <table id="itemlist" contenteditable="true" spellcheck="false">
+					<tr>
+						<td class="qty">0</td>
+						<td class="name">InsertItems here</td>
+						<td class="price">0,00</td>
+					</tr>					
+				  </table>		  
 				  <div class="divider"></div>
 				  <div id="total">
 					<div id="left">Total</div>
-					<div id="right">5,12</div>
+					<div id="right">0,00</div>
 					<div style="clear: both"></div>
 				  </div>
 				  <div id="buttons">
-					<div id="cancel" class="buttonsbutton">Cancel</div>
-					<div id="receive" class="buttonsbutton">Receive</div>
-					<div id="spend" class="buttonsbutton">Spend</div>					
+					<div id="cancel" onclick="modal()" class="buttonsbutton">Cancel</div>
+					<div id="receive" onclick="receive()" class="buttonsbutton">Receive</div>
+					<div id="spend" onclick="spend()" class="buttonsbutton">Spend</div>					
 				  </div>
 				</div>								
 			</div>
@@ -139,7 +104,7 @@
 		<div id="main">
 			<div class="row clearfix">
 				<div id="addpaym" class="column">				
-					<img id="addimage" class="svg" onclick="newtrans()" src="resources/add.svg"/>		
+					<img id="addimage" class="svg" onclick="modal()" src="resources/add.svg"/>		
 				</div>
 			</div>
 			<div class="row clearfix">
