@@ -1,3 +1,4 @@
+//
 $('document').ready(function() {
 	itemcount = 1;
 	$("#itemlist").keyup(function() {
