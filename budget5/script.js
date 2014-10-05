@@ -3,16 +3,6 @@ $('document').ready(function() {
 	$("#itemlist").keyup(function() {
 		count();
 	});
-	
-	$("#itemlist").focusin(function() {
-		$("#itemlist").append('<tr class="addrow" contenteditable="false"><td colspan="3" contenteditable="false" onclick="addrow()">add row</td></tr>');
-		$(".deleterow").css('display','inline');
-	});
-	$("#itemlist").focusout(function() {
-		$(".addrow").remove();
-		$(".deleterow").css('display','none');
-	});
-	
 });
 
 function messen() {
@@ -23,25 +13,30 @@ function modal() {
 	var status = $("#newtrans").css('display');
 	if(status === 'none') {	
 		$("#newtrans").css('display','block');
-		$("#main").css('display','none');
 	} else {
 		$("#newtrans").css('display','none');
-		$("#main").css('display','block');
 	}
 }
 function count() {
 	var sum = 0;
 	var number;
+	var quantity;
 	for(i=0;i<itemcount;i++){
-		number = $(".price").eq(i).text();
+		number = $(".price").eq(i).val();
+		quantity = $(".qty").eq(i).val();
+		
 		number = number.replace(",", ".");	
-		number = parseFloat(number);
+		number = parseFloat(number);		
 		number = number.toFixed(2);
-		number = parseFloat(number);
+		number = parseFloat(number);		
 		if(!$.isNumeric(number)){		
 			continue;
 		}
-		sum += number;
+		quantity = parseFloat(quantity);
+		if(!$.isNumeric(quantity)){		
+			quantity = 1;
+		}
+		sum += number*quantity;
 	}	
 	displaySum = sum;
 	displaySum = displaySum.toFixed(2);	
@@ -49,18 +44,30 @@ function count() {
 	$("#right").text(displaySum);
 }
 function addrow() {
+	console.log("added");
 	itemcount++;
 	$(".addrow").remove();
-	$("#itemlist").append('<tr><td class="qty">0</td><td class="name">InsertItems here</td><td class="trash"><img class="deleterow" src="resources/trash.svg" onclick="deleterow('+itemcount+')" /></td><td class="price">0</td></tr><tr class="addrow" contenteditable="false"><td colspan="3" contenteditable="false" onclick="addrow()">add row</td></tr>');
+	$("#itemlist").append('<div class="itemrow"><input class="qty" type="number" placeholder="#" autocomplete="off" required><input class="name" type="text" placeholder="Itemname" required><div class="trash"><img class="deleterow" src="resources/trash.svg" onclick="deleterow('+itemcount+')" /></div><input class="price" type="number" placeholder="0,00" required><div style="clear: both"></div></div><div class="addrow" contenteditable="false" onclick="addrow()">add row</div>');
 }
 function deleterow(number) {
-	$("tr").eq(number-1).remove();
+	console.log("remove "+number+". item");
+	$(".itemrow").eq(number-1).remove();
+	var counter = 2;
+	$("img.deleterow").each(function( index ) {
+		$(this).attr("onclick","deleterow("+counter+")");
+		counter++;
+	});
 	itemcount--;
 	count();
 }
 function spend() {
-	var sum;
-	var store;
+	var sum = $("#right").text();
+	sum = sum.replace(",", ".");
+	sum = parseFloat(sum);		
+	if(!$.isNumeric(sum)){		
+		console.log("variable sum is not a number");
+	}
+	var store = $("#transtitle").text();
 	var itemlist;
 	alert("Spend "+sum+"€ at "+store+" for "+itemlist);
 }

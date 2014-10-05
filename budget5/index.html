@@ -80,14 +80,16 @@
 					<div style="clear: both"></div>
 				  </div>
 				  <div class="divider"></div>
-				  <table id="itemlist" contenteditable="true" spellcheck="false">
-					<tr>
-						<td class="qty">0</td>
-						<td class="name">InsertItems here</td>
-						<td class="trash">&nbsp;</td>
-						<td class="price">0,00</td>
-					</tr>					
-				  </table>		  
+				  <form id="itemlist">
+					<div class="itemrow">
+						<input class="qty" type="number" placeholder="#" autocomplete="off" required>
+						<input class="name" type="text" placeholder="Itemname" autocomplete="off" required>
+						<div class="trash">&nbsp;</div>
+						<input class="price" type="text" placeholder="0,00" autocomplete="off" required>
+						<div style="clear: both"></div>
+					</div>	
+					<div class="addrow" onclick="addrow()">add row</div>
+				  </form>		  
 				  <div class="divider"></div>
 				  <div id="total">
 					<div id="left">Total</div>

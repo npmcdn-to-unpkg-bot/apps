@@ -25,7 +25,7 @@ font-size: 30px;
 background: none repeat scroll 0 0 #f5f5f5;
 }
 /************************************************************************************
-Gird-Settings
+Grid-Settings
 ************************************************************************************/
 .clearfix:before,
 .clearfix:after {
@@ -64,7 +64,9 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
+input[type=number] {
+	-moz-appearance:textfield;
+}
 label {		
 	position: relative;
 	display: block;
@@ -118,7 +120,7 @@ div.bordercontainer {
 div#newtrans {
 	width: 100%;
 	height: 100%;
-	background: #F5F5F5;
+	background-color:rgba(0,0,0,0.5);
 	display: none;
 	padding: 1rem;
 	position: fixed;
@@ -126,6 +128,7 @@ div#newtrans {
 	overflow: hidden;	
 }
 	div#newtrans #exit {
+		color: white;
 		float: right;
 		width: 36px;
 		height: 36px;		
@@ -134,6 +137,7 @@ div#newtrans {
 		cursor: pointer;
 	}
 	div#newtrans #edit {
+		color: white;
 		float: right;
 		width: 36px;
 		height: 36px;
@@ -141,6 +145,7 @@ div#newtrans {
 		cursor: pointer;
 	}
 	div#newtrans #scan {
+		color: white;
 		float: right;
 		width: 36px;
 		height: 36px;
@@ -148,6 +153,7 @@ div#newtrans {
 		margin: 0 5px 0 0;
 	}
 	div#newtrans header#newheader {		
+		color: white;
 		float: left;		
 		position: relative;
 		overflow: hidden;
@@ -155,7 +161,7 @@ div#newtrans {
 		font-weight: bold;
 	}
 div#receipt {
-  background: white;
+  background: #fafafa;
   position: relative;
   width: 300px;  
   margin: 15px auto 0 auto;
@@ -164,19 +170,17 @@ div#receipt {
   font-size: 14px;
   -webkit-box-sizing: padding-box;
   box-sizing: padding-box; 
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  -moz-border-image:url("resources/ecken.png") 50% 0% 50% 0% round; 
-  -webkit-border-image:url("resources/ecken.png") 50% 0% 50% 0% round; 
-  -o-border-image:url("resources/ecken.png") 50% 0% 50% 0% round; 
-  border-image:url("resources/ecken.png") 50% 0% 50% 0% round;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  -moz-border-image:url("resources/receiptborder.png") 7 3 7 3 round; 
+  -webkit-border-image:url("resources/receiptborder.png") 7 3 7 3 round; 
+  -o-border-image:url("resources/receiptborder.png") 7 3 7 3 round; 
+  border-image:url("resources/receiptborder.png") 7 3 7 3 round;
   -moz-background-clip: padding-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-/* Cross-browser Variante. Wenn möglich später durch styles ersetzen */
-  filter: url(resources/shadow.svg#drop-shadow);
-  -webkit-filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.5));
-  -webkit-filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.5));
 }
 time {
   font-size: 12px;
@@ -232,7 +236,7 @@ div.divider {
   overflow: hidden;
   opacity: 0.25;
 }
-table#itemlist {
+form#itemlist {
 	width: 100%;
 	display: table;
 	position: relative;	
@@ -243,15 +247,14 @@ table#itemlist {
 	font-size: 14px;
 	table-layout:fixed;
 }
-table#itemlist:focus {
+form#itemlist:focus {
 	outline: none;
 }
-	table#itemlist td {
-		overflow: hidden;
+	form#itemlist input {
+		border: none; 
+		background: none;
+		float: left;
 	}
-#itemlist tbody {
-	width: 100%;
-}
 .qty {
 	width: 8%;
 	padding-left: 2px;
@@ -260,13 +263,16 @@ table#itemlist:focus {
 	width: 72%;
 }
 .trash {
+	float: left;
 	width: 5%;
 }
 .price {
 	width: 15%;
 	text-align: right;
 }
-tr.addrow td {
+div.addrow {
+	height: 25px;
+	display: block;
 	text-align: center;
 	opacity: 0.25;
 	font-size: 12px;	
@@ -279,15 +285,15 @@ tr.addrow td {
 }
 div#total { 
   color: #5a584c;
-  margin: 5px 0 20px 0;
+  margin: 5px 0 40px 0;
   cursor: default;
 }
 	div#total div#left {
-		width: 80%;
+		width: 70%;
 		float: left;
 	}
 	div#total div#right {
-		width: 20%;
+		width: 30%;
 		float: right;
 		text-align: right;		
 	}
@@ -394,7 +400,7 @@ div#currentbudget div#trenddown #down {
 /************************************************************************************
 Expenses, income input form.
 ************************************************************************************/
-form {		
+/*form {		
 	position: relative;	
 	line-height: 26px;
 	margin: 0 0 0 0;
