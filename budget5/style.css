@@ -303,8 +303,10 @@ div#buttons {
   display: flex; 
   justify-content:center;
   flex-flow: row-reverse;
+  -webkit-flex-flow: row-reverse;
 }
 div#buttons div#receive, div#buttons div#cancel, div#buttons div#spend {
+  -webkit-flex: 1;
   flex: 1;
   height: 25px;
   width: 80px;
