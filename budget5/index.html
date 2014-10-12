@@ -11,7 +11,7 @@
 		<!--Dropbox-->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.5.0/dropbox.min.js"></script>
 		<!-- Javascript -->
-        <script src="http://code.jquery.com/jquery-1.7.2.min.js" charset="UTF-8"></script>
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js" charset="UTF-8"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" charset="UTF-8"></script>
 		<script src="/apps/budget5/script.js" charset="UTF-8"></script> 
         <!-- <script src="/apps/budget/constructors.js" charset="UTF-8"></script>
@@ -63,51 +63,52 @@
 			<div id="newtrans">
 				<img id="exit" class="svg" onclick="modal()" src="resources/add.svg" />						
 				<img id="scan" class="svg" src="resources/scan.svg" />
-				<img id="edit" class="svg" src="resources/edit.svg" />
-				<header id="newheader">New Transaction</header>
+				<img id="edit" class="svg" src="resources/edit.svg" />				
 				<div style="clear: both"></div>
 				<div id="receipt">
-				  <time contenteditable="true" spellcheck="false">15.05.2014 19:00:00</time>				  
-				  <div style="clear: both"></div>
-				  <header id="transtitle" contenteditable="true" spellcheck="false">Store Name</header>
-				  <div id="tableheader">
-					<div id="headleft">
-						<div id="Qty">qty</div>
-						<div id="Item">item</div>
+					<form id="header">
+						<input type="datetime-local" id="time" placeholder="date here" autocomplete="off" readonly required/>				  
+						<div style="clear: both"></div>
+						<input type="text" id="transtitle" placeholder="New Transaction" autocomplete="off" required>
+					</form>
+					<div id="tableheader">
+						<div id="headleft">
+							<div id="Qty">qty</div>
+							<div id="Item">item</div>
+							<div style="clear: both"></div>
+						</div>
+						<div id="headright">Eur</div>
 						<div style="clear: both"></div>
 					</div>
-					<div id="headright">Eur</div>
-					<div style="clear: both"></div>
-				  </div>
-				  <div class="divider"></div>
-				  <form id="itemlist">
-					<div class="itemrow">
-						<input class="qty" type="number" placeholder="#" autocomplete="off" required>
-						<input class="name" type="text" placeholder="Itemname" autocomplete="off" required>
-						<div class="trash">&nbsp;</div>
-						<input class="price" type="text" placeholder="0,00" autocomplete="off" required>
+					<div class="divider"></div>
+					<form id="itemlist">
+						<div class="itemrow">
+							<input class="qty" type="number" placeholder="#" autocomplete="off" required>
+							<input class="name" type="text" placeholder="Itemname" autocomplete="off" required>
+							<div class="trash">&nbsp;</div>
+							<input class="price" type="text" placeholder="0,00" autocomplete="off" required>
+							<div style="clear: both"></div>
+						</div>	
+						<div class="addrow" onclick="addrow()">add row</div>
+					</form>		  
+					<div class="divider"></div>
+					<div id="total">
+						<div id="left">Total</div>
+						<div id="right">0,00</div>
 						<div style="clear: both"></div>
-					</div>	
-					<div class="addrow" onclick="addrow()">add row</div>
-				  </form>		  
-				  <div class="divider"></div>
-				  <div id="total">
-					<div id="left">Total</div>
-					<div id="right">0,00</div>
-					<div style="clear: both"></div>
-				  </div>
-				  <div id="buttons">
-					<div id="cancel" onclick="modal()" class="buttonsbutton">Cancel</div>
-					<div id="receive" onclick="receive()" class="buttonsbutton">Receive</div>
-					<div id="spend" onclick="spend()" class="buttonsbutton">Spend</div>					
-				  </div>
+					</div>
+					<div id="buttons">
+						<div id="cancel" onclick="modal()" class="buttonsbutton">Cancel</div>
+						<div id="receive" onclick="send('receive')" class="buttonsbutton">Receive</div>
+						<div id="spend" onclick="send('spend')" class="buttonsbutton">Spend</div>					
+					</div>
 				</div>								
 			</div>
 		</div>
 		<div id="main">
 			<div class="row clearfix">
 				<div id="addpaym" class="column">				
-					<img id="addimage" class="svg" onclick="modal()" src="resources/add.svg"/>		
+					<img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/>		
 				</div>
 			</div>
 			<div class="row clearfix">

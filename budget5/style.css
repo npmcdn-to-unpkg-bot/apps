@@ -152,14 +152,6 @@ div#newtrans {
 		cursor: pointer;
 		margin: 0 5px 0 0;
 	}
-	div#newtrans header#newheader {		
-		color: white;
-		float: left;		
-		position: relative;
-		overflow: hidden;
-		display: block;
-		font-weight: bold;
-	}
 div#receipt {
   background: #fafafa;
   position: relative;
@@ -182,25 +174,35 @@ div#receipt {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-time {
+#time {
   font-size: 12px;
   color: #5a584c;
   float: left;
+  /*cursor: pointer;*/
+  background: none;
+  border: none;
 }
-time:focus {
-	outline: none;
-}
-header#transtitle {	
+input#transtitle {	
   font-size: 22px;
   margin: 10px 0 20px 0;
   text-align: center;
   color: #5a584c;
+  width: 100%;
+  display: block;
+  background: none;
+  border: none;
 }
-header#transtitle:active {
-  text-decoration: underline;
+input#transtitle::-webkit-input-placeholder {
+   opacity: 0.2;
 }
-header#transtitle:focus {
-  outline: none;
+input#transtitle:-moz-placeholder { /* Firefox 18- */
+    opacity: 0.2;  
+}
+input#transtitle::-moz-placeholder {  /* Firefox 19+ */
+   opacity: 0.2; 
+}
+input#transtitle:-ms-input-placeholder {  
+    opacity: 0.2; 
 }
 div#tableheader {
   font-size: 10px;
@@ -817,10 +819,6 @@ div.expense {
 Media Queries
 **************************************************/
 @media (max-width:400px) {
-	header#newheader {
-		font-size: 20px;
-		line-height: 30px;
-	}
 }
 @media (max-width:350px) {
 	div#receipt {
