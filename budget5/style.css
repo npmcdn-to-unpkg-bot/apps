@@ -274,6 +274,7 @@ form#itemlist:focus {
 }
 div.addrow {
 	height: 25px;
+	line-height: 20px;
 	display: block;
 	text-align: center;
 	opacity: 0.25;

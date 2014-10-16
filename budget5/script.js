@@ -128,5 +128,5 @@ function inTime(time){
 	var year = time.getFullYear()
 	var timestring = day+"."+month+"."+year+" "+hour+':'+minute+':'+second;
 	$("input#time").attr('class',time);
-	$("input#time").val(timestring);
+	$("input#time").val(timestring);	
 }
