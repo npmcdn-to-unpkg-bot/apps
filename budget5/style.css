@@ -617,13 +617,8 @@ label#nettolabel div {
 Dashboard
 ************************************************************************************/
 div#chart {
-	background: white;
-	width: 96%;
 	height: 200px;
-	position: relative;
-	float: left;
-	margin:1%;	
-	padding: 1%;
+	overflow: hidden;
 }
 div#blackbar {
 	display: none; /* attempt to hide chart branding @media needed to work!(now just in 480x320*/
@@ -634,16 +629,9 @@ div#blackbar {
 	right: 2%;	
 	top: 675px;
 }
-div#currentstatus {	
-	height: 104px;
-	float: left;
-	background: white;
-	min-width: 150px;
-	position: relative;
+div#currentstatus {		
 	overflow: hidden;
 	text-align: center;	
-	margin: 1%;	
-	padding: 1%;
 	font-weight: bold;
 	cursor: pointer;
 }
@@ -662,15 +650,8 @@ div#currentstatus {
 			float: right;
 		}
 div#monthlybudget {	
-	height: 104px;
-	float: left;
-	background: white;
-	min-width: 150px;
-	position: relative;
 	overflow: hidden;
-	text-align: center;	
-	margin: 1%;	
-	padding: 1%;
+	text-align: center;		
 	font-weight: bold;
 }
 div#monthlybudget .amount {
@@ -716,14 +697,7 @@ div#monthlyrevenues .amount {
 transactions
 ************************************************************************************/
 div#transactions {
-	float: left;
-	height: 150px;
-	overflow-y: scroll;
-	background: white;
-	width: 46%;	
-	margin:1%;	
-	padding: 1%;
-	resize: vertical
+	overflow: hidden;
 }
 div#transactions h1 {	
 	display: block;
@@ -741,14 +715,7 @@ div#transactions h1:not(:first-child) {
 	margin-top: 10px;
 }
 div#rTransactions {
-	float: left;
-	height: 150px;
-	overflow-y: scroll;
-	background: white;
-	width: 46%;	
-	margin:1%;	
-	padding: 1%;
-	resize: vertical
+	overflow: hidden;
 }
 div#rTransactions h1 {	
 	display: block;
@@ -765,8 +732,7 @@ div#rTransactions h1 {
 div#rTransactions h1:not(:first-child) {
 	margin-top: 10px;
 }
-div.time {
-	width: 65px;
+div.time {	
 	position: relative;
 	float: left;	
 	overflow: hidden;
@@ -799,7 +765,7 @@ div.transaction {
 	*/
 }
 div.transaction .amount {
-	width: 85px;
+	width: 200px;
 	position: relative;	
 	overflow: hidden;
 	float: left;
