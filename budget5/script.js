@@ -248,10 +248,10 @@ function displayData() {
 	$('#datelabel').html(displayDate(currentDate));
 	reposLabel();
 	$('#date').datepicker();
-	//clear div
-	$("#main").html("");
+	//clear data(below pls)
+	//Maybe a reset with .html() is needed. future will see.
+	
 	//create a chart
-	$("#main").append('<div class="row clearfix"><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div>');		
 	var expenseArray = [];		
 	for(i = 1; i <= currentDate.getDate(); i++) {
 		specificDate = new Date(currentDate);		
@@ -319,9 +319,11 @@ function displayData() {
 	//add blackbar in order to conceal chartbranding -> dumme idee
 	//$("#dashboard").append('<div id="blackbar"></div>');
 	//insert dashboard-elements
-	$("#main").append('<div class="row clearfix"><div class="column fourth"><div id="currentstatus" onclick="displayDeposits()" class="bordercontainer"><div class="amount">'+budget.getCurrentStatusAmount()+'€</div>Current Status</div></div><div class="column fourth"><div id="monthlybudget" class="bordercontainer"><div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget</div></div></div>");	
-	//insert transaction-divs
-	$("#main").append('<div class="row clearfix"><div class="column half"><div id="transactions" class="bordercontainer"></div></div><div class="column half"><div id="rTransactions" class="bordercontainer"></div></div></div>');
+	
+	$('#currentstatus').html('<div class="amount">'+budget.getCurrentStatusAmount()+'€</div>Current Status');
+	$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
+	
+	//insert transaction-divs	
 		//insert all transactions
 		$.each(budget.getTransactions(), function() {		
 			currentDate = new Date();
