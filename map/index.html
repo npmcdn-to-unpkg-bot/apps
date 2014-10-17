@@ -1,0 +1,51 @@
+<html lang="de" xml:lang="de">
+  
+  <head>         
+        <title>Map</title>       
+        <meta charset="UTF-8" />
+        <!-- CSS -->
+        <link rel="stylesheet" media="all" type="text/css" href="/apps/resources/normalize.css" /> 
+		<link rel="stylesheet" media="all" type="text/css" href="/apps/map/style.css" />
+		<link rel="stylesheet" type="text/css" href="apps/index.pageslide.css">		
+		<!-- Meta -->
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">     
+		<!-- Javascript -->
+        <script src="http://code.jquery.com/jquery-1.7.2.min.js" charset="UTF-8"></script>
+		<script src="/apps/map/script.js" charset="UTF-8"></script> 
+		<!-- Highmaps -->
+		<script src="/apps/resources/Highmaps-1.0.4/js/highmaps.js"></script>
+		<script src="/apps/map/resources/world-highres.js"></script>
+		<!--SVG-FIX-->
+		<script type="text/javascript">
+			$('document').ready(function() {			
+				/*
+				* Replace all SVG images with inline SVG
+				*/
+				jQuery('img.svg').each(function(){
+					var $img = jQuery(this);
+					var imgID = $img.attr('id');
+					var imgClass = $img.attr('class');
+					var imgURL = $img.attr('src');
+					jQuery.get(imgURL, function(data) {
+						// Get the SVG tag, ignore the rest
+						var $svg = jQuery(data).find('svg');
+						// Add replaced image's ID to the new SVG
+						if(typeof imgID !== 'undefined') {
+							$svg = $svg.attr('id', imgID);
+						}
+						// Add replaced image's classes to the new SVG
+						if(typeof imgClass !== 'undefined') {
+							$svg = $svg.attr('class', imgClass+' replaced-svg');
+						}
+						// Remove any invalid XML tags as per http://validator.w3.org
+						$svg = $svg.removeAttr('xmlns:a');
+						// Replace image with new SVG
+						$img.replaceWith($svg);
+					});
+				});				
+			});
+		</script>		
+   </head>    
+    <body>		
+	</body>    
+</html>
