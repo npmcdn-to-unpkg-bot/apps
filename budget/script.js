@@ -116,6 +116,7 @@ function send(type) {
 	}
 	console.log(type+" "+sum+"€ at "+store+" for "+itemlist+" die länge der Liste ist "+itemlist.length);
 	budget.addTransaction(store,type,sum,itemlist,date);
+	modal();
 	saveData(displayData);
 }
 function inTime(time){	
@@ -267,7 +268,13 @@ function displayData() {
 				backgroundColor: 'rgba(255, 255, 255, 0.1)'
 			},
 			title: {
-                text: '',
+                text: 'Daily Expenses',
+				align: 'left',
+				style: {
+					"font-family": "helvetica, arial",
+					"font-weight": "bold",
+					"font-size": "24"
+				},
                 x: 0, //center	
 				enabled: false
             },
@@ -324,14 +331,15 @@ function displayData() {
 	//$("#dashboard").append('<div id="blackbar"></div>');
 	//insert dashboard-elements
 	
-	$('#currentstatus').html('<div class="amount">'+budget.getCurrentStatusAmount()+'€</div>Current Status');
+	$('#currentstatus').html('<div class="amount">'+currentAmount()+'€</div>Current Status');
 	$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
 	
 	//insert transaction-divs	
 		//insert all transactions
+		$("#transactions").html("");
 		$.each(budget.getTransactions(), function() {		
 			currentDate = new Date();
-			givenDate = new Date(this.getDate());
+			givenDate = new Date(this.getDate());			
 			transactionInhalt = $("#transactions").html();
 			if(givenDate.getDate()-currentDate.getDate() == 0 ) {			
 				if(transactionInhalt.indexOf('<h1 class="head">Today</h1>') > -1){			
@@ -436,22 +444,20 @@ function MonthlyExpenses(aDate) {
 	return sum;
 }
 function DailyExpenses(aDate) {	
-	var sum = 0;	
+	var sum = 0;
+	//console.log(aDate.getDate()+" "+aDate.getMonth()+" "+aDate.getFullYear());
 	$.each(budget.getTransactions(), function() {		
 		givenDate = new Date(this.getDate());
-		
+		//console.log(givenDate.getDate()+" "+givenDate.getMonth()+" "+givenDate.getFullYear());
 		var isSameDay = (givenDate.getDate() == aDate.getDate() 
         && givenDate.getMonth() == aDate.getMonth()
         && givenDate.getFullYear() == aDate.getFullYear());
 		
 		if(isSameDay) {			
-			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
-			} else {
-				//console.log(this.getName());
-				if(this.getType() == 'expense'){
-					sum += this.getAmount();					
-				}
-			}
+			//console.log("match");			
+			if(this.getType() == 'spend'){				
+				sum += this.getAmount();					
+			} 	
 		}
 	});	
 	if(sum !== 0) {
@@ -518,6 +524,20 @@ function MonthlyBudget() {
 	//console.log(sum);
 	//console.log($.type(sum));
 	return sum;
+}
+function currentAmount() {
+	start = budget.getCurrentStartAmount();	
+	$.each(budget.getTransactions(), function() {	
+		var amount = this.getAmount();				
+		if(this.getType() == "spend") {
+			start -= parseFloat(amount);
+		} else {
+			start += parseFloat(amount);
+		}
+		start = parseFloat(start);
+		start = start.toFixed(2);
+	});
+	return start;
 }
 function reposLabel() {
 	var newLabelWidth = $('#datelabel').width();	

@@ -1,14 +1,10 @@
 function loadData(callback) {	
 	$.getJSON( "/data/budget.json", function( data ) {					
-		var amount = data.currentStatus.amount;	
-		budget.setCurrentStatusAmount(amount);	
-		var deposits = [];			
-		$.each(data.currentStatus.deposits, function() {				
-			budget.addDeposit(this.name,this.amount);	
-		});			
+		var amount = data.startAmount;	
+		budget.setCurrentStartAmount(amount);				
 		data.transactions = data.transactions.reverse();
 		$.each(data.transactions, function() {			
-			budget.addTransaction(this.name,this.type,this.amount,this.date);				
+			budget.addTransaction(this.name,this.type,this.amount,this.itemlist,this.date);				
 		});	
 		$.each(data.recurringTransactions, function() {			
 			budget.addRecurringTransaction(this.name,this.type,this.amount,this.date);				
