@@ -1,30 +1,24 @@
 <html lang="de" xml:lang="de">
   
   <head>         
-        <title>Budget</title>       
+        <title>Budget</title>  
+		<!--Meta-->
         <meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSS -->
         <link rel="stylesheet" media="all" type="text/css" href="/apps/resources/normalize.css" /> 
 		<link rel="stylesheet" media="all" type="text/css" href="/apps/budget/style.css" />
-		<link rel="stylesheet" type="text/css" href="apps/index.pageslide.css">		
-		<!-- Meta -->
-        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">     
 		<!--Dropbox-->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js"></script>
 		<!-- Javascript -->
-        <script src="http://code.jquery.com/jquery-1.7.2.min.js" charset="UTF-8"></script>
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js" charset="UTF-8"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" charset="UTF-8"></script>
 		<script src="/apps/budget/script.js" charset="UTF-8"></script> 
-        <script src="/apps/budget/constructors.js" charset="UTF-8"></script>
-		<script src="/apps/budget/functions.js" charset="UTF-8"></script>
 		<script src="/apps/budget/cloud.js" charset="UTF-8"></script>
+		<script src="/apps/budget/constructors.js" charset="UTF-8"></script>       
 		<!--Highchart-->
 		<script src="/apps/resources/Highcharts-3.0.6/js/highcharts.js"></script>
 		<script src="/apps/resources/Highcharts-3.0.6/js/themes/budget.js"></script>
-		<!--Odometer
-		<script src="https://raw.github.com/HubSpot/odometer/v0.4.2/odometer.min.js"></script>
-		<link rel="stylesheet" href="https://raw.github.com/HubSpot/odometer/master/themes/odometer-theme-default.css" />
-		-->
 		<!--SVG-FIX-->
 		<script type="text/javascript">
 			$('document').ready(function() {			
@@ -36,6 +30,7 @@
 					var imgID = $img.attr('id');
 					var imgClass = $img.attr('class');
 					var imgURL = $img.attr('src');
+					var imgFUNCTION = $img.attr('onclick');
 					jQuery.get(imgURL, function(data) {
 						// Get the SVG tag, ignore the rest
 						var $svg = jQuery(data).find('svg');
@@ -47,6 +42,12 @@
 						if(typeof imgClass !== 'undefined') {
 							$svg = $svg.attr('class', imgClass+' replaced-svg');
 						}
+						//Add replaced image's functions tot the new SVG
+						if(typeof imgFUNCTION !== 'undefined') {
+							$svg = $svg.attr('onclick', imgFUNCTION);
+						}
+						//Add HTML5 draggable attribute						
+						$svg = $svg.attr('draggable', "false");
 						// Remove any invalid XML tags as per http://validator.w3.org
 						$svg = $svg.removeAttr('xmlns:a');
 						// Replace image with new SVG
@@ -54,45 +55,91 @@
 					});
 				});				
 			});
-		</script>		
-   </head>    
-    <body onload="messen()" onresize="messen()">
-		<header>
-			<form>					
-				<div id="type">
-					<div id="checkbox">												
-						<label for="expense" id="expenselabel" class="checkboxlabel" onclick="onRevenue()">Spend</label>
-							<input id="expense" name="verwendung" type="radio" value="expense" autocomplete="off" checked>	
-						<label for="revenue" id="revenuelabel" class="checkboxlabel" onclick="onExpense()">Receive</label>
-							<input id="revenue" name="verwendung" type="radio" value="revenue" autocomplete="off">	
-					</div> 
-				</div>
-				<input id="amount" name="amount" type="number" placeholder="" autocomplete="off" required autofocus>					
-				<span id="amounttext">€</span>
-				<span id="storetext">at</span>
-				<input id="store" name="store" type="text" value="Netto" required>			
-				<span id="datetext"> on </span>
-				<label for="date" id="datelabel" class="datelabel" onclick="$('#date').datepicker('show')"></label>
-				<input id="date" name="date" type="text" value="" autocomplete="off">							
-				<!-- <div id="stores">
-					<label for="netto" id="nettolabel" class="storelabel" onclick="updatePhrase('Netto'),hideStores()"></label>
-					<input id="netto" name="store" type="radio" value="Netto" autocomplete="off" checked>						
-					<label for="aldi" id="aldilabel" class="storelabel" onclick="updatePhrase('Aldi'),hideStores()"></label>
-					<input id="aldi" name="store" type="radio" value="Aldi" autocomplete="off">	
-					<label for="ikea" id="ikealabel" class="storelabel" onclick="updatePhrase('Ikea'),hideStores()"></label>
-					<input id="ikea" name="store" type="radio" value="Ikea" autocomplete="off">						
-					<label for="rewe" id="rewelabel" class="storelabel" onclick="updatePhrase('Rewe'),hideStores()"></label>
-					<input id="rewe" name="store" type="radio" value="Rewe" autocomplete="off">	
-					<div style="clear: both"></div>
-				</div> -->
-				<button id="submitter" onclick="processInput(addTransaction)">Save</button>
-				<label for="repeat"   id="repeatlabel" onclick="changeRepeat()"><img id="repeatimage" class="svg" src="resources/repeat.svg"/></label>
-				<input id="repeat" name="repeat" type="hidden" value="off" autocomplete="off">				
-				<div style="clear: both"></div>	
-			</form>
-		</header>			
-		<div id="content">			
+		</script>	
+	</head>    
+    <body onload="messen()" onresize="messen()">		
+		<div id="modal">
+			<div id="newtrans">
+				<img id="exit" class="svg" onclick="modal()" src="resources/add.svg" />						
+				<img id="scan" class="svg" src="resources/scan.svg" />
+				<img id="edit" class="svg" src="resources/edit.svg" />				
+				<div style="clear: both"></div>
+				<div id="receipt">
+					<form id="header">
+						<input type="text" id="time" placeholder="date here" autocomplete="off" readonly required/>				  
+						<div style="clear: both"></div>
+						<input type="text" id="transtitle" placeholder="New Receipt" autocomplete="off" required>
+					</form>
+					<div id="tableheader">
+						<div id="headleft">
+							<div id="Qty">qty</div>
+							<div id="Item">item</div>
+							<div style="clear: both"></div>
+						</div>
+						<div id="headright">Eur</div>
+						<div style="clear: both"></div>
+					</div>
+					<div class="divider"></div>
+					<form id="itemlist">
+						<div class="itemrow">
+							<input class="qty" type="number" placeholder="#" autocomplete="off" required>
+							<input class="name" type="text" placeholder="Itemname" autocomplete="off" required>
+							<div class="trash">&nbsp;</div>
+							<input class="price" type="text" placeholder="0,00" autocomplete="off" required>
+							<div style="clear: both"></div>
+						</div>	
+						<div class="addrow" onclick="addrow()">add row</div>
+					</form>		  
+					<div class="divider"></div>
+					<div id="total">
+						<div id="left">Total</div>
+						<div id="right">0,00</div>
+						<div style="clear: both"></div>
+					</div>
+					<div id="buttons">
+						<div id="cancel" onclick="modal()" class="buttonsbutton">Cancel</div>
+						<div id="receive" onclick="send('receive')" class="buttonsbutton">Receive</div>
+						<div id="spend" onclick="send('spend')" class="buttonsbutton">Spend</div>					
+					</div>
+				</div>								
+			</div>
 		</div>
-		</body>
-    
+		<div id="main">
+			<div class="row clearfix">
+				<div id="addpaym" class="column">
+					<img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/>
+				</div>
+			</div>
+			<div class="row clearfix">
+				<div class="column full">
+					<div id="chart" class="bordercontainer">
+					</div>
+				</div>
+			</div>
+			<div class="row clearfix">
+				<div class="column fourth">
+					<div id="currentstatus" onclick="displayDeposits()" class="bordercontainer">
+						<div class="amount">
+						</div>
+						Current Status
+					</div>
+				</div>
+				<div class="column fourth">
+					<div id="monthlybudget" class="bordercontainer">
+						<div class="amount">
+						</div>
+						This Month's Budget
+					</div>
+				</div>
+			</div>
+			<div class="row clearfix">
+				<div class="column half">
+					<div id="transactions" class="bordercontainer"></div>
+				</div>
+				<div class="column half">
+					<div id="rTransactions" class="bordercontainer"></div>
+				</div>
+			</div>			
+		</div>
+	</body>
 </html>

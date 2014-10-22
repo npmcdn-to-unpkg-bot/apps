@@ -1,8 +1,58 @@
-/*Shortnote for Updatedetection */
-body {	
-	font-family: helvetica, arial;	
-	background: #F5F5F5;
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+position: relative;
+transition: all 0.6s ease-in-out 0s;
+font-family: helvetica, arial;
 }
+svg {
+  fill: currentColor;
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.nodrag {
+	pointer-events: none;
+}
+body {
+font-size: 30px;
+background: none repeat scroll 0 0 #f5f5f5;
+}
+/************************************************************************************
+Grid-Settings
+************************************************************************************/
+.clearfix:before,
+.clearfix:after {
+content: " ";
+display: table;
+}
+ 
+.clearfix:after {
+clear: both;
+}
+ 
+.clearfix {
+*zoom: 1;
+}
+
+.column {
+float: left;
+padding: 1rem;
+background-clip: content-box;
+}
+.column.full { width: 100%; }
+.column.two-thirds { width: 66.7%; }
+.column.half { width: 50%; }
+.column.third { width: 33.3%; }
+.column.fourth { width: 25%; }
+.column.flow-opposite { float: right; }
+
 textarea, input,a,a:active, a:focus, input:focus{ 
 	outline: none;
 	box-shadow:none
@@ -13,6 +63,9 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+input[type=number] {
+	-moz-appearance:textfield;
 }
 label {		
 	position: relative;
@@ -27,6 +80,7 @@ label:hover {
 	cursor: pointer;
 }
 div#messwert {
+	font-size: 14px;
 	position: fixed;
 	right: 0px;
 	bottom: 0px;
@@ -37,20 +91,241 @@ div#content {
     position: relative;	   
 	overflow: hidden;
 }
-header {		
-	width: 98%;
-	position: relative;
-	background: white;
-	color: black;
-	font-family: Helvetica, arial black, arial;
-	font-size: 30px;	
-	overflow: hidden;
-	z-index: 99;
-	margin: 1%;		
-}
 a {
 	color: black;
 	text-decoration: none;
+}
+div#addpaym {
+	width: 68px;
+	height: 68px;
+	background: #F5F5F5 content-box;	
+	transition: all 0.6s ease-in-out 0s;
+	overflow: hidden;
+}
+
+	div#addpaym #addimage {
+		width: 36px;
+		height: 36px;
+		fill: black;
+		transition: all 0.6s ease-in-out 0s;	
+		cursor: pointer;
+	}
+div.bordercontainer {	
+	border: 3px solid black;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px;
+}
+div#newtrans {
+	width: 100%;
+	height: 100%;
+	background-color:rgba(0,0,0,0.5);
+	display: none;
+	padding: 1rem;
+	position: fixed;
+	z-index: 99;
+	overflow: hidden;	
+}
+	div#newtrans #exit {
+		color: white;
+		float: right;
+		width: 36px;
+		height: 36px;		
+		transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		cursor: pointer;
+	}
+	div#newtrans #edit {
+		color: white;
+		float: right;
+		width: 36px;
+		height: 36px;
+		margin: 0 5px 0 0;
+		cursor: pointer;
+	}
+	div#newtrans #scan {
+		color: white;
+		float: right;
+		width: 36px;
+		height: 36px;
+		cursor: pointer;
+		margin: 0 5px 0 0;
+	}
+div#receipt {
+  background: #fafafa;
+  position: relative;
+  width: 300px;  
+  margin: 15px auto 0 auto;
+  padding: 10px;
+  overflow: hidden;  
+  font-size: 14px;
+  -webkit-box-sizing: padding-box;
+  box-sizing: padding-box; 
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  -moz-border-image:url("resources/receiptborder.png") 7 3 7 3 round; 
+  -webkit-border-image:url("resources/receiptborder.png") 7 3 7 3 round; 
+  -o-border-image:url("resources/receiptborder.png") 7 3 7 3 round; 
+  border-image:url("resources/receiptborder.png") 7 3 7 3 round;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+#time {
+  font-size: 12px;
+  color: #5a584c;
+  float: left;
+  /*cursor: pointer;*/
+  background: none;
+  border: none;
+}
+input#transtitle {	
+  font-size: 22px;
+  margin: 10px 0 20px 0;
+  text-align: center;
+  color: #5a584c;
+  width: 100%;
+  display: block;
+  background: none;
+  border: none;
+}
+input#transtitle::-webkit-input-placeholder {
+   opacity: 0.2;
+}
+input#transtitle:-moz-placeholder { /* Firefox 18- */
+    opacity: 0.2;  
+}
+input#transtitle::-moz-placeholder {  /* Firefox 19+ */
+   opacity: 0.2; 
+}
+input#transtitle:-ms-input-placeholder {  
+    opacity: 0.2; 
+}
+div#tableheader {
+  font-size: 10px;
+  color: #5a584c;
+  margin: 0 0 1px 0;
+  cursor: default;
+}
+	div#tableheader div#headleft {		
+		width: 80%;
+		float: left;
+	}
+		div#tableheader div#headleft div#qty{
+			float: left;
+			width: 10%;
+		}
+		div#tableheader div#headleft div#item{
+			float: left;
+			width: 70%;
+		}
+		
+	div#tableheader div#headright {
+		width: 20%;
+		float: right;
+		text-align: right;
+		padding: 0 7px 0 0;
+	}
+div.divider {
+  position: relative;
+  width: 100%;
+  height: 0px;
+  border-top: 1px grey solid;
+  margin: 0px 0 0px 0;
+  overflow: hidden;
+  opacity: 0.25;
+}
+form#itemlist {
+	width: 100%;
+	display: table;
+	position: relative;	
+	list-style-type: none;
+	padding: 0px 0 0 0;
+	margin: 0px 0 0px 0;
+	color: #5a584c;
+	font-size: 14px;
+	table-layout:fixed;
+}
+form#itemlist:focus {
+	outline: none;
+}
+	form#itemlist input {
+		border: none; 
+		background: none;
+		float: left;
+	}
+.qty {
+	width: 8%;
+	padding-left: 2px;
+}
+.name {
+	width: 72%;
+}
+.trash {
+	float: left;
+	width: 5%;
+}
+.price {
+	width: 15%;
+	text-align: right;
+}
+div.addrow {
+	height: 25px;
+	line-height: 20px;
+	display: block;
+	text-align: center;
+	opacity: 0.25;
+	font-size: 12px;	
+	cursor: pointer;
+}
+.deleterow {	
+	height: 14px;
+	opacity: 0.2;	
+	cursor: pointer;
+}
+div#total { 
+  color: #5a584c;
+  margin: 5px 0 40px 0;
+  cursor: default;
+}
+	div#total div#left {
+		width: 70%;
+		float: left;
+	}
+	div#total div#right {
+		width: 30%;
+		float: right;
+		text-align: right;		
+	}
+div#buttons {
+  width: 100%; 
+  display: -webkit-flex; 
+  display: flex; 
+  justify-content:center;
+  flex-flow: row-reverse;
+  -webkit-flex-flow: row-reverse;
+}
+div#buttons div#receive, div#buttons div#cancel, div#buttons div#spend {
+  -webkit-flex: 1;
+  flex: 1;
+  height: 25px;
+  width: 80px;
+  border: 1px solid #5a584c;
+  border-radius: 5px;
+  text-align: center; 
+  line-height: 23px;
+  opacity: 0.25;
+  font-weight: bold;
+  cursor: pointer;
+  color: #5a584c;  
+  line-height: 20px;
+  margin: 0 4px 0 4px;
+}
+div#buttons div#receive:hover, div#buttons div#cancel:hover, div#buttons div#spend:hover, div#buttons div#receive:active, div#buttons div#cancel:active, div#buttons div#spend:active {
+	opacity: 1;
 }
 /************************************************************************************
 Actual Current Budget - Sizes and spacing like on big screen?
@@ -130,7 +405,7 @@ div#currentbudget div#trenddown #down {
 /************************************************************************************
 Expenses, income input form.
 ************************************************************************************/
-form {		
+/*form {		
 	position: relative;	
 	line-height: 26px;
 	margin: 0 0 0 0;
@@ -241,7 +516,7 @@ form {
 		padding-top: 15px;
 	}
 	form label#repeatlabel {
-		width: 42px;
+		width: 52px;
 		display: block;
 		color: black;
 		text-align: center;
@@ -342,13 +617,8 @@ label#nettolabel div {
 Dashboard
 ************************************************************************************/
 div#chart {
-	background: white;
-	width: 96%;
 	height: 200px;
-	position: relative;
-	float: left;
-	margin:1%;	
-	padding: 1%;
+	overflow: hidden;
 }
 div#blackbar {
 	display: none; /* attempt to hide chart branding @media needed to work!(now just in 480x320*/
@@ -359,16 +629,9 @@ div#blackbar {
 	right: 2%;	
 	top: 675px;
 }
-div#currentstatus {	
-	height: 104px;
-	float: left;
-	background: white;
-	min-width: 150px;
-	position: relative;
+div#currentstatus {		
 	overflow: hidden;
 	text-align: center;	
-	margin: 1%;	
-	padding: 1%;
 	font-weight: bold;
 	cursor: pointer;
 }
@@ -387,15 +650,8 @@ div#currentstatus {
 			float: right;
 		}
 div#monthlybudget {	
-	height: 104px;
-	float: left;
-	background: white;
-	min-width: 150px;
-	position: relative;
 	overflow: hidden;
-	text-align: center;	
-	margin: 1%;	
-	padding: 1%;
+	text-align: center;		
 	font-weight: bold;
 }
 div#monthlybudget .amount {
@@ -441,14 +697,7 @@ div#monthlyrevenues .amount {
 transactions
 ************************************************************************************/
 div#transactions {
-	float: left;
-	height: 150px;
-	overflow-y: scroll;
-	background: white;
-	width: 46%;	
-	margin:1%;	
-	padding: 1%;
-	resize: vertical
+	overflow: hidden;
 }
 div#transactions h1 {	
 	display: block;
@@ -466,14 +715,7 @@ div#transactions h1:not(:first-child) {
 	margin-top: 10px;
 }
 div#rTransactions {
-	float: left;
-	height: 150px;
-	overflow-y: scroll;
-	background: white;
-	width: 46%;	
-	margin:1%;	
-	padding: 1%;
-	resize: vertical
+	overflow: hidden;
 }
 div#rTransactions h1 {	
 	display: block;
@@ -490,8 +732,7 @@ div#rTransactions h1 {
 div#rTransactions h1:not(:first-child) {
 	margin-top: 10px;
 }
-div.time {
-	width: 65px;
+div.time {	
 	position: relative;
 	float: left;	
 	overflow: hidden;
@@ -524,7 +765,7 @@ div.transaction {
 	*/
 }
 div.transaction .amount {
-	width: 85px;
+	width: 200px;
 	position: relative;	
 	overflow: hidden;
 	float: left;
@@ -544,6 +785,14 @@ div.expense {
 /*************************************************
 Media Queries
 **************************************************/
+@media (max-width:400px) {
+}
+@media (max-width:350px) {
+	div#receipt {
+		width: 100%;
+	}
+}
+/*
 @media (max-width:1232px) {
 	header {
 		font-size: 28px;
@@ -821,7 +1070,7 @@ Media Queries
 }
 /*************************************************
 Mobile view. Not my first choice.
-*************************************************/
+*************************************************
 @media (max-width:736px) {
 	header {
 		font-size: 18px;
