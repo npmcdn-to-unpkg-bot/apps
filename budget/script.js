@@ -7,7 +7,16 @@ $('document').ready(function() {
 	} else {				
 		alert("permission denied.");
 		return;
-	}		
+	}
+	
+	$("#my-menu").mmenu({
+        // options
+		header: true
+    }, {
+        // configuration
+		
+    });
+	
 	itemcount = 1;
 	$("#itemlist").keyup(function() {
 		count();
@@ -331,8 +340,8 @@ function displayData() {
 	//$("#dashboard").append('<div id="blackbar"></div>');
 	//insert dashboard-elements
 	
-	$('#currentstatus').html('<div class="amount">'+currentAmount()+'€</div>Current Status');
-	$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
+	$('#currentAmount').html(currentAmount()+'€');
+	//$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
 	
 	//insert transaction-divs	
 		//insert all transactions
