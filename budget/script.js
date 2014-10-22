@@ -95,7 +95,7 @@ function send(type) {
 		console.log('sum undefined');
 		return;
 	}	
-	var itemlist = {};
+	var itemlist = [];
 	for(i=0;i<itemcount;i++){
 		number = $(".price").eq(i).val();
 		quantity = $(".qty").eq(i).val();
@@ -114,7 +114,9 @@ function send(type) {
 		}
 		itemlist[i]= new Item(quantity,name,number);
 	}
-	alert(type+" "+sum+"€ at "+store+" for "+itemlist);
+	console.log(type+" "+sum+"€ at "+store+" for "+itemlist+" die länge der Liste ist "+itemlist.length);
+	budget.addTransaction(store,type,sum,itemlist,date);
+	saveData(displayData);
 }
 function inTime(time){	
 	console.log(time);	

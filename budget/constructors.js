@@ -41,8 +41,8 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 		this.currentStatus.amount += amount;
 		this.currentStatus.amount = (Math.round(this.currentStatus.amount * 100)/100).toFixed(2);
 	}
-	this.addTransaction = function(name, type, amount, date, turnus) {
-		var trans = new Transaction(name, type, amount, date, turnus);
+	this.addTransaction = function(name, type, amount, itemlist, date) {
+		var trans = new Transaction(name, type, amount, itemlist, date);
 		this.transactions.unshift(trans);
 		//this.transactions.push(trans);
 		if(name === 'Wallet' || name === 'wallet') {} else {
@@ -87,10 +87,11 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 			return this.amount;
 		}
 	}
-	function Transaction(name, type, amount, date) {
+	function Transaction(name, type, amount, itemlist, date) {
 		this.name = name;
 		this.type = type;
 		this.amount = amount;
+		this.itemlist = itemlist;
 		if(date){
 			this.date = new Date(date);;
 		} else {
@@ -106,17 +107,21 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 			amount = (Math.round(this.amount * 100)/100).toFixed(2);
 			return amount;
 		}
+		this.getItemlist = function() {
+			return this.itemlist;
+		}
 		this.getDate = function() {
 			return this.date;
 		}	
 		this.getType = function() {
 			return this.type;
 		}	
-	  }
-	  function recurringTransaction(name, type, amount, date) {
+	}
+	function recurringTransaction(name, type, amount, itemlist, date) {
 		this.name = name;
 		this.type = type;
-		this.amount = amount;	
+		this.amount = amount;
+		this.itemlist = itemlist;
 		if(date) {
 			this.date = new Date(date);
 		} else { 
@@ -132,10 +137,27 @@ function Budget(amount,deposits,transactions,recurringTransactions) {
 			amount = (Math.round(this.amount * 100)/100).toFixed(2);
 			return amount;
 		}
+		this.getItemlist = function() {
+			return this.itemlist;
+		}
 		this.getDate = function() {		
 			return this.date;
 		}
 		this.getType = function() {
 			return this.type;
 		}	
+	} 
+	function Item(quantity,name,number) {
+		this.quantity = quantity;
+		this.name = name;
+		this.number = number;
+		this.getName = function() {
+			return this.name;
+		}
+		this.getQuantity = function() {
+			return this.quantity;
+		}
+		this.getNumber = function() {
+			return this.number;
+		}
 	}
