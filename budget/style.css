@@ -808,6 +808,7 @@ Mmenu customization
 #my-menu:not( .mm-menu ) {
    display: none;
 }
+
 .mm-menu {
     max-width: 340px !important;
 }
