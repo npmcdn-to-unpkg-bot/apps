@@ -19,6 +19,9 @@ $('document').ready(function() {
             "title": '<img id="Menulogo" src="/apps/budget/resources/budget.svg"/>',
             "add": true,
             "update": true
+        },
+		dragOpen: {
+            open: true
         }
     }, {
         // configuration
