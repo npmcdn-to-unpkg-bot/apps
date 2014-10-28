@@ -65,16 +65,17 @@
     <body onload="messen()" onresize="messen()">		
 		<nav id="my-menu">
 		   <ul>
-			  <li><a href="/">Home</a></li>
-			  <li>
-				 <a href="/about/">About us</a>
+			  <li><a onclick="displayData()">Dashboard</a></li>
+			  <!--<li>
+				 <span href="/about/">About us</span>
 				 <ul>
 					<li><a href="/about/history/">History</a></li>
 					<li><a href="/about/team/">The team</a></li>
 					<li><a href="/about/address/">Our address</a></li>
 				 </ul>
-			  </li>
-			  <li><a href="/contact/">Contact</a></li>
+			  </li>-->
+			  <li><a onclick="displayScheduledData()">Haushaltsplanung</a></li>
+			  <li><a onclick="displayHistory('budget')">History</a></li>
 		   </ul>
 		</nav>
 		<div id="pagewrapper" style="overflow: hidden">
@@ -125,30 +126,7 @@
 				</div>
 			</div>
 			<div id="main">
-				<div class="row clearfix">
-					<div id="menu" class="column">
-						<img id="menuimage" class="svg" onclick="$('#my-menu').trigger('open.mm');" src="resources/menu.svg" />
-					</div>				
-					<div id="addpaym" class="column">
-						<img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/>
-					</div>
-					<div id="currentAmount" class="column">
-					</div>
-				</div>
-				<div class="row clearfix">
-					<div class="column full">
-						<div id="chart" class="bordercontainer">
-						</div>
-					</div>
-				</div>			
-				<div class="row clearfix">
-					<div class="column half">
-						<div id="transactions" class="bordercontainer"></div>
-					</div>
-					<div class="column half">
-						<div id="rTransactions" class="bordercontainer"></div>
-					</div>
-				</div>			
+					
 			</div>
 		</div>
 	</body>

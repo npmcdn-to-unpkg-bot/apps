@@ -124,10 +124,12 @@ div#currentAmount {
 	line-height: 36px;
 }
 div.bordercontainer {	
+	
 	border: 3px solid black;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	
 	padding: 10px;
 }
 div#newtrans {
@@ -135,7 +137,7 @@ div#newtrans {
 	height: 100%;
 	background-color:rgba(0,0,0,0.5);
 	display: none;
-	padding: 1rem;
+	padding: 0.5rem;
 	position: fixed;
 	z-index: 99;
 	overflow: hidden;	
@@ -148,6 +150,7 @@ div#newtrans {
 		transform: rotate(45deg);
 		-webkit-transform: rotate(45deg);
 		cursor: pointer;
+		margin-right: 1rem;
 	}
 	div#newtrans #edit {
 		color: white;
@@ -794,6 +797,44 @@ div.revenue {
 }
 div.expense {
 	color: red;
+}
+
+/*************************************************
+Mmenu customization
+**************************************************/
+#my-menu a {
+	cursor: pointer;
+}
+#my-menu:not( .mm-menu ) {
+   display: none;
+}
+.mm-menu {
+    max-width: 340px !important;
+}
+html.mm-opening .mm-page, html.mm-opening #mm-blocker {
+    transform: translate(340px, 0px) !important;
+}
+.mm-title {
+	font-size: 60px;
+	padding-top: 30px !important;
+}
+.mm-header {
+	height: 120px !important;
+	line-height: 60px !important;
+}
+#menulogo {
+	height: 100px;
+	margin-top: -20px;
+}
+.mm-menu.mm-hasheader > .mm-panel.mm-list {
+	padding-top: 120px !important;
+}
+.mm-header .mm-prev[href]:before, .mm-header .mm-next[href]:after {
+	height: 14px !important;
+	width: 14px !important;
+}
+.mm-header .mm-prev, .mm-header .mm-next {
+	padding-top: 55px !important;
 }
 /*************************************************
 Media Queries

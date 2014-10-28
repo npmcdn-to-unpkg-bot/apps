@@ -10,8 +10,16 @@ $('document').ready(function() {
 	}
 	
 	$("#my-menu").mmenu({
-        // options
-		header: true
+        // options		
+		footer: {
+            add: true,
+            content: "(c) 2014"
+        },
+		"header": {
+            "title": '<img id="Menulogo" src="/apps/budget/resources/budget.svg"/>',
+            "add": true,
+            "update": true
+        }
     }, {
         // configuration
 		
@@ -264,7 +272,7 @@ function displayData() {
 	$('#date').datepicker();
 	//clear data(below pls)
 	//Maybe a reset with .html() is needed. future will see.
-	
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column full"><div id="transactions" class="bordercontainer"></div></div></div>');
 	//create a chart
 	var expenseArray = [];		
 	for(i = 1; i <= currentDate.getDate(); i++) {
@@ -328,6 +336,9 @@ function displayData() {
             legend: {
                 enabled: false
             },
+			credits: {
+				enabled: false
+			},
             series: [{
 				name: 'Amount',
 				data: expenseArray,
@@ -353,14 +364,14 @@ function displayData() {
 			if(givenDate.getDate()-currentDate.getDate() == 0 ) {			
 				if(transactionInhalt.indexOf('<h1 class="head">Today</h1>') > -1){			
 					$("#transactions").append('');
-					if(this.getType() == 'revenue'){
+					if(this.getType() == 'receive'){
 							$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					} else {
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					}
 				} else {
 					$("#transactions").append('<h1 class="head">Today</h1>');
-					if(this.getType() == 'revenue'){
+					if(this.getType() == 'receive'){
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					} else {
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
@@ -369,14 +380,14 @@ function displayData() {
 			} else if(Math.abs(givenDate.getDate()-currentDate.getDate()) == 1){
 				if(transactionInhalt.indexOf('<h1 class="head">Yesterday</h1>') > -1){
 					$("#transactions").append('');
-					if(this.getType() == 'revenue'){
+					if(this.getType() == 'receive'){
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					} else {
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					}
 				} else {				
 					$("#transactions").append('<h1 class="head">Yesterday</h1>');
-					if(this.getType() == 'revenue'){
+					if(this.getType() == 'receive'){
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					} else {
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
@@ -392,7 +403,7 @@ function displayData() {
 					}
 				} else {				
 					$("#transactions").append('<h1 class="head">'+displayDate(givenDate)+'</h1>');
-					if(this.getType() == 'revenue'){
+					if(this.getType() == 'receive'){
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
 					} else {
 						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
@@ -402,30 +413,30 @@ function displayData() {
 			
 		});			
 	//insert all Recurring Transactions
-	var transactionArray = budget.getRecurringTransactions();
-	var length = transactionArray.length;
-	for(var i = 0; i < length; i++) {	
-		for( var j = 0; j < length; j++) {
+	// var transactionArray = budget.getRecurringTransactions();
+	// var length = transactionArray.length;
+	// for(var i = 0; i < length; i++) {	
+		// for( var j = 0; j < length; j++) {
 			//console.log('i='+i+',j='+j);			
-			if(transactionArray[i].getDate() < transactionArray[j].getDate()) {
+			// if(transactionArray[i].getDate() < transactionArray[j].getDate()) {
 				//console.log('Laufvariablen: i='+i+',j='+j+' .tausche: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
-				var tausch = transactionArray[i];
-				transactionArray[i]=transactionArray[j];
-				transactionArray[j]=tausch;
-			} else {
+				// var tausch = transactionArray[i];
+				// transactionArray[i]=transactionArray[j];
+				// transactionArray[j]=tausch;
+			// } else {
 				//console.log('Laufvariablen: i='+i+',j='+j+' .tausche nicht: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
-			}
-		}
-	}
-	$.each(transactionArray, function() {	
-		givenDate = new Date(this.getDate());
-		rTransactionInhalt = $("#rTransactions").html();		
-		if(this.getType() == 'revenue'){
-			$("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
-		} else {
-			$("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
-		}		
-	});	
+			// }
+		// }
+	// }
+	// $.each(transactionArray, function() {	
+		// givenDate = new Date(this.getDate());
+		// rTransactionInhalt = $("#rTransactions").html();		
+		// if(this.getType() == 'revenue'){
+			// $("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
+		// } else {
+			// $("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
+		// }		
+	// });	
 	//console.log('eingetragen');	
 };
 function messen() {
@@ -535,17 +546,17 @@ function MonthlyBudget() {
 	return sum;
 }
 function currentAmount() {
-	start = budget.getCurrentStartAmount();	
+	start = parseFloat(budget.getCurrentStartAmount());		
 	$.each(budget.getTransactions(), function() {	
 		var amount = this.getAmount();				
-		if(this.getType() == "spend") {
-			start -= parseFloat(amount);
-		} else {
-			start += parseFloat(amount);
-		}
-		start = parseFloat(start);
+		if(this.getType() == "spend") {			
+			start -= amount;
+		} else if(this.getType() == "receive") {			
+			start += amount;			
+		}		
 		start = start.toFixed(2);
-	});
+		start = parseFloat(start);
+	});	
 	return start;
 }
 function reposLabel() {
