@@ -105,8 +105,6 @@ div#menu {
 		cursor: pointer;
 	}
 div#addpaym {
-	width: 68px;
-	height: 68px;
 	float: right;
 	background: #F5F5F5 content-box;	
 	transition: all 0.6s ease-in-out 0s;
@@ -123,7 +121,7 @@ div#addpaym {
 div#currentAmount {
 	line-height: 36px;
 }
-div.bordercontainer {	
+.bordercontainer {	
 	
 	border: 3px solid black;
 	-webkit-border-radius: 10px;
@@ -150,7 +148,6 @@ div#newtrans {
 		transform: rotate(45deg);
 		-webkit-transform: rotate(45deg);
 		cursor: pointer;
-		margin-right: 1rem;
 	}
 	div#newtrans #edit {
 		color: white;
@@ -324,7 +321,7 @@ div#buttons {
   flex-flow: row-reverse;
   -webkit-flex-flow: row-reverse;
 }
-div#buttons div#receive, div#buttons div#cancel, div#buttons div#spend {
+div.buttonsbutton {
   -webkit-flex: 1;
   flex: 1;
   height: 25px;
@@ -340,7 +337,7 @@ div#buttons div#receive, div#buttons div#cancel, div#buttons div#spend {
   line-height: 20px;
   margin: 0 4px 0 4px;
 }
-div#buttons div#receive:hover, div#buttons div#cancel:hover, div#buttons div#spend:hover, div#buttons div#receive:active, div#buttons div#cancel:active, div#buttons div#spend:active {
+div.buttonsbutton:hover, div.buttonsbutton:active {
 	opacity: 1;
 }
 /************************************************************************************
@@ -712,10 +709,39 @@ div#monthlyrevenues .amount {
 /************************************************************************************
 transactions
 ************************************************************************************/
-div#transactions {
+ul#transactions {	
+	display: block;
+	overflow: hidden;
+	margin: 0 0 0 0;
+}
+	ul#transactions li {
+		list-style-type: none;
+		display: -webkit-flex; 
+		display: flex;
+		justify-content:center;
+	}
+		ul#transactions li div.type,ul#transactions li div.amount,ul#transactions li div.store {
+			-webkit-flex: 1;
+			flex: 1;			
+		}
+	ul#transactions h1 {	
+		display: block;
+		width: 100%;
+		position:relative;		
+		font-weight: bold;
+		font-size: 12px;
+		line-height: 20px;
+		margin: 0;	
+		overflow: hidden;
+		border-bottom: 1px solid black;
+	}
+	ul#transactions h1:not(:first-child) {
+		margin-top: 10px;
+	}
+ul#rTransactions {
 	overflow: hidden;
 }
-div#transactions h1 {	
+ul#rTransactions h1 {	
 	display: block;
 	width: 100%;
 	position:relative;
@@ -727,28 +753,10 @@ div#transactions h1 {
 	overflow: hidden;
 	border-bottom: 1px solid black;
 }
-div#transactions h1:not(:first-child) {
+ul#rTransactions h1:not(:first-child) {
 	margin-top: 10px;
 }
-div#rTransactions {
-	overflow: hidden;
-}
-div#rTransactions h1 {	
-	display: block;
-	width: 100%;
-	position:relative;
-	float: left;
-	font-weight: bold;
-	font-size: 12px;
-	line-height: 20px;
-	margin: 0;	
-	overflow: hidden;
-	border-bottom: 1px solid black;
-}
-div#rTransactions h1:not(:first-child) {
-	margin-top: 10px;
-}
-div.time {	
+div.type {	
 	position: relative;
 	float: left;	
 	overflow: hidden;
@@ -780,11 +788,9 @@ div.transaction {
 	border-radius: 5px;
 	*/
 }
-div.transaction .amount {
-	width: 200px;
-	position: relative;	
+div.amount {		
 	overflow: hidden;
-	float: left;
+	float: right;
 	text-align: right;
 	padding-right: 10px;
 	margin-right: 10px;
@@ -797,6 +803,9 @@ div.revenue {
 }
 div.expense {
 	color: red;
+}
+div.store {
+	text-align: left;
 }
 
 /*************************************************

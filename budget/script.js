@@ -275,7 +275,7 @@ function displayData() {
 	$('#date').datepicker();
 	//clear data(below pls)
 	//Maybe a reset with .html() is needed. future will see.
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column full"><div id="transactions" class="bordercontainer"></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column full"><ul id="transactions" class="bordercontainer"></div></div></div>');
 	//create a chart
 	var expenseArray = [];		
 	for(i = 1; i <= currentDate.getDate(); i++) {
@@ -368,53 +368,54 @@ function displayData() {
 				if(transactionInhalt.indexOf('<h1 class="head">Today</h1>') > -1){			
 					$("#transactions").append('');
 					if(this.getType() == 'receive'){
-							$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+							$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				} else {
 					$("#transactions").append('<h1 class="head">Today</h1>');
 					if(this.getType() == 'receive'){
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				}
 			} else if(Math.abs(givenDate.getDate()-currentDate.getDate()) == 1){
 				if(transactionInhalt.indexOf('<h1 class="head">Yesterday</h1>') > -1){
 					$("#transactions").append('');
 					if(this.getType() == 'receive'){
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				} else {				
 					$("#transactions").append('<h1 class="head">Yesterday</h1>');
 					if(this.getType() == 'receive'){
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				}
 			} else {	
 				if(transactionInhalt.indexOf('<h1 class="head">'+displayDate(givenDate)+'</h1>') > -1){				
 					$("#transactions").append('');
 					if(this.getType() == 'revenue'){
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				} else {				
 					$("#transactions").append('<h1 class="head">'+displayDate(givenDate)+'</h1>');
 					if(this.getType() == 'receive'){
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<div class="time">'+displayTime(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+"€</div>"+this.getName()+'</div><div style="clear: both"></div>');
+						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				}
 			}
 			
-		});			
+		});	
+		$("#transactions").append('<div style="clear: both"></div>');
 	//insert all Recurring Transactions
 	// var transactionArray = budget.getRecurringTransactions();
 	// var length = transactionArray.length;
