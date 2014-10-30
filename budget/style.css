@@ -122,12 +122,12 @@ div#currentAmount {
 	line-height: 36px;
 }
 .bordercontainer {	
-	
+	/*
 	border: 3px solid black;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-	
+	*/
 	padding: 10px;
 }
 div#newtrans {
@@ -716,27 +716,54 @@ ul#transactions {
 }
 	ul#transactions li {
 		list-style-type: none;
+		/*
 		display: -webkit-flex; 
 		display: flex;
+		*/
 		justify-content:center;
 	}
-		ul#transactions li div.type,ul#transactions li div.amount,ul#transactions li div.store {
+		ul#transactions li div.date,ul#transactions li div.amount,ul#transactions li div.store {
+			/*
 			-webkit-flex: 1;
-			flex: 1;			
+			flex: 1;
+			*/
 		}
+		ul#transactions li:nth-child(even) {
+			background: #ffffff;
+		} 
 	ul#transactions h1 {	
-		display: block;
-		width: 100%;
+		display: block;		
 		position:relative;		
-		font-weight: bold;
-		font-size: 12px;
+		font-weight: 700;
+		font-size: 24px;
+		font-family: arial, Helvetica;
 		line-height: 20px;
-		margin: 0;	
-		overflow: hidden;
-		border-bottom: 1px solid black;
+		margin: 0 0 30px 10px;	
+		overflow: hidden;		
 	}
 	ul#transactions h1:not(:first-child) {
 		margin-top: 10px;
+	}
+	ul#transactions img {
+		height: 10px;
+		position: absolute;
+		z-index: 90;
+		top: 101px;
+		left: 56px;
+		transform:rotate(-90deg);
+		-ms-transform:rotate(-90deg);  /* IE 9 */
+		-webkit-transform:rotate(-90deg); /* Safari and Chrome */
+	}
+	ul#transactions b {
+		display: block;
+		width: 10px;
+		height: 10px;		
+		background-color: black;
+		border-radius: 50%;
+		position: absolute;
+		z-index: 90;
+		bottom: 5px;
+		left: 55px;
 	}
 ul#rTransactions {
 	overflow: hidden;
@@ -756,11 +783,38 @@ ul#rTransactions h1 {
 ul#rTransactions h1:not(:first-child) {
 	margin-top: 10px;
 }
-div.type {	
+div.date {	
 	position: relative;
 	float: left;	
 	overflow: hidden;
-	margin-left: 20px;
+	margin-left: 12px;	
+	display: block;
+	width: 150px;
+}
+	div.date .number {
+		float: left;
+		border-right: 2px solid black;
+		padding-right: 4px;
+		margin-right: 4px;
+	}
+	div.date .rest {
+		width: 100px;
+		float: left;
+		font-size: 12px;
+		line-height: 12px;
+		padding-top: 7px;
+	}	
+		div.rest span {
+			float: left;
+		}
+	div.date .borderdiv {		
+		width: 2px;
+		background: black;
+		display: block;
+		position: relative;
+		left: 37px;
+	}
+div#today {	
 }
 div.datemonth {
 	width: 85px;
@@ -805,7 +859,10 @@ div.expense {
 	color: red;
 }
 div.store {
+	float: left;
 	text-align: left;
+	overflow: hidden;
+	position: relative;
 }
 
 /*************************************************

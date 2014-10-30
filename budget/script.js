@@ -175,6 +175,25 @@ function displayDate(d) {
 	"October", "November", "December");
 			
 	var curr_day = d.getDay();
+	var curr_date = d.getDate();	
+	var curr_month = d.getMonth();
+	var curr_year = d.getFullYear();
+	
+	if(curr_date.toString().length<2) {		
+		curr_date = '0'+ curr_date;
+	};
+	
+	return('<div class="number">'+curr_date+ '</div><div class="rest"><span>' +d_names[curr_day]  +'</span><span>'+ m_names[curr_month] + " " + curr_year+'</span><div style="clear: both"></div></div><div style="clear: both"></div>');
+}
+function displayDate2(d) {
+	var d_names = new Array("Sunday", "Monday", "Tuesday",
+	"Wednesday", "Thursday", "Friday", "Saturday");
+
+	var m_names = new Array("January", "February", "March", 
+	"April", "May", "June", "July", "August", "September", 
+	"October", "November", "December");
+			
+	var curr_day = d.getDay();
 	var curr_date = d.getDate();
 	var sup = "";
 	if (curr_date == 1 || curr_date == 21 || curr_date ==31)
@@ -275,7 +294,7 @@ function displayData() {
 	$('#date').datepicker();
 	//clear data(below pls)
 	//Maybe a reset with .html() is needed. future will see.
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column full"><ul id="transactions" class="bordercontainer"></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	//create a chart
 	var expenseArray = [];		
 	for(i = 1; i <= currentDate.getDate(); i++) {
@@ -360,62 +379,47 @@ function displayData() {
 	//insert transaction-divs	
 		//insert all transactions
 		$("#transactions").html("");
+		$("#transactions").append('<img src="/apps/budget/resources/triangle.svg"/><b></b><h1>Latest Transactions</h1>');
 		$.each(budget.getTransactions(), function() {		
 			currentDate = new Date();
 			givenDate = new Date(this.getDate());			
 			transactionInhalt = $("#transactions").html();
+			$("#transactions").append('<li></li>');
 			if(givenDate.getDate()-currentDate.getDate() == 0 ) {			
-				if(transactionInhalt.indexOf('<h1 class="head">Today</h1>') > -1){			
-					$("#transactions").append('');
+				if(transactionInhalt.indexOf('<div id="today" class="date">Today</div>') > -1){			
+					$("#transactions li").last().append('<div class="date"><div class="borderdiv">&nbsp;</div></div>');
 					if(this.getType() == 'receive'){
-							$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+							$("#transactions li").last().append('<div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						$("#transactions li").last().append('<div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				} else {
-					$("#transactions").append('<h1 class="head">Today</h1>');
+					$("#transactions li").last().append('<div id="today" class="date">Today</div>');
 					if(this.getType() == 'receive'){
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						$("#transactions li").last().append('<div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					}
-				}
-			} else if(Math.abs(givenDate.getDate()-currentDate.getDate()) == 1){
-				if(transactionInhalt.indexOf('<h1 class="head">Yesterday</h1>') > -1){
-					$("#transactions").append('');
-					if(this.getType() == 'receive'){
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					} else {
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					}
-				} else {				
-					$("#transactions").append('<h1 class="head">Yesterday</h1>');
-					if(this.getType() == 'receive'){
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					} else {
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						$("#transactions li").last().append('<div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				}
 			} else {	
-				if(transactionInhalt.indexOf('<h1 class="head">'+displayDate(givenDate)+'</h1>') > -1){				
-					$("#transactions").append('');
-					if(this.getType() == 'revenue'){
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+				if(transactionInhalt.indexOf('<div class="date">'+displayDate(givenDate)+'</div>') > -1){				
+					$("#transactions li").last().append('<div class="date"><div class="borderdiv">&nbsp;</div></div>');
+					if(this.getType() == 'receive'){
+						$("#transactions li").last().append('<div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						$("#transactions li").last().append('<div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				} else {				
-					$("#transactions").append('<h1 class="head">'+displayDate(givenDate)+'</h1>');
+					$("#transactions li").last().append('<div class="date">'+displayDate(givenDate)+'</div>');
 					if(this.getType() == 'receive'){
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						$("#transactions li").last().append('<div class="revenue amount">+'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
-						$("#transactions").append('<li><div class="type">'+this.getType()+'</div><div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						$("#transactions li").last().append('<div class="expense amount">-'+this.getAmountstring()+'€</div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					}
 				}
 			}
 			
-		});	
-		$("#transactions").append('<div style="clear: both"></div>');
+		});			
 	//insert all Recurring Transactions
 	// var transactionArray = budget.getRecurringTransactions();
 	// var length = transactionArray.length;
