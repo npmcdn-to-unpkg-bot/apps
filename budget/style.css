@@ -730,6 +730,7 @@ ul#transactions {
 		border-left: 1px solid black;
 		border-right: 1px solid black;
 		cursor: pointer;
+		overflow: hidden;
 		/*
 		display: -webkit-flex; 
 		display: flex;
