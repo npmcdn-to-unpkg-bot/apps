@@ -42,7 +42,7 @@ function messen() {
 	$("#messwert").remove();
 	$("body").prepend("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
 }
-function modal(mode) {
+function modal(mode,id) {
 	switch (mode) {
     case 'close':
 		console.log('modal closing');
@@ -50,12 +50,31 @@ function modal(mode) {
 		$("#oldtrans").css('display','none');
         break;
     case 'newtrans':
-		console.log('modal newt');
+		console.log('modal newt');				
+		buttonsString = '<div id="cancel" onclick="modal(&quot;close&quot;)" class="buttonsbutton">Cancel</div><div id="receive" onclick="send(&quot;receive&quot;)" class="buttonsbutton">Receive</div><div id="spend" onclick="send(&quot;spend&quot;)" class="buttonsbutton">Spend</div>';			
+		$('#buttons').html(buttonsString);	
         $("#newtrans").css('display','block');
         break;
-    case 'oldtrans':
+    case 'oldtrans':		
 		console.log('modal oldt');
-        $("#oldtrans").css('display','block');
+		/* <div id="update" onclick="update()" class="buttonsbutton">Update</div>	*/		
+		buttonsString = '<div id="cancel" onclick="modal(&quot;close&quot;)" class="buttonsbutton">Cancel</div><div id="update" onclick="update()" class="buttonsbutton">Update</div>';				
+		$('#buttons').html(buttonsString);			
+		var transactionList = budget.getTransactions();
+		var title = transactionList[id].getName();		
+		$('#oldtrans #transtitle').val(title);
+		var date = transactionList[id].getDate();
+		inTime(date);
+		var itemlist = transactionList[id].getItemlist();		
+		var listLength = itemlist.length;
+		console.log(listLength);
+		for(i = 1; i<listLength; i++) {
+			addrow();
+		}
+		console.log(title);
+		console.log(itemlist);
+		
+        $("#newtrans").css('display','block');
         break;   
     default:
        return;
@@ -105,7 +124,9 @@ function deleterow(number) {
 	count();
 }
 function send(type) {
-	var date = $("input#time").attr('class'); 
+	var date = $("input.time").attr('class'); 
+	date = date.replace('time ', '');
+	console.log(date);
 	if(date == '') {
 		console.log('date undefined');
 		return;
@@ -170,8 +191,8 @@ function inTime(time){
 	((''+month).length<2 ? '0' : '');
 	var year = time.getFullYear()
 	var timestring = day+"."+month+"."+year+" "+hour+':'+minute+':'+second;
-	$("input#time").attr('class',time);
-	$("input#time").val(timestring);	
+	$("input.time").val(timestring);
+	$("input.time").attr('class','time '+time);
 }
 
 ////////////////////////////////////////////////////
@@ -396,7 +417,7 @@ function displayData() {
 			currentDate = new Date();
 			givenDate = new Date(this.getDate());			
 			transactionInhalt = $("#transactions").html();
-			$("#transactions").append('<li onclick="'+i+'"></li>');
+			$("#transactions").append('<li onclick="modal(&#34;oldtrans&#34;,'+i+')"></li>');
 			if(givenDate.getDate()-currentDate.getDate() == 0 ) {			
 				if(transactionInhalt.indexOf('<div id="today" class="date">Today</div>') > -1){			
 					$("#transactions li").last().append('<div class="date"><div class="borderdiv">&nbsp;</div></div>');

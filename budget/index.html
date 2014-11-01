@@ -54,7 +54,7 @@
 					<div style="clear: both"></div>
 					<div id="receipt">
 						<form id="header">
-							<input type="text" id="time" placeholder="date here" autocomplete="off" readonly required/>				  
+							<input type="text" class="time" placeholder="date here" autocomplete="off" readonly required/>				  
 							<div style="clear: both"></div>
 							<input type="text" id="transtitle" placeholder="New Receipt" autocomplete="off" required>
 						</form>
@@ -85,55 +85,9 @@
 							<div style="clear: both"></div>
 						</div>
 						<div id="buttons">
-							<div id="cancel" onclick="modal('close')" class="buttonsbutton">Cancel</div>
-							<div id="receive" onclick="send('receive')" class="buttonsbutton">Receive</div>
-							<div id="spend" onclick="send('spend')" class="buttonsbutton">Spend</div>					
 						</div>
 					</div>								
-				</div>
-				<div id="oldtrans">
-					<img id="exit" class="svg" onclick="modal('close')" src="resources/add.svg" />						
-					<img id="scan" class="svg" src="resources/scan.svg" />
-					<img id="edit" class="svg" src="resources/edit.svg" />				
-					<div style="clear: both"></div>
-					<div id="receipt">
-						<form id="header">
-							<input type="text" id="time" autocomplete="off" readonly required/>				  
-							<div style="clear: both"></div>
-							<input type="text" id="transtitle" autocomplete="off" required>
-						</form>
-						<div id="tableheader">
-							<div id="headleft">
-								<div id="Qty">qty</div>
-								<div id="Item">item</div>
-								<div style="clear: both"></div>
-							</div>
-							<div id="headright">Eur</div>
-							<div style="clear: both"></div>
-						</div>
-						<div class="divider"></div>
-						<form id="itemlist">
-							<div class="itemrow">
-								<input class="qty" type="number" autocomplete="off" required>
-								<input class="name" type="text" autocomplete="off" required>
-								<div class="trash">&nbsp;</div>
-								<input class="price" type="text" autocomplete="off" required>
-								<div style="clear: both"></div>
-							</div>	
-							<div class="addrow" onclick="addrow()">add row</div>
-						</form>		  
-						<div class="divider"></div>
-						<div id="total">
-							<div id="left">Total</div>
-							<div id="right">0,00</div>
-							<div style="clear: both"></div>
-						</div>
-						<div id="buttons">
-							<div id="cancel" onclick="modal('close')" class="buttonsbutton">Cancel</div>
-							<div id="update" onclick="update()" class="buttonsbutton">Update</div>					
-						</div>
-					</div>								
-				</div>
+				</div>				
 			</div>
 			<div id="main">
 					
