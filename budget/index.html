@@ -28,43 +28,6 @@
 		<script src="/apps/resources/jQuery.mmenu-4.5.7/src/js/addons/jquery.mmenu.header.min.js" type="text/javascript"></script>
 		<script src="/apps/budget/budget.mmenu.dragopen.min.js" type="text/javascript"></script>
 		<script src="http://hammerjs.github.io/dist/hammer.min.js" charset="UTF-8"></script>
-		<!--SVG-FIX-->
-		<script type="text/javascript">
-			$('document').ready(function() {			
-				/*
-				* Replace all SVG images with inline SVG
-				*/
-				jQuery('img.svg').each(function(){
-					var $img = jQuery(this);
-					var imgID = $img.attr('id');
-					var imgClass = $img.attr('class');
-					var imgURL = $img.attr('src');
-					var imgFUNCTION = $img.attr('onclick');
-					jQuery.get(imgURL, function(data) {
-						// Get the SVG tag, ignore the rest
-						var $svg = jQuery(data).find('svg');
-						// Add replaced image's ID to the new SVG
-						if(typeof imgID !== 'undefined') {
-							$svg = $svg.attr('id', imgID);
-						}
-						// Add replaced image's classes to the new SVG
-						if(typeof imgClass !== 'undefined') {
-							$svg = $svg.attr('class', imgClass+' replaced-svg');
-						}
-						//Add replaced image's functions tot the new SVG
-						if(typeof imgFUNCTION !== 'undefined') {
-							$svg = $svg.attr('onclick', imgFUNCTION);
-						}
-						//Add HTML5 draggable attribute						
-						$svg = $svg.attr('draggable', "false");
-						// Remove any invalid XML tags as per http://validator.w3.org
-						$svg = $svg.removeAttr('xmlns:a');
-						// Replace image with new SVG
-						$img.replaceWith($svg);
-					});
-				});				
-			});
-		</script>	
 	</head>    
     <body onload="messen()" onresize="messen()">		
 		<nav id="my-menu">
@@ -85,7 +48,7 @@
 		<div id="pagewrapper" style="overflow: hidden">
 			<div id="modal">
 				<div id="newtrans">
-					<img id="exit" class="svg" onclick="modal()" src="resources/add.svg" />						
+					<img id="exit" class="svg" onclick="modal('close')" src="resources/add.svg" />						
 					<img id="scan" class="svg" src="resources/scan.svg" />
 					<img id="edit" class="svg" src="resources/edit.svg" />				
 					<div style="clear: both"></div>
@@ -122,9 +85,52 @@
 							<div style="clear: both"></div>
 						</div>
 						<div id="buttons">
-							<div id="cancel" onclick="modal()" class="buttonsbutton">Cancel</div>
+							<div id="cancel" onclick="modal('close')" class="buttonsbutton">Cancel</div>
 							<div id="receive" onclick="send('receive')" class="buttonsbutton">Receive</div>
 							<div id="spend" onclick="send('spend')" class="buttonsbutton">Spend</div>					
+						</div>
+					</div>								
+				</div>
+				<div id="oldtrans">
+					<img id="exit" class="svg" onclick="modal('close')" src="resources/add.svg" />						
+					<img id="scan" class="svg" src="resources/scan.svg" />
+					<img id="edit" class="svg" src="resources/edit.svg" />				
+					<div style="clear: both"></div>
+					<div id="receipt">
+						<form id="header">
+							<input type="text" id="time" autocomplete="off" readonly required/>				  
+							<div style="clear: both"></div>
+							<input type="text" id="transtitle" autocomplete="off" required>
+						</form>
+						<div id="tableheader">
+							<div id="headleft">
+								<div id="Qty">qty</div>
+								<div id="Item">item</div>
+								<div style="clear: both"></div>
+							</div>
+							<div id="headright">Eur</div>
+							<div style="clear: both"></div>
+						</div>
+						<div class="divider"></div>
+						<form id="itemlist">
+							<div class="itemrow">
+								<input class="qty" type="number" autocomplete="off" required>
+								<input class="name" type="text" autocomplete="off" required>
+								<div class="trash">&nbsp;</div>
+								<input class="price" type="text" autocomplete="off" required>
+								<div style="clear: both"></div>
+							</div>	
+							<div class="addrow" onclick="addrow()">add row</div>
+						</form>		  
+						<div class="divider"></div>
+						<div id="total">
+							<div id="left">Total</div>
+							<div id="right">0,00</div>
+							<div style="clear: both"></div>
+						</div>
+						<div id="buttons">
+							<div id="cancel" onclick="modal('close')" class="buttonsbutton">Cancel</div>
+							<div id="update" onclick="update()" class="buttonsbutton">Update</div>					
 						</div>
 					</div>								
 				</div>
