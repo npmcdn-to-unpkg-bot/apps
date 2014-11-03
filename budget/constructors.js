@@ -13,7 +13,17 @@ function Budget(startAmount,transactions,recurringTransactions) {
 		var trans = new Transaction(name, type, amount, itemlist, date);
 		this.transactions.unshift(trans);
 		//this.transactions.push(trans);		
-	}  
+	} 
+	this.editTransaction = function(id,name,amount,itemlist,date) {
+		this.transactions[id].name = name;
+		this.transactions[id].amount = amount;
+		this.transactions[id].itemlist = itemlist;
+		if(date){
+			this.transactions[id].date = new Date(date);;
+		} else {
+			alert("error date is missing");
+		}
+	}
 	this.getTransactions = function() {
 		return transactions;	 
 	}

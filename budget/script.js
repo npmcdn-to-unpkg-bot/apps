@@ -2,7 +2,7 @@ $('document').ready(function() {
 	authStatus = localStorage.getItem('Blunified');
 			
 	if (authStatus === 'true') {				
-		budget = new Budget(0,[],[],[]);
+		budget = new Budget(0,[],[]);
 		loadData(displayData);
 	} else {				
 		alert("permission denied.");
@@ -44,37 +44,57 @@ function messen() {
 }
 function modal(mode,id) {
 	switch (mode) {
-    case 'close':
-		console.log('modal closing');
-        $("#newtrans").css('display','none');
-		$("#oldtrans").css('display','none');
-        break;
-    case 'newtrans':
-		console.log('modal newt');				
+    case 'close':		
+        $("#overlay").css('display','none');
+		$("#trans").css('display','none');	
+		$('#trans #transtitle').val('');
+		$('#itemlist').html('<div class="itemrow"><input type="number" required="" autocomplete="off" placeholder="#" class="qty"><input type="text" required="" autocomplete="off" placeholder="Itemname" class="name"><div class="trash">&nbsp;</div><input type="text" required="" autocomplete="off" placeholder="0,00" class="price"><div style="clear: both"></div></div><div class="addrow" onclick="addrow()">add row</div>');
+		itemcount = 1;
+		break;
+    case 'newtrans':					
 		buttonsString = '<div id="cancel" onclick="modal(&quot;close&quot;)" class="buttonsbutton">Cancel</div><div id="receive" onclick="send(&quot;receive&quot;)" class="buttonsbutton">Receive</div><div id="spend" onclick="send(&quot;spend&quot;)" class="buttonsbutton">Spend</div>';			
 		$('#buttons').html(buttonsString);	
-        $("#newtrans").css('display','block');
+		$("#overlay").css('display','block');
+		$("#trans").css('display','block');
         break;
     case 'oldtrans':		
-		console.log('modal oldt');
-		/* <div id="update" onclick="update()" class="buttonsbutton">Update</div>	*/		
-		buttonsString = '<div id="cancel" onclick="modal(&quot;close&quot;)" class="buttonsbutton">Cancel</div><div id="update" onclick="update()" class="buttonsbutton">Update</div>';				
+		/* <div id="delete" onclick="delete()" class="buttonsbutton">Delete</div>	*/		
+		buttonsString = '<div id="cancel" onclick="modal(&quot;close&quot;)" class="buttonsbutton">Cancel</div><div id="delete" onclick=" deleteTransaction('+id+')" class="buttonsbutton">Delete</div><div id="update" onclick="update('+id+')" class="buttonsbutton">Update</div>';				
 		$('#buttons').html(buttonsString);			
 		var transactionList = budget.getTransactions();
 		var title = transactionList[id].getName();		
-		$('#oldtrans #transtitle').val(title);
+		$('#trans #transtitle').val(title);
+		
 		var date = transactionList[id].getDate();
 		inTime(date);
+		
 		var itemlist = transactionList[id].getItemlist();		
-		var listLength = itemlist.length;
-		console.log(listLength);
-		for(i = 1; i<listLength; i++) {
+		var listLength = itemlist.length;		
+		for(i = 1; i<listLength; i++) {			
 			addrow();
 		}
-		console.log(title);
-		console.log(itemlist);
+		for(i = 0; i<listLength; i++) {
 		
-        $("#newtrans").css('display','block');
+			var qty = itemlist[i].quantity;			
+			$('.itemrow:eq('+i+') > .qty').val(qty);
+			
+			var name = itemlist[i].name;
+			$('.itemrow:eq('+i+') > .name').val(name);
+			
+			var number = itemlist[i].number;			
+			if(String(number).indexOf(".") >= 0) {
+				number = String(number).replace(".", ",");	
+				if(number.length < 4) {
+					number = number+'0';
+				}	
+			} else {
+				number = number+',00';
+			}
+			$('.itemrow:eq('+i+') > .price').val(number);
+		}
+		count();		
+		$("#overlay").css('display','block');
+        $("#trans").css('display','block');
         break;   
     default:
        return;
@@ -110,7 +130,7 @@ function addrow() {
 	console.log("added");
 	itemcount++;
 	$(".addrow").remove();
-	$("#itemlist").append('<div class="itemrow"><input class="qty" type="number" placeholder="#" autocomplete="off" required><input class="name" type="text" placeholder="Itemname" required><div class="trash"><img class="deleterow" src="resources/trash.svg" onclick="deleterow('+itemcount+')" /></div><input class="price" type="number" placeholder="0,00" required><div style="clear: both"></div></div><div class="addrow" onclick="addrow()">add row</div>');
+	$("#itemlist").append('<div class="itemrow"><input class="qty" type="number" placeholder="#" autocomplete="off" required><input class="name" type="text" placeholder="Itemname" required><div class="trash"><img class="deleterow" src="resources/trash.svg" onclick="deleterow('+itemcount+')" /></div><input class="price" type="text" placeholder="0,00" required><div style="clear: both"></div></div><div class="addrow" onclick="addrow()">add row</div>');
 }
 function deleterow(number) {
 	console.log("remove "+number+". item");
@@ -132,6 +152,7 @@ function send(type) {
 		return;
 	}
 	var store = $("#transtitle").val();
+	store = firstLetterUp(store);
 	if(store == '') {
 		console.log('store undefined');
 		return;
@@ -171,6 +192,65 @@ function send(type) {
 	modal('close');
 	saveData(displayData);
 }
+function update(id){
+	var date = $("input.time").attr('class'); 
+	date = date.replace('time ', '');
+	console.log(date);
+	if(date == '') {
+		console.log('date undefined');
+		return;
+	}
+	var store = $("#transtitle").val();
+	store = firstLetterUp(store);
+	if(store == '') {
+		console.log('store undefined');
+		return;
+	}
+	var sum = $("#right").text();
+	sum = sum.replace(",", ".");
+	sum = parseFloat(sum);		
+	if(!$.isNumeric(sum)){		
+		console.log("variable sum is not a number");
+		return;
+	}
+	if(sum == '') {
+		console.log('sum undefined');
+		return;
+	}	
+	var itemlist = [];
+	for(i=0;i<itemcount;i++){
+		number = $(".price").eq(i).val();
+		quantity = $(".qty").eq(i).val();
+		name = $(".name").eq(i).val();
+		
+		number = number.replace(",", ".");	
+		number = parseFloat(number);		
+		number = number.toFixed(2);
+		number = parseFloat(number);		
+		if(!$.isNumeric(number)){		
+			continue;
+		}
+		quantity = parseFloat(quantity);
+		if(!$.isNumeric(quantity)){		
+			quantity = 1;
+		}
+		itemlist[i]= new Item(quantity,name,number);
+	}
+	budget.editTransaction(id,store,sum,itemlist,date);
+	modal('close');
+	saveData(displayData);
+}
+function deleteTransaction(id) {
+	if ( confirm("Are you sure you want to delete this Transaction?") ) {
+		var transactionList = budget.getTransactions();
+		console.log(transactionList);
+		transactionList.splice(id, 1);
+		console.log(transactionList);
+		budget.transactions = transactionList;
+		modal('close');
+		saveData(displayData);
+	}	
+}
 function inTime(time){	
 	console.log(time);	
 	var hour = time.getHours();
@@ -185,10 +265,14 @@ function inTime(time){
 		if(second < 10) {
 		second = '0'+second;
 	}
-	var day = time.getDate();
-	((''+day).length<2 ? '0' : '');
+	var day = time.getDate();	
+	if((''+day).length<2){
+		day = '0'+day;
+	}	
 	var month = time.getMonth()+1;
-	((''+month).length<2 ? '0' : '');
+	if((''+month).length<2){
+		month = '0'+month;
+	}	
 	var year = time.getFullYear()
 	var timestring = day+"."+month+"."+year+" "+hour+':'+minute+':'+second;
 	$("input.time").val(timestring);
@@ -339,7 +423,7 @@ function displayData() {
 				backgroundColor: 'rgba(255, 255, 255, 0.1)'
 			},
 			title: {
-                text: 'Daily Expenses',
+                text: 'Expenses this Month',
 				align: 'left',
 				style: {
 					"font-family": "helvetica, arial",
@@ -654,4 +738,7 @@ function replaceSVG() {
 						$img.replaceWith($svg);
 					});
 				});			
+}
+function firstLetterUp(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

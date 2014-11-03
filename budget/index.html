@@ -5,7 +5,9 @@
 		<!--Meta-->
         <meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- CSS -->
+		<!-- favicon -->
+		<link rel="shortcut icon" 	type="image/x-icon" href="/apps/budget/resources/favicon.ico">
+		<!-- CSS -->
         <link rel="stylesheet" media="all" type="text/css" href="/apps/resources/normalize.css" /> 
 		<link rel="stylesheet" media="all" type="text/css" href="/apps/budget/style.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="/apps/resources/jQuery.mmenu-4.5.7/src/css/jquery.mmenu.css" />
@@ -47,11 +49,14 @@
 		</nav>
 		<div id="pagewrapper" style="overflow: hidden">
 			<div id="modal">
-				<div id="newtrans">
+				<div id="overlay" onclick="modal('close')"></div>
+				<div id="trans">
+					<!--
 					<img id="exit" class="svg" onclick="modal('close')" src="resources/add.svg" />						
 					<img id="scan" class="svg" src="resources/scan.svg" />
-					<img id="edit" class="svg" src="resources/edit.svg" />				
+					<img id="edit" class="svg" src="resources/edit.svg" />						
 					<div style="clear: both"></div>
+					-->
 					<div id="receipt">
 						<form id="header">
 							<input type="text" class="time" placeholder="date here" autocomplete="off" readonly required/>				  

@@ -130,25 +130,26 @@ div#currentAmount {
 	*/
 	padding: 10px;
 }
-div#newtrans {
-	width: 100%;
+div#modal {
 	height: 100%;
-	background-color:rgba(0,0,0,0.5);
-	display: none;
-	padding: 0.5rem;
+	width: 100%;
 	position: fixed;
-	z-index: 99;
-	overflow: hidden;	
+	overflow: hidden;
 }
-div#oldtrans {
-	width: 100%;
-	height: 100%;
+div#overlay {	
 	background-color:rgba(0,0,0,0.5);
-	display: none;
-	padding: 0.5rem;
+	display: none;	
+	z-index: 98;	
+	height: 100%;
+	width: 100%;
 	position: fixed;
+}
+div#trans {		
+	display: none;		
 	z-index: 99;
 	overflow: hidden;	
+	width: 300px; 
+	margin: 100px auto 0 auto;
 }
 	#exit {
 		color: white;
@@ -177,9 +178,7 @@ div#oldtrans {
 	}
 div#receipt {
   background: #fafafa;
-  position: relative;
-  width: 300px;  
-  margin: 15px auto 0 auto;
+  position: relative; 
   padding: 10px;
   overflow: hidden;  
   font-size: 14px;
@@ -974,6 +973,39 @@ Media Queries
 @media (max-width:350px) {
 	div#receipt {
 		width: 100%;
+	}
+}
+@media (max-width:1440px) {
+	div.third {
+		width: 50% !important;
+	}
+}
+@media (max-width:960px) {
+	div.third {
+		width: 100% !important;
+	}
+}
+@media (max-width:488px) {
+	div.amount {
+		width: auto;
+	}
+	div.amount .svg {
+		margin-right: 5px;
+	}
+	div.rest {
+		display: none;
+	}
+	div.date {
+		width: 70px;
+	}
+	div#today {
+		margin-left: 22px;
+		font-size: 18px;
+		line-height: 36px;
+	}	
+	div.store {
+		width: 120px;
+		font-size: 16px;
 	}
 }
 /*
