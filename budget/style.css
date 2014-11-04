@@ -821,9 +821,9 @@ div.date {
 	position: relative;
 	float: left;	
 	overflow: hidden;
-	padding-left: 12px;	
+	margin-left: 12px;	
 	display: block;
-	width: 162px;
+	width: 150px;
 }
 	div.date .number {
 		height: 100%;
@@ -849,6 +849,7 @@ div.date {
 		display: block;
 		position: relative;
 		left: 37px;
+		z-index: 5;
 	}
 div#today {	
 }
