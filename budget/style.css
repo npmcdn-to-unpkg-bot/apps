@@ -821,9 +821,9 @@ div.date {
 	position: relative;
 	float: left;	
 	overflow: hidden;
-	margin-left: 12px;	
+	padding-left: 12px;	
 	display: block;
-	width: 150px;
+	width: 162px;
 }
 	div.date .number {
 		height: 100%;
