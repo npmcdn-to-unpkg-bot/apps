@@ -44,7 +44,8 @@ function messen() {
 }
 function modal(mode,id) {
 	switch (mode) {
-    case 'close':		
+    case 'close':	
+		$("#modal").css('display','none');
         $("#overlay").css('display','none');
 		$("#trans").css('display','none');	
 		$('#trans #transtitle').val('');
@@ -56,6 +57,7 @@ function modal(mode,id) {
 		$('#buttons').html(buttonsString);	
 		$("#overlay").css('display','block');
 		$("#trans").css('display','block');
+		$("#modal").css('display','block');
         break;
     case 'oldtrans':		
 		/* <div id="delete" onclick="delete()" class="buttonsbutton">Delete</div>	*/		
@@ -95,6 +97,7 @@ function modal(mode,id) {
 		count();		
 		$("#overlay").css('display','block');
         $("#trans").css('display','block');
+		$("#modal").css('display','block');
         break;   
     default:
        return;

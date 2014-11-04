@@ -130,11 +130,17 @@ div#currentAmount {
 	*/
 	padding: 10px;
 }
+div#main {
+	position: relative;
+	z-index: 1;
+}
 div#modal {
 	height: 100%;
 	width: 100%;
+	display: none;
 	position: fixed;
 	overflow: hidden;
+	z-index: 2;
 }
 div#overlay {	
 	background-color:rgba(0,0,0,0.5);
