@@ -192,6 +192,7 @@ function send(type) {
 	}
 	console.log(type+" "+sum+"€ at "+store+" for "+itemlist+" die länge der Liste ist "+itemlist.length);
 	budget.addTransaction(store,type,sum,itemlist,date);
+	repositionTransactions();
 	modal('close');
 	saveData(displayData);
 }
@@ -544,6 +545,12 @@ function displayData() {
 		if (firstLiInhalt.indexOf('<div id="today" class="date">') <= -1){
 			console.log('today existiert nicht');
 			$("#transactions li").first().before('<li><div id="today" class="date">Today</div><div style="clear: both"></div></li>');
+			$("#transactions li").first().css('cursor','auto');
+			$("#transactions li").first().hover(function() {
+				$("#transactions li").first().css('background','white');
+			},function() {
+				$("#transactions li").first().css('background','white');
+			});
 		}	
 		replaceSVG();		
 		

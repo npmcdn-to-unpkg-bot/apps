@@ -5,7 +5,8 @@ function loadData(callback) {
 		data.transactions = data.transactions.reverse();
 		$.each(data.transactions, function() {			
 			budget.addTransaction(this.name,this.type,this.amount,this.itemlist,this.date);				
-		});	
+		});
+		repositionTransactions();
 		$.each(data.recurringTransactions, function() {			
 			budget.addRecurringTransaction(this.name,this.type,this.amount,this.date);				
 		});		

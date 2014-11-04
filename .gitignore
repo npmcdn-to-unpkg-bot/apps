@@ -163,3 +163,10 @@ pip-log.txt
 .DS_Store
 resources/jquery-ui-extensions/autocomplete/jquery.ui.autocomplete.accentFolding.js
 resources/jquery-ui-extensions/autocomplete/jquery.ui.autocomplete.accentFolding.js
+resources/date.js/CHANGELOG.txt
+resources/date.js/LICENSE.txt
+resources/date.js/README.txt
+resources/date.js/src/core.js
+resources/date.js/src/date.js
+resources/date.js/src/extras.js
+resources/SecureDownloadManager.log

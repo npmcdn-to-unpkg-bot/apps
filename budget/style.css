@@ -881,7 +881,7 @@ div.transaction {
 }
 li div.amount {		
 	height: 36px;
-	width: 150px;
+	width: 100px;
 	display: block;
 	overflow: hidden;
 	float: right;

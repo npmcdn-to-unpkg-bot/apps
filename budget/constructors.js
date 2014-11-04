@@ -10,8 +10,8 @@ function Budget(startAmount,transactions,recurringTransactions) {
 		return this.startAmount;	 
 	};
 	this.addTransaction = function(name, type, amount, itemlist, date) {
-		var trans = new Transaction(name, type, amount, itemlist, date);
-		this.transactions.unshift(trans);
+		var trans = new Transaction(name, type, amount, itemlist, date);		
+		this.transactions.unshift(trans);		
 		//this.transactions.push(trans);		
 	} 
 	this.editTransaction = function(id,name,amount,itemlist,date) {
@@ -19,10 +19,18 @@ function Budget(startAmount,transactions,recurringTransactions) {
 		this.transactions[id].amount = amount;
 		this.transactions[id].itemlist = itemlist;
 		if(date){
-			this.transactions[id].date = new Date(date);;
-		} else {
-			alert("error date is missing");
-		}
+			var date = new Date(date);
+			var currentDate = new Date(this.transactions[id].date);
+			if(Date.compare(date,currentDate) == 1 || Date.compare(date,currentDate) == -1) {
+				console.log(date);
+				console.log(currentDate);
+				console.log('date differs from previous data');
+				this.transactions[id].date = date;
+				repositionTransactions();
+			} else {
+				this.transactions[id].date = date;
+			}			
+		} 
 	}
 	this.getTransactions = function() {
 		return transactions;	 
