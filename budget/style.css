@@ -879,9 +879,9 @@ div.transaction {
 	border-radius: 5px;
 	*/
 }
-div.amount {		
+li div.amount {		
 	height: 36px;
-	width: 100px;
+	width: 150px;
 	display: block;
 	overflow: hidden;
 	float: right;
@@ -894,7 +894,7 @@ div.amount {
 	font-weight: bold;
 	/*border-right: 1px solid grey;*/
 }
-	div.amount .svg {
+	li div.amount .svg {
 		position: relative;
 		display: block;
 		height: 16px;
@@ -902,19 +902,19 @@ div.amount {
 		float: left;
 		left: 0px;
 	}
-		div.amount .expense {
+		li div.amount .expense {
 			color: #FF4D2C;
 			transform:rotate(90deg);
 			-ms-transform:rotate(90deg); /* IE 9 */
 			-webkit-transform:rotate(90deg); /* Safari and Chrome */
 		}
-		div.amount .revenue {
+		li div.amount .revenue {
 			color: #45B220;
 			transform:rotate(-90deg);
 			-ms-transform:rotate(-90deg); /* IE 9 */
 			-webkit-transform:rotate(-90deg); /* Safari and Chrome */
 		}
-	div.amount span {
+	li div.amount span {
 		position: relative;
 		display: block;
 		float: right;
