@@ -26,6 +26,7 @@ function Budget(startAmount,transactions,recurringTransactions) {
 				console.log(currentDate);
 				console.log('date differs from previous data');
 				this.transactions[id].date = date;
+				console.log('editingTransactions');
 				repositionTransactions();
 			} else {
 				this.transactions[id].date = date;

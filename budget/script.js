@@ -192,6 +192,7 @@ function send(type) {
 	}
 	console.log(type+" "+sum+"€ at "+store+" for "+itemlist+" die länge der Liste ist "+itemlist.length);
 	budget.addTransaction(store,type,sum,itemlist,date);
+	console.log('repositioning');
 	repositionTransactions();
 	modal('close');
 	saveData(displayData);
@@ -751,4 +752,37 @@ function replaceSVG() {
 }
 function firstLetterUp(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function repositionTransactions(){
+	var transactionList = budget.getTransactions();
+	var newCandidate = transactionList[0];
+	
+	function newest(i){
+		// console.log(i);
+		var newestStelle = i;
+		var temp = transactionList[newestStelle];
+		for(++i;i<transactionList.length;i++){
+			// console.log(i);
+			var currentDate = temp.getDate();
+			var nextDate = transactionList[i].getDate();
+			if(Date.compare(currentDate,nextDate) == -1) {
+				console.log('found a position');
+				newestStelle = i;
+				temp = transactionList[newestStelle];
+			}
+		}
+		return newestStelle;
+	}	
+	function switchPositions(A,B){
+		console.log(A+' switched with '+B);
+		var temp = transactionList[A];
+		transactionList[A] = transactionList[B];
+		transactionList[B] = temp;
+	}
+	for(var i=0;i<transactionList.length;i++){		
+		switchPositions(i,newest(i));
+	}
+	// console.log(transactionList[newest(0)].getDate());
+	// console.log(transactionList[newest(1)].getDate());
+	// console.log(transactionList[newest(2)].getDate());
 }

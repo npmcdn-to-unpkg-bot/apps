@@ -6,6 +6,8 @@ function loadData(callback) {
 		$.each(data.transactions, function() {			
 			budget.addTransaction(this.name,this.type,this.amount,this.itemlist,this.date);				
 		});
+		//Data should always be n order on the server --> this line is only for testing.Remove it later. 
+		// console.log('reordering on display');
 		repositionTransactions();
 		$.each(data.recurringTransactions, function() {			
 			budget.addRecurringTransaction(this.name,this.type,this.amount,this.date);				
