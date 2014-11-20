@@ -1,27 +1,17 @@
 $('document').ready(function() {
 	authStatus = localStorage.getItem('Blunified');
 			
-	if (authStatus === 'true') {				
-		budget = new Budget(0,[],[]);
-		loadData(displayData);
-	} else {				
+	if (authStatus !== 'true') {				
 		alert("permission denied.");
 		return;
 	}
-	
-	$(document).bind('keydown', 'ctrl+n', function() {
-		modal('newtrans');
-		return false;
-	});
-	$(document).bind('keydown', 'left', function() {
-		refreshChart(-1);
-		return false;
-	});
-	$(document).bind('keydown', 'right', function() {
-		refreshChart(1);
-		return false;
-	});
-	
+	//Global variables
+	monthStrings = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+	itemcount = 1;
+	//budget initialisation
+	budget = new Budget(0,[],[]);
+	loadData(displayData);		
+	//Plugin Config
 	$("#my-menu").mmenu({
         // options		
 		footer: {
@@ -39,12 +29,11 @@ $('document').ready(function() {
     }, {
         // configuration
 		
-    });
-	
-	itemcount = 1;
+    });	
+	//keyEvents
 	$("#itemlist").keyup(function() {
 		count();
-	});	
+	});
 });
 function Item(qty,name,price){
 	this.qty = qty;
@@ -373,8 +362,7 @@ function displayRealTimeClock(id) {
         date = new Date;
         year = date.getFullYear();
         month = date.getMonth();
-        months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
-        d = date.getDate();
+		d = date.getDate();
         day = date.getDay();
          h = date.getHours();
         if(h<10)
@@ -391,7 +379,7 @@ function displayRealTimeClock(id) {
         {
                 s = "0"+s;
         }
-        result = months[month]+' '+d+' '+year+' '+h+':'+m+':'+s;
+        result = monthStrings[month]+' '+d+' '+year+' '+h+':'+m+':'+s;
         $('#'+id).html(result);
         setTimeout('displayRealTimeClock("'+id+'");','1000');
        
@@ -419,11 +407,26 @@ function displayDateInMonth(d) {
 	return(curr_date + "<sup>"
 	+ sup + "</sup> ");
 }
-function refreshChart(increment) {
-	var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-	var currentDate= new Date();
+function refreshChart(change,increment) {	
 	//function works only in leaps of one!
-	if(increment !== 0) {
+	var currentDate= new Date();
+	//change option
+	if( change == 1 && status == 'Expenses') {	
+			
+			status = 'Revenues';
+			type = 'receive';			
+	} else if(change == 1 && status == 'Revenues'){
+			console.log('ToSpend');
+			status = 'Expenses';
+			type = 'spend';			
+	}	
+	//console.log('status is: '+status+'increment is: '+increment);	
+	//increment option
+	if(increment == 1 || increment == -1) {
+			if(year ==  currentDate.getFullYear() && month == currentDate.getMonth() && increment == 1){
+				return;
+			}
+			//console.log('type is: '+type+' status is: '+status);
 			month = month+increment;				
 			if(month == -1) {
 				year = year-1;
@@ -436,29 +439,62 @@ function refreshChart(increment) {
 			specificDate = new Date();	
 			specificDate.setFullYear(year);
 			specificDate.setMonth(month);
-			console.log(specificDate);
-			days = Date.getDaysInMonth(year, month);			
+			console.log(specificDate);			
+			if(month == currentDate.getMonth()) {
+				days = currentDate.getDate();
+			} else {
+				days = Date.getDaysInMonth(year, month);
+			}		
 			var expenseArray = [];
 			for(i = 1; i <= days; i++) {				
 				specificDate.setDate(i);				
-				expenseArray.push(DailyExpenses(specificDate));	
+				expenseArray.push(DailySum(type,specificDate));	
 			}
-		} else {		
+		} else if(increment == 0) {	
+			// Works like a reset --> displays current Month
+			status = 'Expenses';
+			type = 'spend';
 			month = currentDate.getMonth();	
 			year = currentDate.getFullYear();	
 			var expenseArray = [];		
 			for(i = 1; i <= currentDate.getDate(); i++) {
 				specificDate = new Date(currentDate);		
-				specificDate.setDate(i);
-				expenseArray.push(DailyExpenses(specificDate));		
+				specificDate.setDate(i);				
+				expenseArray.push(DailySum(type,specificDate));	
+				
 			}			
+		} else {
+			// Works like a trigger changing display state --> see spanString
+			specificDate = new Date();	
+			specificDate.setFullYear(year);
+			specificDate.setMonth(month);
+			console.log(specificDate);
+			if(month == currentDate.getMonth()) {
+				days = currentDate.getDate();
+			} else {
+				days = Date.getDaysInMonth(year, month);
+			}
+			var expenseArray = [];
+			for(i = 1; i <= days; i++) {				
+				specificDate.setDate(i);				
+				expenseArray.push(DailySum(type,specificDate));	
+			}
 		}
+		//
+		spanString = '<span id="display" onclick="refreshChart(1)">';
+		monthback = '<img id="monthback" onclick="refreshChart(0,-1)" src="/apps/budget/resources/triangle.svg">';
+		if(month == currentDate.getMonth()) {
+			monthforward = '';
+		} else {
+			monthforward = '<img id="monthforward" onclick="refreshChart(0,+1)" src="/apps/budget/resources/triangle.svg">';
+		}
+		
 		$('#chart').highcharts({
             chart: {
 				backgroundColor: 'rgba(255, 255, 255, 0.1)'
 			},
 			title: {
-                text: 'Expenses this '+monthback+months[month]+' '+year+monthforward,
+                text: '<div id="month">'+monthback+monthStrings[month]+' '+year+monthforward+'</div>'+spanString+status+'</span>',
 				align: 'left',				
                 x: 0, //centering	
 				useHTML: true,
@@ -528,9 +564,7 @@ function displayData() {
 	//Maybe a reset with .html() is needed. future will see.
 	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	//create a chart	
-	monthback = '<img id="monthback" onclick="refreshChart(-1)" src="/apps/budget/resources/triangle.svg">';
-	monthforward = '<img id="monthforward" onclick="refreshChart(+1)" src="/apps/budget/resources/triangle.svg">';
-	refreshChart(0);
+	refreshChart('Expenses',0);
 	//add blackbar in order to conceal chartbranding -> dumme idee
 	//$("#dashboard").append('<div id="blackbar"></div>');
 	//insert dashboard-elements
@@ -621,7 +655,29 @@ function displayData() {
 			// $("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
 		// }		
 	// });	
-	//console.log('eingetragen');	
+	//console.log('eingetragen');
+	
+	// Hotkeys
+	$(document).bind('keydown', 'ctrl+n', function() {
+		modal('newtrans');
+		return false;
+	});
+	$(document).bind('keydown', 'left', function() {
+		refreshChart(0,-1);
+		return false;
+	});
+	$(document).bind('keydown', 'right', function() {
+		refreshChart(0,1);
+		return false;
+	});
+	$(document).bind('keydown', 'up', function() {
+		refreshChart(1);
+		return false;
+	});
+	$(document).bind('keydown', 'down', function() {
+		refreshChart(1);
+		return false;
+	});
 };
 function messen() {
 	$("#messwert").remove();
@@ -647,7 +703,7 @@ function MonthlyExpenses(aDate) {
 	});
 	return sum;
 }
-function DailyExpenses(aDate) {	
+function DailySum(type, aDate) {	
 	var sum = 0;
 	//console.log(aDate.getDate()+" "+aDate.getMonth()+" "+aDate.getFullYear());
 	$.each(budget.getTransactions(), function() {		
@@ -659,7 +715,7 @@ function DailyExpenses(aDate) {
 		
 		if(isSameDay) {			
 			//console.log("match");			
-			if(this.getType() == 'spend'){				
+			if(this.getType() == type){				
 				sum += this.getAmount();					
 			} 	
 		}
@@ -807,7 +863,7 @@ function repositionTransactions(){
 			var currentDate = temp.getDate();
 			var nextDate = transactionList[i].getDate();
 			if(Date.compare(currentDate,nextDate) == -1) {
-				console.log('found a position');
+				//console.log('found a position');
 				newestStelle = i;
 				temp = transactionList[newestStelle];
 			}
