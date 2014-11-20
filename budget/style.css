@@ -648,6 +648,30 @@ div#chart {
 	height: 200px;
 	overflow: hidden;
 }
+span.highcharts-title {
+	font-family: helvetica, arial !important;
+	font-weight: bold !important;
+	font-size: 24px !important;
+	transition: none;
+}
+div#chart img {
+	height: 16px;
+	width: auto;
+	opacity: 0.25;
+	cursor: pointer;
+}
+div#chart img:hover, div#chart img:active {
+	opacity: 1;
+}
+img#monthback {
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg);  /* IE 9 */
+	-webkit-transform:rotate(180deg); /* Safari and Chrome */
+	margin: 0 3px 0 0;
+}
+img#monthforward {
+	margin: 0 0 0 5px;
+}
 div#blackbar {
 	display: none; /* attempt to hide chart branding @media needed to work!(now just in 480x320*/
 	background: white;

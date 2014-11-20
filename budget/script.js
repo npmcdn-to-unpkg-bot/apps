@@ -9,6 +9,19 @@ $('document').ready(function() {
 		return;
 	}
 	
+	$(document).bind('keydown', 'ctrl+n', function() {
+		modal('newtrans');
+		return false;
+	});
+	$(document).bind('keydown', 'left', function() {
+		refreshChart(-1);
+		return false;
+	});
+	$(document).bind('keydown', 'right', function() {
+		refreshChart(1);
+		return false;
+	});
+	
 	$("#my-menu").mmenu({
         // options		
 		footer: {
@@ -406,36 +419,49 @@ function displayDateInMonth(d) {
 	return(curr_date + "<sup>"
 	+ sup + "</sup> ");
 }
-function displayData() {		
-	//start with data
+function refreshChart(increment) {
+	var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	var currentDate= new Date();
-	//insert current datetime into form
-	$('#datelabel').html(displayDate(currentDate));
-	reposLabel();
-	$('#date').datepicker();
-	//clear data(below pls)
-	//Maybe a reset with .html() is needed. future will see.
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
-	//create a chart
-	var expenseArray = [];		
-	for(i = 1; i <= currentDate.getDate(); i++) {
-		specificDate = new Date(currentDate);		
-		specificDate.setDate(i);
-		expenseArray.push(DailyExpenses(specificDate));		
-	}	
-	$('#chart').highcharts({
+	//function works only in leaps of one!
+	if(increment !== 0) {
+			month = month+increment;				
+			if(month == -1) {
+				year = year-1;
+				month = 11;				
+			} else if(month == 12) {
+				year = year+1;
+				month = 0;				
+			}		
+			
+			specificDate = new Date();	
+			specificDate.setFullYear(year);
+			specificDate.setMonth(month);
+			console.log(specificDate);
+			days = Date.getDaysInMonth(year, month);			
+			var expenseArray = [];
+			for(i = 1; i <= days; i++) {				
+				specificDate.setDate(i);				
+				expenseArray.push(DailyExpenses(specificDate));	
+			}
+		} else {		
+			month = currentDate.getMonth();	
+			year = currentDate.getFullYear();	
+			var expenseArray = [];		
+			for(i = 1; i <= currentDate.getDate(); i++) {
+				specificDate = new Date(currentDate);		
+				specificDate.setDate(i);
+				expenseArray.push(DailyExpenses(specificDate));		
+			}			
+		}
+		$('#chart').highcharts({
             chart: {
 				backgroundColor: 'rgba(255, 255, 255, 0.1)'
 			},
 			title: {
-                text: 'Expenses this Month',
-				align: 'left',
-				style: {
-					"font-family": "helvetica, arial",
-					"font-weight": "bold",
-					"font-size": "24"
-				},
-                x: 0, //center	
+                text: 'Expenses this '+monthback+months[month]+' '+year+monthforward,
+				align: 'left',				
+                x: 0, //centering	
+				useHTML: true,
 				enabled: false
             },
             subtitle: {
@@ -485,11 +511,26 @@ function displayData() {
             series: [{
 				name: 'Amount',
 				data: expenseArray,
-				pointStart: Date.UTC(currentDate.getFullYear(),currentDate.getMonth(), 1),
+				pointStart: Date.UTC(currentDate.getFullYear(),month, 1),
 				
 				pointInterval: 24 * 3600 * 1000 // one day
 			}]
-    });
+	});
+}
+function displayData() {		
+	//start with data
+	var currentDate= new Date();
+	//insert current datetime into form
+	$('#datelabel').html(displayDate(currentDate));
+	reposLabel();
+	$('#date').datepicker();
+	//clear data(below pls)
+	//Maybe a reset with .html() is needed. future will see.
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	//create a chart	
+	monthback = '<img id="monthback" onclick="refreshChart(-1)" src="/apps/budget/resources/triangle.svg">';
+	monthforward = '<img id="monthforward" onclick="refreshChart(+1)" src="/apps/budget/resources/triangle.svg">';
+	refreshChart(0);
 	//add blackbar in order to conceal chartbranding -> dumme idee
 	//$("#dashboard").append('<div id="blackbar"></div>');
 	//insert dashboard-elements
@@ -544,7 +585,7 @@ function displayData() {
 		});	
 		var firstLiInhalt = $("#transactions li").first().html();
 		if (firstLiInhalt.indexOf('<div id="today" class="date">') <= -1){
-			console.log('today existiert nicht');
+			//console.log('today existiert nicht');
 			$("#transactions li").first().before('<li><div id="today" class="date">Today</div><div style="clear: both"></div></li>');
 			$("#transactions li").first().css('cursor','auto');
 			$("#transactions li").first().hover(function() {
@@ -774,7 +815,7 @@ function repositionTransactions(){
 		return newestStelle;
 	}	
 	function switchPositions(A,B){
-		console.log(A+' switched with '+B);
+		//console.log(A+' switched with '+B);
 		var temp = transactionList[A];
 		transactionList[A] = transactionList[B];
 		transactionList[B] = temp;
