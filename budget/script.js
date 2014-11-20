@@ -149,13 +149,13 @@ function deleterow(number) {
 	count();
 }
 function send(type) {
-	var date = $("input.time").attr('class'); 
-	date = date.replace('time ', '');
-	console.log(date);
-	if(date == '') {
-		console.log('date undefined');
-		return;
-	}
+	var dateString = $("input.time").val();
+	var date = validateDateString(dateString);
+	if(!date){
+		console.log('returning');
+		console.log(date);
+		return
+	}		
 	var store = $("#transtitle").val();
 	store = firstLetterUp(store);
 	if(store == '') {
@@ -200,13 +200,13 @@ function send(type) {
 	saveData(displayData);
 }
 function update(id){
-	var date = $("input.time").attr('class'); 
-	date = date.replace('time ', '');
-	console.log(date);
-	if(date == '') {
-		console.log('date undefined');
-		return;
-	}
+	var dateString = $("input.time").val();
+	var date = validateDateString(dateString);
+	if(!date){
+		console.log('returning');
+		console.log(date);
+		return
+	}	
 	var store = $("#transtitle").val();
 	store = firstLetterUp(store);
 	if(store == '') {
@@ -285,7 +285,22 @@ function inTime(time){
 	$("input.time").val(timestring);
 	$("input.time").attr('class','time '+time);
 }
-
+function validateDateString(dateString) {	
+	var split1 =  dateString.split(".");
+	var day = parseInt(split1[0]);
+	var month = parseInt(split1[1]);
+	month = month-1;
+	var split2 = split1[2].split(" ");
+	var year = parseInt(split2[0]);
+	var split3 = split2[1].split(':');
+	var hour = parseInt(split3[0]);
+	var minute = parseInt(split3[1]);
+	var second = parseInt(split3[2]);	
+	if(Date.validateDay(day, year, month) && Date.validateHour(hour) && Date.validateMinute(minute) && Date.validateMonth(month) && Date.validateSecond(second) && Date.validateYear(year)){
+		var date = Date.parseExact(dateString, "dd.MM.yyyy HH:mm:ss");		
+	}
+	return date;
+}
 ////////////////////////////////////////////////////
 //Old functionality Stuff
 ///////////////////////////////////////////////////
@@ -659,6 +674,7 @@ function displayData() {
 	
 	// Hotkeys
 	$(document).bind('keydown', 'ctrl+n', function() {
+	    inTime(new Date());
 		modal('newtrans');
 		return false;
 	});
