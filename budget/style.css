@@ -770,7 +770,7 @@ ul#transactions {
 		border-left: 1px solid black;
 		border-right: 1px solid black;
 		cursor: pointer;
-		overflow: hidden;
+		overflow: hidden;		
 		/*
 		display: -webkit-flex; 
 		display: flex;
@@ -799,24 +799,25 @@ ul#transactions {
 		ul#transactions li:hover {
 			background: #CCCCCC;
 		}
+		ul#transactions li.daily {
+			margin: 0 0 0 27px;	
+			padding: 0 0 0 10px;
+		}
 	ul#transactions h1 {	
 		display: block;		
 		position:relative;		
 		font-weight: 700;
 		font-size: 24px;
 		font-family: arial, Helvetica;
-		line-height: 20px;
-		margin: 0 0 30px 10px;	
+		line-height: 25px;
+		margin: 10px 0 30px 27px;	
 		overflow: hidden;		
-	}
-	ul#transactions h1:not(:first-child) {
-		margin-top: 10px;
-	}
+	}	
 	ul#transactions img.peak {
 		height: 10px;
 		position: absolute;
 		z-index: 90;
-		top: 101px;
+		top: 106px;
 		left: 57px;
 		transform:rotate(-90deg);
 		-ms-transform:rotate(-90deg);  /* IE 9 */
