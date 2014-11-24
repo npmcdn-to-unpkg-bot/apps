@@ -630,8 +630,7 @@ function refreshChart(change,increment) {
 			credits: {
 				enabled: false
 			},
-            series: [{
-				allowPointSelect: true,
+            series: [{				
 				name: type,
 				data: expenseArray,
 				pointStart: Date.UTC(currentDate.getFullYear(),month, 1),				
