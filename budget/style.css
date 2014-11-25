@@ -121,6 +121,9 @@ div#addpaym {
 div#currentAmount {
 	line-height: 36px;
 }
+select#deposits {
+	/*background: #F5F5F5;*/
+}
 .bordercontainer {	
 	/*
 	border: 3px solid black;
@@ -659,11 +662,12 @@ span#display {
 	font-size: 12px;
     opacity: 0.25;
     position: relative;
-    top: -40px;
+    top: -30px;
 	left: 16px;
 }
 div#month {
 	width: 200px;
+	top: 10px;
 }
 div#chart img {
 	height: 16px;
@@ -862,11 +866,13 @@ div.date {
 	width: 150px;
 }
 	div.date .number {
+		width: 33px;
 		height: 100%;
 		float: left;
-		border-right: 2px solid black;
+		border-right: 2px solid black !important;
 		padding-right: 4px;
 		margin-right: 4px;
+		box-sizing: content-box;
 	}
 	div.date .rest {
 		width: 100px;

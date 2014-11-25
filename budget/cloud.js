@@ -1,10 +1,14 @@
 function loadData(callback) {	
 	$.getJSON( "/data/budget.json", function( data ) {					
-		var amount = data.startAmount;	
-		budget.setCurrentStartAmount(amount);				
+		// var amount = data.startAmount;	
+		// budget.setCurrentStartAmount(amount);	
+		data.deposits = data.deposits.reverse();		
+		$.each(data.deposits, function() {			
+			budget.addDeposit(this.name,this.startAmount);				
+		});		
 		data.transactions = data.transactions.reverse();
 		$.each(data.transactions, function() {			
-			budget.addTransaction(this.name,this.type,this.amount,this.itemlist,this.date);				
+			budget.addTransaction(this.name,this.type,this.deposit,this.amount,this.itemlist,this.date);				
 		});
 		//Data should always be n order on the server --> this line is only for testing.Remove it later. 
 		// console.log('reordering on display');
@@ -51,13 +55,13 @@ function processInput(callback) {
 	console.log('processed');
 	callback(name,type,repeat,amount,date);
 }
-function addTransaction(name,type,repeat,amount,date) {	
+function addTransaction(name,type,deposit,repeat,amount,date) {	
 	console.log('name is'+name);
 	if(repeat === 'off') {
 		console.log(amount);
-		budget.addTransaction(name,type,amount,date);
+		budget.addTransaction(name,type,deposit,amount,date);
 	} else { 
-		budget.addRecurringTransaction(name,type,amount,date);
+		budget.addRecurringTransaction(name,type,deposit,amount,date);
 	}	
 	//console.log("data is: "+JSON.stringify(budget));
 	saveData(displayData);

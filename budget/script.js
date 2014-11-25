@@ -10,8 +10,9 @@ $('document').ready(function() {
 	itemcount = 1;
 	transactionDay = "";
 	type = "spend";
+	deposit = "Wallet";
 	//budget initialisation
-	budget = new Budget(0,[],[]);
+	budget = new Budget([],[],[]);
 	loadData(displayData);		
 	//Plugin Config
 	$("#my-menu").mmenu({
@@ -219,7 +220,8 @@ function send(type) {
 		itemlist[i]= new Item(quantity,name,number);
 	}
 	console.log(type+" "+sum+"€ at "+store+" for "+itemlist+" die länge der Liste ist "+itemlist.length);
-	budget.addTransaction(store,type,sum,itemlist,date);
+	//insert deposit functio here...
+	budget.addTransaction(store,type,"Wallet",sum,itemlist,date);
 	console.log('repositioning');
 	repositionTransactions();
 	modal('close');
@@ -613,6 +615,20 @@ function refreshChart(change,increment) {
 							showTransactions(currentDate,type);							
 							transactionDay = currentDate;							 						
 						}
+					},
+					point: {
+						events: {
+							mouseOver : function(event) {  								
+								var currentDate = new Date(event.target.x);							
+								var type = event.target.series.name;
+								showTransactions(currentDate,type);							
+							},
+							mouseOut : function(event) {
+								if(transactionDay == "") {
+									showTransactions();									
+								}
+							}
+						}
 					}
 				}
 			},
@@ -668,7 +684,7 @@ function showTransactions(d,type) {
 		replaceSVG();
 	} else {		
 		//insert all Transactions		
-		console.log('all shown');
+		//console.log('all shown');
 		$("#transactions").empty();
 		$("#transactions").append('<img class="peak" src="/apps/budget/resources/triangle.svg"/><b></b><h1>All Transactions</h1>');
 		var i = 0;
@@ -738,14 +754,18 @@ function displayData() {
 	//$('#date').datepicker();	
 	//clear data(below pls)
 	//Maybe a reset with .html() is needed. future will see.
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"><select id="deposits" name="deposits"></select></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$.each(budget.getDeposits(), function() {			
+		console.log(this.getName());
+		$('#deposits').append('<option value="'+this.getName()+'">'+this.getName()+'</option>');		
+	});	
+	$('#currentAmount').append(currentAmount()+'€');
 	//create a chart	
 	refreshChart('Expenses',0);
 	//add blackbar in order to conceal chartbranding -> dumme idee
 	//$("#dashboard").append('<div id="blackbar"></div>');
 	//insert dashboard-elements
-	showTransactions();
-	$('#currentAmount').html(currentAmount()+'€');
+	showTransactions();	
 	//$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
 	
 			
@@ -885,13 +905,10 @@ function DailyRevenues(aDate) {
         && givenDate.getFullYear() == aDate.getFullYear());
 		
 		if(isSameDay) {			
-			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
-			} else {
-				//console.log(this.getName());
-				if(this.getType() == 'revenue'){
-					sum += this.getAmount();
-				}
-			}
+			//console.log(this.getName());
+			if(this.getType() == 'revenue'){
+				sum += this.getAmount();
+			}			
 		}
 	});	
 	return sum;
@@ -914,17 +931,19 @@ function MonthlyBudget() {
 	//console.log($.type(sum));
 	return sum;
 }
-function currentAmount() {
-	start = parseFloat(budget.getCurrentStartAmount());		
+function currentAmount() {		
+	start = parseFloat(budget.getCurrentStartAmount(deposit));	
 	$.each(budget.getTransactions(), function() {	
-		var amount = this.getAmount();				
-		if(this.getType() == "spend") {			
-			start -= amount;
-		} else if(this.getType() == "receive") {			
-			start += amount;			
-		}		
-		start = start.toFixed(2);
-		start = parseFloat(start);
+		if(this.getDeposit() == deposit) {	
+			var amount = this.getAmount();			
+			if(this.getType() == "spend") {			
+				start -= amount;
+			} else if(this.getType() == "receive") {			
+				start += amount;			
+			}		
+			start = start.toFixed(2);
+			start = parseFloat(start);
+		}
 	});	
 	return start;
 }
@@ -980,15 +999,14 @@ function firstLetterUp(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 function repositionTransactions(){
-	var transactionList = budget.getTransactions();
+	var transactionList = budget.getTransactions();	
 	var newCandidate = transactionList[0];
 	
 	function newest(i){
 		// console.log(i);
 		var newestStelle = i;
 		var temp = transactionList[newestStelle];
-		for(++i;i<transactionList.length;i++){
-			// console.log(i);
+		for(++i;i<transactionList.length;i++){			
 			var currentDate = temp.getDate();
 			var nextDate = transactionList[i].getDate();
 			if(Date.compare(currentDate,nextDate) == -1) {

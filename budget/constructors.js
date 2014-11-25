@@ -1,20 +1,36 @@
-function Budget(startAmount,transactions,recurringTransactions) {
-	this.startAmount = startAmount;
+function Budget(deposits,transactions,recurringTransactions) {
+	//this.startAmount = startAmount;
+	this.deposits = deposits;
 	this.transactions = transactions;
 	this.recurringTransactions = recurringTransactions;
   
-	this.setCurrentStartAmount = function(amount) {
-		this.startAmount = amount;	 
+	// this.setCurrentStartAmount = function(amount,deposit) {
+		// this.startAmount = amount;	 
+	// };
+	 
+	this.addDeposit = function(name, startAmount) {
+		var depo = new Deposit(name, startAmount);		
+		this.deposits.unshift(depo);	 	
+		//this.transactions.push(trans);		
+	}
+	this.getDeposits = function() {
+		return deposits;	 
+	}
+	this.getCurrentStartAmount = function(depositname) {		
+		$.each(this.deposits, function() {			
+			if(this.getName() == depositname){
+				startAmount = this.getStartAmount();
+				return false;
+			}
+		});	
+		return startAmount;
 	};
-	this.getCurrentStartAmount = function() {
-		return this.startAmount;	 
-	};
-	this.addTransaction = function(name, type, amount, itemlist, date) {
-		var trans = new Transaction(name, type, amount, itemlist, date);		
+	this.addTransaction = function(name, type, deposit, amount, itemlist, date) {
+		var trans = new Transaction(name, type, deposit, amount, itemlist, date);		
 		this.transactions.unshift(trans);		
 		//this.transactions.push(trans);		
-	} 
-	this.editTransaction = function(id,name,amount,itemlist,date) {
+	}	
+	this.editTransaction = function(id, name, deposit, amount, itemlist, date) {
 		this.transactions[id].name = name;
 		this.transactions[id].amount = amount;
 		this.transactions[id].itemlist = itemlist;
@@ -34,7 +50,7 @@ function Budget(startAmount,transactions,recurringTransactions) {
 		} 
 	}
 	this.getTransactions = function() {
-		return transactions;	 
+		return this.transactions;	 
 	}
 	this.addRecurringTransaction = function(name, type, amount, itemlist, date) {
 		var trans = new recurringTransaction(name, type, amount, itemlist, date);
@@ -45,9 +61,21 @@ function Budget(startAmount,transactions,recurringTransactions) {
 		return recurringTransactions;	 
 	}
 }
-	function Transaction(name, type, amount, itemlist, date) {
+	function Deposit(name, startAmount) {
+		this.name = name;
+		this.startAmount = startAmount;
+		
+		this.getName = function() {
+			return this.name;
+		}
+		this.getStartAmount = function() {
+			return this.startAmount;
+		}
+	}
+	function Transaction(name, type, deposit, amount, itemlist, date) {
 		this.name = name;
 		this.type = type;
+		this.deposit = deposit;
 		this.amount = amount;
 		this.itemlist = itemlist;
 		if(date){
@@ -74,6 +102,9 @@ function Budget(startAmount,transactions,recurringTransactions) {
 		this.getType = function() {
 			return this.type;
 		}	
+		this.getDeposit = function() {
+			return this.deposit;
+		}
 	}
 	function recurringTransaction(name, type, amount, itemlist, date) {
 		this.name = name;
