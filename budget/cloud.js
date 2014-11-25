@@ -64,5 +64,5 @@ function addTransaction(name,type,deposit,repeat,amount,date) {
 		budget.addRecurringTransaction(name,type,deposit,amount,date);
 	}	
 	//console.log("data is: "+JSON.stringify(budget));
-	saveData(displayData);
+	saveData(displayDash);
 }

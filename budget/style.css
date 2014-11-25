@@ -119,37 +119,34 @@ div#addpaym {
 		cursor: pointer;
 	}
 div#currentAmount {	
+	height: 52px;
 	line-height: 36px;
 	position: relative;
-}
-div#cuttingdiv {
-	width: 172px;
 	overflow: hidden;
-	position: relative;
+	padding: 8px;
 }
-select#deposits {
-	width: 189px;
-	background: #F5F5F5;
-	border: none;
-	cursor: pointer;
-	position: relative;
-	z-index: 1;
-}
-select#deposits:active {
-	border: none;
-}
-label.deposits {	
-	width: 17px;
-	height: 36px;
-	display: block;
-	position: absolute;
-	top: 8px;
-	left: 175px;	
-	z-index: 2;
-	-webkit-transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    -ms-transform:rotate(90deg);
-}
+	div.depoption {
+		width: 80px;
+		height: 44px;
+		display: block;
+		position: relative;
+		padding: 0 0 8px 0;
+	}
+		span.deponame {
+			font-size: 14px;
+			line-height: 12px;
+			float: left;
+			opacity: 0.25;
+			font-weight: bold;
+		}
+		span.depoamount {
+			font-size: 24px;
+			line-height: 30px;			
+			position: absolute;
+			top: 12px;
+			left: 0px;
+			font-weight: bold;
+		}
 .bordercontainer {	
 	/*
 	border: 3px solid black;

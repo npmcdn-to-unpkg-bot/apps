@@ -11,9 +11,10 @@ $('document').ready(function() {
 	transactionDay = "";
 	type = "spend";
 	deposit = "Wallet";
+	selectOpen = 0;	
 	//budget initialisation
 	budget = new Budget([],[],[]);
-	loadData(displayData);		
+	loadData(displayDash);		
 	//Plugin Config
 	$("#my-menu").mmenu({
         // options		
@@ -221,11 +222,11 @@ function send(type) {
 	}
 	console.log(type+" "+sum+"€ at "+store+" for "+itemlist+" die länge der Liste ist "+itemlist.length);
 	//insert deposit functio here...
-	budget.addTransaction(store,type,"Wallet",sum,itemlist,date);
+	budget.addTransaction(store,type,deposit,sum,itemlist,date);
 	console.log('repositioning');
 	repositionTransactions();
 	modal('close');
-	saveData(displayData);
+	saveData(displayDash);
 }
 function update(id){
 	var dateString = $("input.time").val();
@@ -273,7 +274,7 @@ function update(id){
 	}
 	budget.editTransaction(id,store,sum,itemlist,date);
 	modal('close');
-	saveData(displayData);
+	saveData(displayDash);
 }
 function deleteTransaction(id) {
 	if ( confirm("Are you sure you want to delete this Transaction?") ) {
@@ -283,7 +284,7 @@ function deleteTransaction(id) {
 		console.log(transactionList);
 		budget.transactions = transactionList;
 		modal('close');
-		saveData(displayData);
+		saveData(displayDash);
 	}	
 }
 function inTime(time){	
@@ -516,7 +517,7 @@ function refreshChart(change,increment) {
 			var expenseArray = [];
 			for(i = 1; i <= days; i++) {				
 				specificDate.setDate(i);				
-				expenseArray.push(DailySum(type,specificDate));	
+				expenseArray.push(DailySum(type,deposit,specificDate));	
 			}
 		} else if(increment == 0) {	
 			// Works like a reset --> displays current Month
@@ -528,7 +529,7 @@ function refreshChart(change,increment) {
 			for(i = 1; i <= currentDate.getDate(); i++) {
 				specificDate = new Date(currentDate);		
 				specificDate.setDate(i);				
-				expenseArray.push(DailySum(type,specificDate));	
+				expenseArray.push(DailySum(type,deposit,specificDate));	
 				
 			}			
 		} else {
@@ -545,7 +546,7 @@ function refreshChart(change,increment) {
 			var expenseArray = [];
 			for(i = 1; i <= days; i++) {				
 				specificDate.setDate(i);				
-				expenseArray.push(DailySum(type,specificDate));	
+				expenseArray.push(DailySum(type,deposit,specificDate));	
 			}
 		}
 		//
@@ -666,7 +667,7 @@ function showTransactions(d,type) {
 			givenDate = new Date(this.getDate());			
 			transactionInhalt = $("#transactions").html();
 			if(Date.compare(d.clearTime(), givenDate.clearTime()) == 0){
-				if(this.getType() == type) {
+				if(this.getType() == type && this.getDeposit() == deposit) {
 					$("#transactions").append('<li class="daily" onclick="modal(&#34;oldtrans&#34;,'+i+')"></li>');
 					console.log('passt');
 					if(this.getType() == 'receive'){
@@ -689,114 +690,85 @@ function showTransactions(d,type) {
 		$("#transactions").append('<img class="peak" src="/apps/budget/resources/triangle.svg"/><b></b><h1>All Transactions</h1>');
 		var i = 0;
 		$.each(budget.getTransactions(), function() {		
-			currentDate = new Date();
-			givenDate = new Date(this.getDate());			
-			transactionInhalt = $("#transactions").html();
-			$("#transactions").append('<li onclick="modal(&#34;oldtrans&#34;,'+i+')"></li>');
-			if(givenDate.getDate()-currentDate.getDate() == 0 && givenDate.getMonth()-currentDate.getMonth() == 0 && givenDate.getFullYear()-currentDate.getFullYear() == 0 ) {			
-				if(transactionInhalt.indexOf('<div id="today" class="date">Today</div>') > -1){			
-					// console.log("Displaying date of today not necessary"+this.getName());
-					$("#transactions li").last().append('<div class="date"><div class="borderdiv">&nbsp;</div></div>');
-					if(this.getType() == 'receive'){
+			if(this.getDeposit() == deposit){
+				currentDate = new Date();
+				givenDate = new Date(this.getDate());			
+				transactionInhalt = $("#transactions").html();
+				$("#transactions").append('<li onclick="modal(&#34;oldtrans&#34;,'+i+')"></li>');
+				if(givenDate.getDate()-currentDate.getDate() == 0 && givenDate.getMonth()-currentDate.getMonth() == 0 && givenDate.getFullYear()-currentDate.getFullYear() == 0 ) {			
+					if(transactionInhalt.indexOf('<div id="today" class="date">Today</div>') > -1){			
+						// console.log("Displaying date of today not necessary"+this.getName());
+						$("#transactions li").last().append('<div class="date"><div class="borderdiv">&nbsp;</div></div>');
+						if(this.getType() == 'receive'){
+								$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						} else {
+							$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						}
+					} else {
+						$("#transactions li").last().append('<div id="today" class="date">Today</div>');
+						if(this.getType() == 'receive'){
 							$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					} else {
-						$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						} else {
+							$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						}
 					}
-				} else {
-					$("#transactions li").last().append('<div id="today" class="date">Today</div>');
-					if(this.getType() == 'receive'){
-						$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					} else {
-						$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					}
-				}
-			} else {	
-				if(transactionInhalt.indexOf('<div class="date">'+displayDate(givenDate)+'</div>') > -1){				
-					// console.log(" displaying date not necessary");
-					$("#transactions li").last().append('<div class="date"><div class="borderdiv">&nbsp;</div></div>');
-					if(this.getType() == 'receive'){
-						$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					} else {
-						$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					}
-				} else {				
-					$("#transactions li").last().append('<div class="date">'+displayDate(givenDate)+'</div>');
-					if(this.getType() == 'receive'){
-						$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
-					} else {
-						$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+				} else {	
+					if(transactionInhalt.indexOf('<div class="date">'+displayDate(givenDate)+'</div>') > -1){				
+						// console.log(" displaying date not necessary");
+						$("#transactions li").last().append('<div class="date"><div class="borderdiv">&nbsp;</div></div>');
+						if(this.getType() == 'receive'){
+							$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						} else {
+							$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						}
+					} else {				
+						$("#transactions li").last().append('<div class="date">'+displayDate(givenDate)+'</div>');
+						if(this.getType() == 'receive'){
+							$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						} else {
+							$("#transactions li").last().append('<div class="amount"><img class="expense svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
+						}
 					}
 				}
 			}
 			i++;
-		});	
-		var firstLiInhalt = $("#transactions li").first().html();
-		if (firstLiInhalt.indexOf('<div id="today" class="date">') <= -1){
-			//console.log('today existiert nicht');
-			$("#transactions li").first().before('<li><div id="today" class="date">Today</div><div style="clear: both"></div></li>');
-			$("#transactions li").first().css('cursor','auto');
-			$("#transactions li").first().hover(function() {
-				$("#transactions li").first().css('background','white');
-			},function() {
-				$("#transactions li").first().css('background','white');
-			});
-		}	
+		});
+		if($('#transactions').children().length < 4){
+			$("#transactions img.peak").remove();
+			$("#transactions b").remove();
+			$("#transactions").append('<span style="opacity: 0.25; font-style: italic; font-size: 16px; margin: 0 0 0 27px;">No Transactions to display...</span>');
+		} else if($('#transactions').children().length < 5) {
+			$("#transactions img.peak").remove();
+			$("#transactions b").remove();
+		} else {
+			var firstLiInhalt = $("#transactions li").first().html();
+			if (firstLiInhalt.indexOf('<div id="today" class="date">') <= -1){
+				//console.log('today existiert nicht');
+				$("#transactions li").first().before('<li><div id="today" class="date">Today</div><div style="clear: both"></div></li>');
+				$("#transactions li").first().css('cursor','auto');
+				$("#transactions li").first().hover(function() {
+					$("#transactions li").first().css('background','white');
+				},function() {
+					$("#transactions li").first().css('background','white');
+				});
+			}
+		}
 		replaceSVG();
 	}
 }
-function displayData() {		
+function displayDash() {		
 	//start with data
-	var currentDate= new Date();
-	
-	//
-	//Try to adapt datepicker again!
-	//
+	var currentDate= new Date();	 //Try to adapt datepicker again!
 	//$('#date').datepicker();	
-	//clear data(below pls)
-	//Maybe a reset with .html() is needed. future will see.
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"><div id="cuttingdiv"><select id="deposits" name="deposits"></select></div><label for="deposits" class="deposits">></label></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
-	$.each(budget.getDeposits(), function() {			
-		console.log(this.getName());
-		$('#deposits').append('<option value="'+this.getName()+'">'+this.getName()+'</option>');		
-	});	
-	//$('#currentAmount').append(currentAmount()+'€');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$.each(budget.getDeposits(), function() {		
+		$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
+	});		
 	//create a chart	
 	refreshChart('Expenses',0);
-	//add blackbar in order to conceal chartbranding -> dumme idee
-	//$("#dashboard").append('<div id="blackbar"></div>');
-	//insert dashboard-elements
+	//insert  transactionlist
 	showTransactions();	
 	//$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
-	
-			
-		
-	//insert all Recurring Transactions
-	// var transactionArray = budget.getRecurringTransactions();
-	// var length = transactionArray.length;
-	// for(var i = 0; i < length; i++) {	
-		// for( var j = 0; j < length; j++) {
-			//console.log('i='+i+',j='+j);			
-			// if(transactionArray[i].getDate() < transactionArray[j].getDate()) {
-				//console.log('Laufvariablen: i='+i+',j='+j+' .tausche: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
-				// var tausch = transactionArray[i];
-				// transactionArray[i]=transactionArray[j];
-				// transactionArray[j]=tausch;
-			// } else {
-				//console.log('Laufvariablen: i='+i+',j='+j+' .tausche nicht: '+transactionArray[i].getDate()+' gegen '+transactionArray[j].getDate());
-			// }
-		// }
-	// }
-	// $.each(transactionArray, function() {	
-		// givenDate = new Date(this.getDate());
-		// rTransactionInhalt = $("#rTransactions").html();		
-		// if(this.getType() == 'revenue'){
-			// $("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="revenue amount">+'+this.getAmountstring()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
-		// } else {
-			// $("#rTransactions").append('<div class="datemonth">'+displayDateInMonth(givenDate)+'</div><div class="transaction"><div class="expense amount">-'+this.getAmountstring()+'€</div>'+this.getName()+'</div><div style="clear: both"></div>');
-		// }		
-	// });	
-	//console.log('eingetragen');
-	
 	// Hotkeys
 	$(document).bind('keydown', 'ctrl+n', function() {	  
 	    inTime(new Date());
@@ -828,6 +800,26 @@ function displayData() {
 		return false;
 	});
 };
+function depoSelect(depoName) {		
+	if(selectOpen == 0) {
+		$("#currentAmount").css("height","140px");
+		$("#currentAmount").css("border","1px solid black");
+		selectOpen = 1;
+	} else {
+		deposit = depoName;
+		displayDash();
+		$("#currentAmount").css("height","52px");
+		$("#currentAmount").css("border","none");
+		$('#currentAmount').html(' ')
+		$('#currentAmount').append('<div onclick="depoSelect(&quot;'+deposit+'&quot;)" id="'+deposit+'" class="depoption"><span class="deponame">'+deposit+'</span><span class="depoamount">'+currentAmount(deposit)+'€</span><div style="clear: both"></div></div>');		
+		$.each(budget.getDeposits(), function() {			
+			if(this.getName() !== deposit){			
+				$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
+			}
+		});	
+		selectOpen = 0;
+	}
+}
 function messen() {
 	$("#messwert").remove();
 	$("body").prepend("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
@@ -852,7 +844,7 @@ function MonthlyExpenses(aDate) {
 	});
 	return sum;
 }
-function DailySum(type, aDate) {	
+function DailySum(type, deposit, aDate) {	
 	var sum = 0;
 	//console.log(aDate.getDate()+" "+aDate.getMonth()+" "+aDate.getFullYear());
 	$.each(budget.getTransactions(), function() {		
@@ -864,7 +856,7 @@ function DailySum(type, aDate) {
 		
 		if(isSameDay) {			
 			//console.log("match");			
-			if(this.getType() == type){				
+			if(this.getType() == type && this.getDeposit() == deposit){				
 				sum += this.getAmount();					
 			} 	
 		}
@@ -931,10 +923,10 @@ function MonthlyBudget() {
 	//console.log($.type(sum));
 	return sum;
 }
-function currentAmount() {		
-	start = parseFloat(budget.getCurrentStartAmount(deposit));	
+function currentAmount(depo) {		
+	start = parseFloat(budget.getCurrentStartAmount(depo));	
 	$.each(budget.getTransactions(), function() {	
-		if(this.getDeposit() == deposit) {	
+		if(this.getDeposit() == depo) {	
 			var amount = this.getAmount();			
 			if(this.getType() == "spend") {			
 				start -= amount;
