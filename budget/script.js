@@ -754,12 +754,12 @@ function displayData() {
 	//$('#date').datepicker();	
 	//clear data(below pls)
 	//Maybe a reset with .html() is needed. future will see.
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"><select id="deposits" name="deposits"></select></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"><div id="cuttingdiv"><select id="deposits" name="deposits"></select></div><label for="deposits" class="deposits">></label></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	$.each(budget.getDeposits(), function() {			
 		console.log(this.getName());
 		$('#deposits').append('<option value="'+this.getName()+'">'+this.getName()+'</option>');		
 	});	
-	$('#currentAmount').append(currentAmount()+'€');
+	//$('#currentAmount').append(currentAmount()+'€');
 	//create a chart	
 	refreshChart('Expenses',0);
 	//add blackbar in order to conceal chartbranding -> dumme idee

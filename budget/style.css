@@ -118,11 +118,37 @@ div#addpaym {
 		transition: all 0.6s ease-in-out 0s;	
 		cursor: pointer;
 	}
-div#currentAmount {
+div#currentAmount {	
 	line-height: 36px;
+	position: relative;
+}
+div#cuttingdiv {
+	width: 172px;
+	overflow: hidden;
+	position: relative;
 }
 select#deposits {
-	/*background: #F5F5F5;*/
+	width: 189px;
+	background: #F5F5F5;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	z-index: 1;
+}
+select#deposits:active {
+	border: none;
+}
+label.deposits {	
+	width: 17px;
+	height: 36px;
+	display: block;
+	position: absolute;
+	top: 8px;
+	left: 175px;	
+	z-index: 2;
+	-webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
 }
 .bordercontainer {	
 	/*
