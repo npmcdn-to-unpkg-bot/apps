@@ -50,10 +50,10 @@ function Budget(deposits,transactions,recurringTransactions) {
 		} 
 	}
 	this.getTransactions = function() {
-		return this.transactions;	 
+		return transactions;	 
 	}
-	this.addRecurringTransaction = function(name, type, amount, itemlist, date) {
-		var trans = new recurringTransaction(name, type, amount, itemlist, date);
+	this.addRecurringTransaction = function(name, type, deposit, amount, date) {
+		var trans = new recurringTransaction(name, type, deposit, amount, date);
 		this.recurringTransactions.unshift(trans);
 		//this.transactions.push(trans);
 	}
@@ -106,11 +106,11 @@ function Budget(deposits,transactions,recurringTransactions) {
 			return this.deposit;
 		}
 	}
-	function recurringTransaction(name, type, amount, itemlist, date) {
+	function recurringTransaction(name, type,deposit, amount, date) {
 		this.name = name;
 		this.type = type;
-		this.amount = amount;
-		this.itemlist = itemlist;
+		this.amount = amount;		
+		this.deposit = deposit;
 		if(date) {
 			this.date = new Date(date);
 		} else { 
@@ -125,16 +125,16 @@ function Budget(deposits,transactions,recurringTransactions) {
 		this.getAmountstring = function() {
 			amount = (Math.round(this.amount * 100)/100).toFixed(2);
 			return amount;
-		}
-		this.getItemlist = function() {
-			return this.itemlist;
-		}
+		}		
 		this.getDate = function() {		
 			return this.date;
 		}
 		this.getType = function() {
 			return this.type;
 		}	
+		this.getDeposit = function() {
+			return this.deposit;
+		}
 	} 
 	function Item(quantity,name,number) {
 		this.quantity = quantity;

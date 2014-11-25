@@ -14,7 +14,7 @@ function loadData(callback) {
 		// console.log('reordering on display');
 		repositionTransactions();
 		$.each(data.recurringTransactions, function() {			
-			budget.addRecurringTransaction(this.name,this.type,this.amount,this.date);				
+			budget.addRecurringTransaction(this.name,this.type,this.deposit,this.amount,this.date);				
 		});		
 		//console.log(JSON.stringify(budget));
 		callback();

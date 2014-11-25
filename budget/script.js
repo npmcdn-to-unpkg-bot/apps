@@ -18,6 +18,9 @@ $('document').ready(function() {
 	//Plugin Config
 	$("#my-menu").mmenu({
         // options		
+		onClick: {
+			close: true
+		},
 		footer: {
             add: true,
             content: "(c) 2014"
@@ -669,7 +672,6 @@ function showTransactions(d,type) {
 			if(Date.compare(d.clearTime(), givenDate.clearTime()) == 0){
 				if(this.getType() == type && this.getDeposit() == deposit) {
 					$("#transactions").append('<li class="daily" onclick="modal(&#34;oldtrans&#34;,'+i+')"></li>');
-					console.log('passt');
 					if(this.getType() == 'receive'){
 						$("#transactions li").last().append('<div class="amount"><img class="revenue svg" src="/apps/budget/resources/triangle.svg"><span>'+this.getAmountstring()+'€</span><div style="clear: both"></div></div><div class="store">'+this.getName()+'</div><div style="clear: both"></div></li>');
 					} else {
@@ -820,6 +822,15 @@ function depoSelect(depoName) {
 		selectOpen = 0;
 	}
 }
+function displayMonth(){
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div></div><div class="row clearfix"><div class="column third"><div id="mmrechnung" class="bordercontainer"><div id="receipt"><div id="mmheader">Monatliche Festbeträge</div><div class="divider"></div><div id="mmlist"></div><div class="divider"></div><div id="total"><div id="left">Monthly Budget</div><div id="right"></div><div style="clear: both"></div></div></div></div></div></div>');
+	$.each(budget.getRecurringTransactions(), function() {					
+		$('#mmlist').append('<div class="transactionrow"><div class="name">'+this.getName()+'</div><div class="trash">&nbsp;</div><div class="price '+this.getType()+'">'+this.getAmount()+'€</div><div style="clear: both"></div></div>');		
+	});	
+	$('#mmlist').append('<div style="clear: both"></div>');
+	$('#mmlist').append('<div class="addrow" onclick="addrow()">add row</div>');
+	$('#total div#right').append(MonthlyRawBudget()+'€');
+}
 function messen() {
 	$("#messwert").remove();
 	$("body").prepend("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
@@ -832,14 +843,11 @@ function MonthlyExpenses(aDate) {
 		var isSameMonth = (givenDate.getMonth() == aDate.getMonth()
         && givenDate.getFullYear() == aDate.getFullYear());
 		
-		if(isSameMonth) {			
-			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
-			} else {
-				//console.log(this.getName());
-				if(this.getType() == 'expense'){
-					sum += this.getAmount();
-				}
-			}
+		if(isSameMonth) {		
+			//console.log(this.getName());
+			if(this.getType() == 'spend'){
+				sum += this.getAmount();
+			}			
 		}
 	});
 	return sum;
@@ -875,14 +883,11 @@ function MonthlyRevenues(aDate) {
 		var isSameMonth = (givenDate.getMonth() == aDate.getMonth()
         && givenDate.getFullYear() == aDate.getFullYear());
 		
-		if(isSameMonth) {			
-			if(this.getName() === 'Wallet' || this.getName() === 'wallet') {				
-			} else {
-				//console.log(this.getName());
-				if(this.getType() == 'revenue'){
-					sum += this.getAmount();
-				}
-			}
+		if(isSameMonth) {		
+			//console.log(this.getName());
+			if(this.getType() == 'receive'){
+				sum += this.getAmount();
+			}			
 		}
 	});
 	return sum;
@@ -908,7 +913,7 @@ function DailyRevenues(aDate) {
 function MonthlyBudget() {
 	var sum = 0;
 	$.each(budget.getRecurringTransactions(), function() {		
-		if(this.getType() == 'revenue'){
+		if(this.getType() == 'receive'){
 			sum += this.getAmount();
 		} else {
 			sum -= this.getAmount();
@@ -921,6 +926,18 @@ function MonthlyBudget() {
 	sum = (Math.round(sum * 100)/100).toFixed(2);
 	//console.log(sum);
 	//console.log($.type(sum));
+	return sum;
+}
+function MonthlyRawBudget() {
+	var sum = 0;
+	$.each(budget.getRecurringTransactions(), function() {		
+		if(this.getType() == 'receive'){
+			sum += this.getAmount();
+		} else {
+			sum -= this.getAmount();
+		}		
+	});
+	sum = sum.toFixed(2);
 	return sum;
 }
 function currentAmount(depo) {		
