@@ -606,6 +606,7 @@ function refreshChart(change,increment) {
             },			
 			plotOptions: {
 				series: {
+					allowPointSelect: true,
 					color: '#000',
 					shadow: false,
 					events: {
