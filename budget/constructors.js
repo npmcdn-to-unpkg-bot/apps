@@ -30,7 +30,7 @@ function Budget(deposits,transactions,recurringTransactions) {
 		this.transactions.unshift(trans);		
 		//this.transactions.push(trans);		
 	}	
-	this.editTransaction = function(id, name, deposit, amount, itemlist, date) {
+	this.editTransaction = function(id, name, amount, itemlist, date) {
 		this.transactions[id].name = name;
 		this.transactions[id].amount = amount;
 		this.transactions[id].itemlist = itemlist;

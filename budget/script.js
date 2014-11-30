@@ -11,7 +11,11 @@ $('document').ready(function() {
 	transactionDay = "";
 	type = "spend";
 	deposit = "Wallet";
-	selectOpen = 0;	
+	transf = "Wallet";
+	transt = "Giro";
+	selectOpen = 0;
+	selectTFOpen = 0;
+	selectTTOpen = 0;
 	//budget initialisation
 	budget = new Budget([],[],[]);
 	loadData(displayDash);		
@@ -115,7 +119,12 @@ function modal(mode,id) {
 		$("#overlay").css('display','block');
         $("#trans").css('display','block');
 		$("#modal").css('display','block');		
-        break;   
+        break;
+	case 'transfer':
+		$("#overlay").css('display','block');
+		$("#transfer").css('display','block');
+		$("#modal").css('display','block');	
+		break;
     default:
        return;
 }	
@@ -762,9 +771,11 @@ function displayDash() {
 	//start with data
 	var currentDate= new Date();	 //Try to adapt datepicker again!
 	//$('#date').datepicker();	
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	$.each(budget.getDeposits(), function() {		
 		$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
+		$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+		$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
 	});		
 	//create a chart	
 	refreshChart('Expenses',0);
@@ -804,8 +815,12 @@ function displayDash() {
 };
 function depoSelect(depoName) {		
 	if(selectOpen == 0) {
+		$("#currentAmount").css("position","fixed");
+		$("#currentAmount").css("left","53px");
+		$("#currentAmount").css("z-index","99");
 		$("#currentAmount").css("height","140px");
 		$("#currentAmount").css("border","1px solid black");
+		
 		selectOpen = 1;
 	} else {
 		deposit = depoName;
@@ -817,9 +832,40 @@ function depoSelect(depoName) {
 		$.each(budget.getDeposits(), function() {			
 			if(this.getName() !== deposit){			
 				$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
+				$('form#transferform #from').append('<div onclick="depoSelecttransf(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+				$('form#transferform #to').append('<div onclick="depoSelecttranst(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+	
 			}
 		});	
 		selectOpen = 0;
+	}
+}
+function depoSelectTransF(depoName) {		
+	if(selectTFOpen == 0) {		
+		$("form#transferform #from").css("z-index","99");
+		$("form#transferform #from").css("margin-bottom","10px");
+		$("form#transferform #from").css("height","140px");
+		$("form#transferform #from").css("border","1px solid black");		
+		selectTFOpen = 1;
+	} else {
+		transF = depoName;
+		$('form#transferform #from').html(' ')
+		$("form#transferform #from").css("height","28px");
+		$("form#transferform #from").css("margin-bottom","0px");
+		function log(){
+			console.log("1");
+		}		
+		setTimeout(log(), 2000);
+		console.log("2");
+		$("form#transferform #from").css("border","none").delay( 1600 );
+		$("form#transferform #from").css("border-bottom","1px dashed black").delay( 1800 );
+		$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+depoName+'&quot;)" id="'+depoName+'" class="depoption">'+depoName+'</div>').delay( 1600 );
+		$.each(budget.getDeposits(), function() {			
+			if(this.getName() !== transF){			
+				$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+			}
+		});	
+		selectTFOpen = 0;
 	}
 }
 function displayMonth(){
