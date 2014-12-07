@@ -1054,6 +1054,7 @@ function currentAmount(depo) {
 			start = parseFloat(start);
 		}
 	});	
+	start = start.toFixed(2);
 	return start;
 }
 function reposLabel() {
