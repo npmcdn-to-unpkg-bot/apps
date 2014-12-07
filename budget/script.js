@@ -5,17 +5,18 @@ $('document').ready(function() {
 		alert("permission denied.");
 		return;
 	}
-	//Global variables
+	//Global variables - StartUp Settings
 	monthStrings = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	itemcount = 1;
 	transactionDay = "";
 	type = "spend";
 	deposit = "Wallet";
-	transf = "Wallet";
-	transt = "Giro";
+	transf = "Giro";
+	transt = "Wallet";
 	selectOpen = 0;
 	selectTFOpen = 0;
 	selectTTOpen = 0;
+	mode = "dash";
 	//budget initialisation
 	budget = new Budget([],[],[]);
 	loadData(displayDash);		
@@ -52,7 +53,46 @@ $('document').ready(function() {
 	});
 	$("#itemlist").keyup(function() {
 		count();
+	});		
+	$(document).bind('keydown', 'ctrl+n', function() {	  
+	    if(mode == "dash") {
+			inTime(new Date());
+			modal('newtrans');
+			return false;
+		}
 	});	
+	$(document).bind('keydown', 'left', function() {
+		if(mode == "dash") {
+			refreshChart(0,-1);
+			showTransactions();
+			return false;
+		}
+	});
+	$(document).bind('keydown', 'right', function() {
+		if(mode == "dash") {
+			refreshChart(0,1);
+			showTransactions();
+			return false;
+		}
+	});
+	$(document).bind('keydown', 'up', function() {
+		if(mode == "dash") {
+			refreshChart(1);
+			if(transactionDay !== "") {
+				showTransactions(transactionDay,type);		
+			}
+			return false;
+		}
+	});
+	$(document).bind('keydown', 'down', function() {
+		if(mode == "dash") {
+			refreshChart(1);
+			if(transactionDay !== "") {
+				showTransactions(transactionDay,type);		
+			}
+			return false;
+		}
+	});
 });
 function Item(qty,name,price){
 	this.qty = qty;
@@ -68,12 +108,12 @@ function modal(mode,id) {
     case 'close':	
 		$("#modal").css('display','none');
         $("#overlay").css('display','none');
-		$("#trans").css('display','none');	
-		$('#trans #transtitle').val('');
+		$("#transfer").css('display','none');		
+		$("#trans").css('display','none');		
 		$('#itemlist').html('<div class="itemrow"><input type="number" required="" autocomplete="off" placeholder="#" class="qty"><input type="text" required="" autocomplete="off" placeholder="Itemname" class="name"><div class="trash">&nbsp;</div><input type="text" required="" autocomplete="off" placeholder="0,00" class="price"><div style="clear: both"></div></div><div class="addrow" onclick="addrow()">add row</div>');
 		itemcount = 1;
 		break;
-    case 'newtrans':					
+    case 'newtrans':		
 		buttonsString = '<div id="cancel" onclick="modal(&quot;close&quot;)" class="buttonsbutton">Cancel</div><div id="receive" onclick="send(&quot;receive&quot;)" class="buttonsbutton">Receive</div><div id="spend" onclick="send(&quot;spend&quot;)" class="buttonsbutton">Spend</div>';			
 		$('#buttons').html(buttonsString);	
 		$("#overlay").css('display','block');
@@ -123,6 +163,7 @@ function modal(mode,id) {
 	case 'transfer':
 		$("#overlay").css('display','block');
 		$("#transfer").css('display','block');
+		$('#transfer #transfernumber').val('0');
 		$("#modal").css('display','block');	
 		break;
     default:
@@ -299,8 +340,23 @@ function deleteTransaction(id) {
 		saveData(displayDash);
 	}	
 }
-function inTime(time){	
-	console.log(time);	
+function transfer() {
+	console.log("transferring");
+	var date = new Date();
+	var amount = $("#transfernumber").val();
+	if(!$.isNumeric(amount)){		
+		console.log("variable sum is not a number");
+		return;
+	}
+	amount = parseFloat(amount);	
+	console.log("amount");
+	budget.addTransaction("transfer","spend",transf,amount,[{"quantity":1,"name":"Transfer","number":amount}],date);
+	budget.addTransaction("transfer","receive",transt,amount,[{"quantity":1,"name":"Transfer","number":amount}],date);
+	console.log("added");
+	modal('close');
+	saveData(displayDash);
+}
+function inTime(time){		
 	var hour = time.getHours();
 	if(hour < 10) {
 		hour = '0'+hour;
@@ -489,11 +545,12 @@ function displayDateInMonth(d) {
 	+ sup + "</sup> ");
 }
 function refreshChart(change,increment) {	
+	console.log(increment);
 	//function works only in leaps of one!
 	var currentDate= new Date();
 	//change option
 	if( change == 1 && status == 'Expenses') {	
-			
+			console.log('ToRevenue');
 			status = 'Revenues';
 			type = 'receive';			
 	} else if(change == 1 && status == 'Revenues'){
@@ -519,8 +576,7 @@ function refreshChart(change,increment) {
 			
 			specificDate = new Date();	
 			specificDate.setFullYear(year);
-			specificDate.setMonth(month);
-			console.log(specificDate);			
+			specificDate.setMonth(month);				
 			if(month == currentDate.getMonth()) {
 				days = currentDate.getDate();
 			} else {
@@ -768,50 +824,27 @@ function showTransactions(d,type) {
 	}
 }
 function displayDash() {		
+	mode = "dash";
 	//start with data
 	var currentDate= new Date();	 //Try to adapt datepicker again!
 	//$('#date').datepicker();	
 	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+transf+'&quot;)" id="'+transf+'" class="depoption">'+transf+'</div>');
+	$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+transt+'&quot;)" id="'+transt+'" class="depoption">'+transt+'</div>');
 	$.each(budget.getDeposits(), function() {		
 		$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
-		$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
-		$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+		if(this.getName() !== transf) {
+			$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+		}
+		if(this.getName() !== transt) {
+			$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+		}
 	});		
 	//create a chart	
 	refreshChart('Expenses',0);
 	//insert  transactionlist
 	showTransactions();	
 	//$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
-	// Hotkeys
-	$(document).bind('keydown', 'ctrl+n', function() {	  
-	    inTime(new Date());
-		modal('newtrans');
-		return false;
-	});	
-	$(document).bind('keydown', 'left', function() {
-		refreshChart(0,-1);
-		showTransactions();
-		return false;
-	});
-	$(document).bind('keydown', 'right', function() {
-		refreshChart(0,1);
-		showTransactions();
-		return false;
-	});
-	$(document).bind('keydown', 'up', function() {
-		refreshChart(1);
-		if(transactionDay !== "") {
-			showTransactions(transactionDay,type);		
-		}
-		return false;
-	});
-	$(document).bind('keydown', 'down', function() {
-		refreshChart(1);
-		if(transactionDay !== "") {
-			showTransactions(transactionDay,type);		
-		}
-		return false;
-	});
 };
 function depoSelect(depoName) {		
 	if(selectOpen == 0) {
@@ -841,6 +874,7 @@ function depoSelect(depoName) {
 	}
 }
 function depoSelectTransF(depoName) {		
+	transf = depoName;
 	if(selectTFOpen == 0) {		
 		$("form#transferform #from").css("z-index","99");
 		$("form#transferform #from").css("margin-bottom","10px");
@@ -852,13 +886,8 @@ function depoSelectTransF(depoName) {
 		$('form#transferform #from').html(' ')
 		$("form#transferform #from").css("height","28px");
 		$("form#transferform #from").css("margin-bottom","0px");
-		function log(){
-			console.log("1");
-		}		
-		setTimeout(log(), 2000);
-		console.log("2");
-		$("form#transferform #from").css("border","none").delay( 1600 );
-		$("form#transferform #from").css("border-bottom","1px dashed black").delay( 1800 );
+		$("form#transferform #from").css("border","none");
+		$("form#transferform #from").css("border-bottom","1px dashed black");		
 		$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+depoName+'&quot;)" id="'+depoName+'" class="depoption">'+depoName+'</div>').delay( 1600 );
 		$.each(budget.getDeposits(), function() {			
 			if(this.getName() !== transF){			
@@ -868,13 +897,37 @@ function depoSelectTransF(depoName) {
 		selectTFOpen = 0;
 	}
 }
+function depoSelectTransT(depoName) {		
+	transt = depoName;
+	if(selectTTOpen == 0) {		
+		$("form#transferform #to").css("z-index","99");
+		$("form#transferform #to").css("margin-bottom","10px");
+		$("form#transferform #to").css("height","140px");
+		$("form#transferform #to").css("border","1px solid black");		
+		selectTTOpen = 1;
+	} else {
+		transF = depoName;
+		$('form#transferform #to').html(' ')
+		$("form#transferform #to").css("height","28px");
+		$("form#transferform #to").css("margin-bottom","0px");
+		$("form#transferform #to").css("border","none");
+		$("form#transferform #to").css("border-bottom","1px dashed black");		
+		$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+depoName+'&quot;)" id="'+depoName+'" class="depoption">'+depoName+'</div>').delay( 1600 );
+		$.each(budget.getDeposits(), function() {			
+			if(this.getName() !== transF){			
+				$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
+			}
+		});	
+		selectTTOpen = 0;
+	}
+}
 function displayMonth(){
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div></div><div class="row clearfix"><div class="column third"><div id="mmrechnung" class="bordercontainer"><div id="receipt"><div id="mmheader">Monatliche Festbeträge</div><div class="divider"></div><div id="mmlist"></div><div class="divider"></div><div id="total"><div id="left">Monthly Budget</div><div id="right"></div><div style="clear: both"></div></div></div></div></div></div>');
+	mode = "month";
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div></div><div class="row clearfix"><div class="column third"><div id="mmrechnung" class="bordercontainer"><div id="receipt"><div id="mmheader">Monatliche Festbeträge</div><div class="divider"></div><div id="mmlist"></div><div class="divider"></div><div id="total"><div id="left">Monthly Budget</div><div id="right"></div><div style="clear: both"></div></div></div></div></div></div>');
 	$.each(budget.getRecurringTransactions(), function() {					
 		$('#mmlist').append('<div class="transactionrow"><div class="name">'+this.getName()+'</div><div class="trash">&nbsp;</div><div class="price '+this.getType()+'">'+this.getAmount()+'€</div><div style="clear: both"></div></div>');		
 	});	
 	$('#mmlist').append('<div style="clear: both"></div>');
-	$('#mmlist').append('<div class="addrow" onclick="addrow()">add row</div>');
 	$('#total div#right').append(MonthlyRawBudget()+'€');
 }
 function messen() {
@@ -995,7 +1048,8 @@ function currentAmount(depo) {
 				start -= amount;
 			} else if(this.getType() == "receive") {			
 				start += amount;			
-			}		
+			}
+			console.log(start);
 			start = start.toFixed(2);
 			start = parseFloat(start);
 		}
