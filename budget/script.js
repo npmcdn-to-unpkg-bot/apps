@@ -350,8 +350,8 @@ function transfer() {
 	}
 	amount = parseFloat(amount);	
 	console.log("amount");
-	budget.addTransaction("Transfer","spend",transf,amount,[{"quantity":1,"name":"Transfer","number":amount}],date);
-	budget.addTransaction("Transfer","receive",transt,amount,[{"quantity":1,"name":"Transfer","number":amount}],date);
+	budget.addTransaction("Transfer","spend",transf,amount,[{"quantity":1,"name":"Transfer to "+transt+"","number":amount}],date);
+	budget.addTransaction("Transfer","receive",transt,amount,[{"quantity":1,"name":"Transfer from "+transf+"","number":amount}],date);
 	console.log("added");
 	modal('close');
 	saveData(displayDash);
