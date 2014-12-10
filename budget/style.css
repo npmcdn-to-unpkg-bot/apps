@@ -1223,8 +1223,6 @@ div.transactionrow{
 /*************************************************
 Media Queries
 **************************************************/
-@media (max-width:400px) {
-}
 @media (max-width:350px) {
 	div#receipt {
 		width: 100%;
@@ -1261,6 +1259,11 @@ Media Queries
 	div.store {
 		width: 120px;
 		font-size: 16px;
+	}
+}
+@media (max-width:425px) {
+	html.mm-opening .mm-page, html.mm-opening #mm-blocker {
+		transform: translate(80%, 0px) !important;
 	}
 }
 /*
