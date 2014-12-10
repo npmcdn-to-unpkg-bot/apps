@@ -851,7 +851,7 @@ function depoSelect(depoName) {
 		$("#currentAmount").css("position","fixed");
 		$("#currentAmount").css("left","53px");
 		$("#currentAmount").css("z-index","99");
-		$("#currentAmount").css("height","185px");
+		$("#currentAmount").css("height","231px");
 		$("#currentAmount").css("border","1px solid black");
 		
 		selectOpen = 1;
@@ -878,7 +878,7 @@ function depoSelectTransF(depoName) {
 	if(selectTFOpen == 0) {		
 		$("form#transferform #from").css("z-index","99");
 		$("form#transferform #from").css("margin-bottom","10px");
-		$("form#transferform #from").css("height","185px");
+		$("form#transferform #from").css("height","231px");
 		$("form#transferform #from").css("border","1px solid black");		
 		selectTFOpen = 1;
 	} else {
@@ -902,7 +902,7 @@ function depoSelectTransT(depoName) {
 	if(selectTTOpen == 0) {		
 		$("form#transferform #to").css("z-index","99");
 		$("form#transferform #to").css("margin-bottom","10px");
-		$("form#transferform #to").css("height","185px");
+		$("form#transferform #to").css("height","231px");
 		$("form#transferform #to").css("border","1px solid black");		
 		selectTTOpen = 1;
 	} else {
