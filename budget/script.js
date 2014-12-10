@@ -831,8 +831,15 @@ function displayDash() {
 	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+transf+'&quot;)" id="'+transf+'" class="depoption">'+transf+'</div>');
 	$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+transt+'&quot;)" id="'+transt+'" class="depoption">'+transt+'</div>');
+	$.each(budget.getDeposits(), function() {
+		if(this.getName() == deposit){
+			$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
+		}
+	});
 	$.each(budget.getDeposits(), function() {		
-		$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
+		if(this.getName() !== deposit){
+			$('#currentAmount').append('<div onclick="depoSelect(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption"><span class="deponame">'+this.getName()+'</span><span class="depoamount">'+currentAmount(this.getName())+'€</span><div style="clear: both"></div></div>');		
+		}
 		if(this.getName() !== transf) {
 			$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+this.getName()+'&quot;)" id="'+this.getName()+'" class="depoption">'+this.getName()+'</div>');
 		}
