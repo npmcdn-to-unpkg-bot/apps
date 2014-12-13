@@ -69,7 +69,7 @@ function Budget(deposits,transactions,recurringTransactions) {
 			return this.name;
 		}
 		this.getStartAmount = function() {
-			return this.startAmount;
+			return parseFloat(this.startAmount);
 		}
 	}
 	function Transaction(name, type, deposit, amount, itemlist, date) {

@@ -17,6 +17,7 @@ $('document').ready(function() {
 	selectTFOpen = 0;
 	selectTTOpen = 0;
 	mode = "dash";
+	startDate = Date.parse("2014.12.08", "yyyy.MM.dd");
 	//budget initialisation
 	budget = new Budget([],[],[]);
 	loadData(displayDash);		
@@ -544,8 +545,7 @@ function displayDateInMonth(d) {
 	return(curr_date + "<sup>"
 	+ sup + "</sup> ");
 }
-function refreshChart(change,increment) {	
-	console.log(increment);
+function refreshChart(change,increment) {		
 	//function works only in leaps of one!
 	var currentDate= new Date();
 	//change option
@@ -937,6 +937,102 @@ function displayMonth(){
 	$('#mmlist').append('<div style="clear: both"></div>');
 	$('#total div#right').append(MonthlyRawBudget()+'€');
 }
+function displayDeposits(){
+	mode = "deposits";
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div></div><div class="row clearfix"><div class="column full"><div id="depositlist" class="bordercontainer"></div></div></div>');
+	
+	var currentDate= new Date();
+	var firstDate = startDate.clone();	
+	var d = 0;
+	
+	$.each(budget.getDeposits(), function() {			
+		$('#depositlist').append('<span class="charttitle">'+this.getName()+'</section>');
+		$('#depositlist').append('<section class="chart"></section>');		
+		console.log(this.getName());		
+		var amountArray = [];	
+		var incDate = startDate.clone();		
+		var i = -1;
+		
+		while(incDate.between(firstDate,currentDate)){			
+			//console.log(incDate);			
+			if(i == -1) {
+				var sumOT = this.getStartAmount();
+			} else {
+				var sumOT = amountArray[i];
+			}
+			//console.log(sumOT);
+			sumOT += DailySum('receive',this.getName(),incDate);
+			//console.log(sumOT);
+			sumOT -= DailySum('spend',this.getName(),incDate);	
+			//console.log(sumOT);
+			sumOT = sumOT.toFixed(2);
+			sumOT = parseFloat(sumOT);				
+			amountArray.push(sumOT);	
+			incDate.addDays(1);
+			i++;
+		}		
+		console.log(amountArray);
+		$('.chart:eq('+d+')').highcharts({
+            chart: {
+				backgroundColor: '#F5F5F5',
+				marginRight: 30,				
+			},
+			title: {                
+				text: null,
+            },
+            subtitle: {
+                text: '',
+                x: 0,
+				enabled: false
+            },
+            xAxis: {                            
+                tickColor: 'rgba(0, 0, 0, 0.1)',
+				gridLineColor: 'rgba(0, 0, 0, 0.1)',
+				lineColor: 'rgba(0, 0, 0, 0.1)',
+				type: 'datetime',
+				dateTimeLabelFormats: {
+					day: '%e of %b'
+				}
+							
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                },
+                gridLineColor: 'rgba(0, 0, 0, 0.1)',
+                tickColor: 'rgba(0, 0, 0, 0.1)',
+				lineColor: 'rgba(0, 0, 0, 0.1)'
+            },			
+			plotOptions: {
+				series: {					
+					color: '#000',
+					shadow: false				
+				}
+			},
+            tooltip: {
+                valueDecimals: 2,
+				valueSuffix: '€',
+				formatter: function () {				
+					var currentDate = new Date(this.x);					
+					return '<span style="font-size: 12px;">'+displayDate2(currentDate)+'</span><br>Amount: <span style="font-size: 14px; font-weight: bold">'+this.y.toFixed(2)+'€</span>';
+				}
+            },
+            legend: {
+                enabled: false
+            },
+			credits: {
+				enabled: false
+			},
+            series: [{				
+				name: type,
+				data: amountArray,
+				pointStart: Date.UTC(startDate.getFullYear(),startDate.getMonth(), startDate.getDate()),				
+				pointInterval: 24 * 3600 * 1000 // one day
+			}]
+		});
+		d++;
+	});	
+}
 function messen() {
 	$("#messwert").remove();
 	$("body").prepend("<div id='messwert'>height: "+window.innerHeight+"px width: "+window.innerWidth+"px</div>");
@@ -1055,8 +1151,7 @@ function currentAmount(depo) {
 				start -= amount;
 			} else if(this.getType() == "receive") {			
 				start += amount;			
-			}
-			console.log(start);
+			}			
 			start = start.toFixed(2);
 			start = parseFloat(start);
 		}
@@ -1068,18 +1163,6 @@ function reposLabel() {
 	var newLabelWidth = $('#datelabel').width();	
 	$('#date').css('width',newLabelWidth+'px');
 	//$('#date').css('left','-'+newLabelWidth+'px');
-}
-function displayDeposits() {	
-	var htmlstring = $('#currentstatus').html(); 
-	if (htmlstring.indexOf('<div class="amount">') >= 0) {
-		$('#currentstatus').html(' ');					
-		$.each(budget.getDeposits(), function() {					
-			$('#currentstatus').append('<div class="deposit"><span class="name">'+this.getName()+'</span><span class="amount">'+this.getAmount()+'</span><div style="clear: both"></div></div>');
-		});
-		
-	} else {
-		$('#currentstatus').html('<div class="amount">'+budget.getCurrentStatusAmount()+'€</div>Current Status');
-	}	
 }
 function replaceSVG() {
 	jQuery('img.svg').each(function(){

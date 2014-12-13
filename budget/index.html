@@ -34,20 +34,21 @@
 		<!--Hotkeys-->
 		<script src="/apps/resources/jquery-hotkeys/jquery.hotkeys.js" charset="UTF-8"></script>
 	</head>    
-    <body> <!--onload="messen()" onresize="messen()"-->		
+    <body> <!-- onload="messen()" onresize="messen()"-->	
 		<nav id="my-menu">
 		   <ul>
-			  <li><a onclick="displayDash()">Dashboard</a></li>
-			  <!--<li>
-				 <span href="/about/">About us</span>
-				 <ul>
-					<li><a href="/about/history/">History</a></li>
-					<li><a href="/about/team/">The team</a></li>
-					<li><a href="/about/address/">Our address</a></li>
-				 </ul>
-			  </li>-->
-			  <li><a onclick="displayMonth()">Haushaltsplanung</a></li>
-			  <li><a onclick="displayHistory('budget')">History</a></li>
+				<li><a onclick="displayDash()">Dashboard</a></li>
+				<!--<li>
+					<span href="/about/">About us</span>
+					<ul>
+						<li><a href="/about/history/">History</a></li>
+						<li><a href="/about/team/">The team</a></li>
+						<li><a href="/about/address/">Our address</a></li>
+					</ul>
+				</li>-->
+				<li><a onclick="displayDeposits()">Kontenübersicht</a></li>
+				<li><a onclick="displayMonth()">Haushaltsplanung</a></li>
+				<li><a onclick="displayHistory('budget')">History</a></li>
 		   </ul>
 		</nav>
 		<div id="pagewrapper" style="overflow: hidden">
