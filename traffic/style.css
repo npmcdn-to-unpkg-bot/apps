@@ -1,0 +1,162 @@
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+position: relative;
+transition: all 0.6s ease-in-out 0s;
+font-family: helvetica, arial;
+}
+svg {
+  fill: currentColor;
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.nodrag {
+	pointer-events: none;
+}
+body {
+font-size: 30px;
+background: none repeat scroll 0 0 #f5f5f5;
+}
+/************************************************************************************
+Grid-Settings
+************************************************************************************/
+.clearfix:before,
+.clearfix:after {
+content: " ";
+display: table;
+}
+ 
+.clearfix:after {
+clear: both;
+}
+ 
+.clearfix {
+*zoom: 1;
+}
+
+.column {
+float: left;
+padding: 0.5rem;
+background-clip: content-box;
+}
+.column.full { width: 100%; }
+.column.two-thirds { width: 66.7%; }
+.column.half { width: 50%; }
+.column.third { width: 33.3%; }
+.column.fourth { width: 25%; }
+.column.flow-opposite { float: right; }
+
+textarea, input,a,a:active, a:focus, input:focus{ 
+	outline: none;
+	box-shadow:none
+	-webkit-appearance: none;
+    border-radius: 0;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+	-moz-appearance:textfield;
+}
+label {		
+	position: relative;
+	display: block;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+label:hover {
+	cursor: pointer;
+}
+.bordercontainer {	
+	/*
+	border: 3px solid black;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	*/
+	padding: 10px;
+}
+div#messwert {
+	font-size: 14px;
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+	z-index:100;
+}
+div#content {
+	width: 100%;
+    position: relative;	   
+	overflow: hidden;
+}
+a {
+	color: black;
+	text-decoration: none;
+}
+div#menu {	
+}
+	div#menu #menuimage{		
+		width: 36px;
+		height: 36px;
+		fill: black;
+		transition: all 0.6s ease-in-out 0s;	
+		cursor: pointer;
+	}
+input, select {
+	position: relative;
+	width: 100%;
+	margin-bottom: 15px;
+	border: 2px solid black;
+}
+input {
+	background: #f5f5f5;
+}
+/*************************************************
+Mmenu customization
+**************************************************/
+#my-menu a {
+	cursor: pointer;
+}
+#my-menu:not( .mm-menu ) {
+   display: none;
+}
+
+.mm-menu {
+    max-width: 340px !important;
+}
+html.mm-opening .mm-page, html.mm-opening #mm-blocker {
+    transform: translate(340px, 0px) !important;
+}
+.mm-title {
+	font-size: 60px;
+	padding-top: 30px !important;
+}
+.mm-header {
+	height: 120px !important;
+	line-height: 60px !important;
+}
+#menulogo {
+	height: 100px;
+	margin-top: -20px;
+}
+.mm-menu.mm-hasheader > .mm-panel.mm-list {
+	padding-top: 120px !important;
+}
+.mm-header .mm-prev[href]:before, .mm-header .mm-next[href]:after {
+	height: 14px !important;
+	width: 14px !important;
+}
+.mm-header .mm-prev, .mm-header .mm-next {
+	padding-top: 55px !important;
+}
