@@ -828,7 +828,7 @@ function displayDash() {
 	//start with data
 	var currentDate= new Date();	 //Try to adapt datepicker again!
 	//$('#date').datepicker();	
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column closed"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+transf+'&quot;)" id="'+transf+'" class="depoption">'+transf+'</div>');
 	$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+transt+'&quot;)" id="'+transt+'" class="depoption">'+transt+'</div>');
 	$.each(budget.getDeposits(), function() {
@@ -853,20 +853,14 @@ function displayDash() {
 	showTransactions();	
 	//$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
 };
-function depoSelect(depoName) {		
+function depoSelect(depoName) {	
 	if(selectOpen == 0) {
-		$("#currentAmount").css("position","fixed");
-		$("#currentAmount").css("left","53px");
-		$("#currentAmount").css("z-index","99");
-		$("#currentAmount").css("height","231px");
-		$("#currentAmount").css("border","1px solid black");
-		
+		$("#currentAmount").toggleClass("closed");
+		$("#currentAmount").toggleClass("open");		
 		selectOpen = 1;
 	} else {
-		deposit = depoName;
-		displayDash();
-		$("#currentAmount").css("height","52px");
-		$("#currentAmount").css("border","none");
+		deposit = depoName;		
+		displayDash();		
 		$('#currentAmount').html(' ')
 		$('#currentAmount').append('<div onclick="depoSelect(&quot;'+deposit+'&quot;)" id="'+deposit+'" class="depoption"><span class="deponame">'+deposit+'</span><span class="depoamount">'+currentAmount(deposit)+'€</span><div style="clear: both"></div></div>');		
 		$.each(budget.getDeposits(), function() {			

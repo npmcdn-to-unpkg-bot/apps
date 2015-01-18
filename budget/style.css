@@ -133,11 +133,22 @@ div#addtransfer {
 	}
 div#currentAmount {	
 	background: #F5F5F5;
+}
+div.closed {
 	height: 52px;
-	line-height: 36px;
 	position: relative;
 	overflow: hidden;
 	padding: 8px;
+	line-height: 36px;
+	transition: none !important;
+}
+div.open {
+	position: fixed ;
+	left: 53px;
+	z-index: 99;
+	height: 231px;
+	border: none;
+	overflow-Y: scroll;
 }
 	div.depoption {
 		width: 150px;
@@ -1280,6 +1291,14 @@ Media Queries
 	div.store {
 		width: 120px;
 		font-size: 16px;
+	}
+	div.open {
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+		background: green;
+		overflow-Y: scroll;
 	}
 }
 @media (max-width:425px) {
