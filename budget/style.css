@@ -1302,8 +1302,14 @@ Media Queries
 	}
 	div#trans {
 		height: 100%;
-		width: 98%;
-		margin: 50px auto 0 auto;
+		width: 99%;
+		margin: 0px auto 0 auto;
+	}
+	div#receipt {
+		height: 100%;
+	}
+	form#itemlist {
+		height: 430px;
 	}
 }
 @media (max-width:425px) {
