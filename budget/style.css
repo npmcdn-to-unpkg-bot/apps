@@ -1300,6 +1300,11 @@ Media Queries
 		background: green;
 		overflow-Y: scroll;
 	}
+	div#trans {
+		height: 100%;
+		width: 98%;
+		margin: 50px auto 0 auto;
+	}
 }
 @media (max-width:425px) {
 	html.mm-opening .mm-page, html.mm-opening #mm-blocker {
