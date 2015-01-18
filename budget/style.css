@@ -147,8 +147,7 @@ div.open {
 	left: 53px;
 	z-index: 99;
 	height: 231px;
-	border: none;
-	overflow-Y: scroll;
+	overflow: hidden;
 }
 	div.depoption {
 		width: 150px;
