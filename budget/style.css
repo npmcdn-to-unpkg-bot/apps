@@ -255,8 +255,7 @@ div#receipt {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-.time {
-  font-size: 12px;
+.time {  
   color: #5a584c;
   float: left;
   /*cursor: pointer;*/
