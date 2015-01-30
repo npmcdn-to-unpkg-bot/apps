@@ -17,6 +17,7 @@ $('document').ready(function() {
 	selectTFOpen = 0;
 	selectTTOpen = 0;
 	mode = "dash";
+	uploadImage = "uplink.png";
 	startDate = Date.parse("2014.12.08", "yyyy.MM.dd");
 	//budget initialisation
 	budget = new Budget([],[],[]);
@@ -830,12 +831,11 @@ function showTransactions(d,type) {
 	}
 }
 function displayDash() {
-	hideUpload();
 	mode = "dash";
 	//start with data
 	var currentDate= new Date();	 //Try to adapt datepicker again!
 	//$('#date').datepicker();
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column closed"></div><div id="uplink" class="column"><img id="uplink" src="resources/uplink.png"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column closed"></div><div id="uplink" class="column"><img id="uplink" src="resources/'+uploadImage+'"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+transf+'&quot;)" id="'+transf+'" class="depoption">'+transf+'</div>');
 	$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+transt+'&quot;)" id="'+transt+'" class="depoption">'+transt+'</div>');
 	$.each(budget.getDeposits(), function() {
@@ -1083,8 +1083,8 @@ function MonthlyRevenues(aDate) {
 	$.each(budget.getTransactions(), function() {
 		givenDate = new Date(this.getDate());
 
-		var isSameMonth = (givenDate.getMonth() == aDate.getMonth()
-        && givenDate.getFullYear() == aDate.getFullYear());
+		var isSameMonth = (givenDate.getMonth() == aDate.getMonth() &&
+			givenDate.getFullYear() == aDate.getFullYear());
 
 		if(isSameMonth) {
 			//console.log(this.getName());
@@ -1100,9 +1100,9 @@ function DailyRevenues(aDate) {
 	$.each(budget.getTransactions(), function() {
 		givenDate = new Date(this.getDate());
 
-		var isSameDay = (givenDate.getDate() == aDate.getDate()
-        && givenDate.getMonth() == aDate.getMonth()
-        && givenDate.getFullYear() == aDate.getFullYear());
+		var isSameDay = (givenDate.getDate() == aDate.getDate() &&
+				givenDate.getMonth() == aDate.getMonth() &&
+				givenDate.getFullYear() == aDate.getFullYear());
 
 		if(isSameDay) {
 			//console.log(this.getName());
@@ -1237,10 +1237,14 @@ function displayUpload() {
 				return 'You have unsaved stuff. Are you sure to leave?';
 		}
 	});
+	//funst das da oben überhaupt?
 	console.log("animation fired");
-	$("#uplink img").attr('img', 'upload.gif');
+	$("#uplink img").attr('src', 'resources/upload.gif');
+	uploadImage = 'upload.gif';
+	console.log("test");
 }
 function hideUpload() {
 	console.log("returned no normal uplink pic");
-	$("#uplink img").attr('img', 'uplink.png');
+	$("#uplink img").attr('src', 'resources/uplink.png');
+	uploadImage = 'uplink.png';
 }
