@@ -21,7 +21,7 @@ $('document').ready(function() {
 	//budget initialisation
 	budget = new Budget([],[],[]);
 	loadData(displayDash);
-	//$("input").change(function(ev) {	
+	//$("input").change(function(ev) {
 	//	var reader = new FileReader();
 	//	reader.onload = (function(ev) {
 	//		$(".latest img").attr("src", ev.target.result).fadeIn();
@@ -242,11 +242,11 @@ function send(type) {
 	if(!date){
 		console.log('returning');
 		console.log(date);
-		return
+		return;
 	}
 	var store = $("#transtitle").val();
 	store = firstLetterUp(store);
-	if(store == '') {
+	if(store === '') {
 		console.log('store undefined');
 		return;
 	}
@@ -257,7 +257,7 @@ function send(type) {
 		console.log("variable sum is not a number");
 		return;
 	}
-	if(sum == '') {
+	if(sum === '') {
 		console.log('sum undefined');
 		return;
 	}
@@ -294,11 +294,11 @@ function update(id){
 	if(!date){
 		console.log('returning');
 		console.log(date);
-		return
+		return;
 	}
 	var store = $("#transtitle").val();
 	store = firstLetterUp(store);
-	if(store == '') {
+	if(store === '') {
 		console.log('store undefined');
 		return;
 	}
@@ -309,7 +309,7 @@ function update(id){
 		console.log("variable sum is not a number");
 		return;
 	}
-	if(sum == '') {
+	if(sum === '') {
 		console.log('sum undefined');
 		return;
 	}
@@ -830,11 +830,12 @@ function showTransactions(d,type) {
 	}
 }
 function displayDash() {
+	hideUpload();
 	mode = "dash";
 	//start with data
 	var currentDate= new Date();	 //Try to adapt datepicker again!
 	//$('#date').datepicker();
-	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column closed"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
+	$('#main').html('<div class="row clearfix"><div id="menu" class="column"><img id="menuimage" class="svg" onclick="$(&quot;#my-menu&quot;).trigger(&quot;open.mm&quot;);" src="resources/menu.svg" /></div><div id="addpaym" class="column"><img id="addimage" class="svg" onclick="modal(&#34;newtrans&#34;),inTime(new Date())" src="resources/add.svg"/></div><div id="addtransfer" class="column"><img id="transferimage" class="svg" onclick="modal(&#34;transfer&#34;)" src="resources/transfer.svg"/></div><div id="currentAmount" class="column closed"></div><div id="uplink" class="column"><img id="uplink" src="resources/uplink.png"></div></div><div class="row clearfix"><div class="column full"><div id="chart" class="bordercontainer"></div></div></div><div class="row clearfix"><div class="column third"><ul id="transactions" class="bordercontainer"></ul></div></div></div>');
 	$('form#transferform #from').append('<div onclick="depoSelectTransF(&quot;'+transf+'&quot;)" id="'+transf+'" class="depoption">'+transf+'</div>');
 	$('form#transferform #to').append('<div onclick="depoSelectTransT(&quot;'+transt+'&quot;)" id="'+transt+'" class="depoption">'+transt+'</div>');
 	$.each(budget.getDeposits(), function() {
@@ -858,16 +859,16 @@ function displayDash() {
 	//insert  transactionlist
 	showTransactions();
 	//$('#monthlybudget').html('<div class="amount">'+MonthlyBudget()+"€</div>This Month's Budget");
-};
+}
 function depoSelect(depoName) {
-	if(selectOpen == 0) {
+	if(selectOpen === 0) {
 		$("#currentAmount").toggleClass("closed");
 		$("#currentAmount").toggleClass("open");
 		selectOpen = 1;
 	} else {
 		deposit = depoName;
 		displayDash();
-		$('#currentAmount').html(' ')
+		$('#currentAmount').html(' ');
 		$('#currentAmount').append('<div onclick="depoSelect(&quot;'+deposit+'&quot;)" id="'+deposit+'" class="depoption"><span class="deponame">'+deposit+'</span><span class="depoamount">'+currentAmount(deposit)+'€</span><div style="clear: both"></div></div>');
 		$.each(budget.getDeposits(), function() {
 			if(this.getName() !== deposit){
@@ -882,7 +883,7 @@ function depoSelect(depoName) {
 }
 function depoSelectTransF(depoName) {
 	transf = depoName;
-	if(selectTFOpen == 0) {
+	if(selectTFOpen === 0) {
 		$("form#transferform #from").css("z-index","99");
 		$("form#transferform #from").css("margin-bottom","10px");
 		$("form#transferform #from").css("height","231px");
@@ -890,7 +891,7 @@ function depoSelectTransF(depoName) {
 		selectTFOpen = 1;
 	} else {
 		transF = depoName;
-		$('form#transferform #from').html(' ')
+		$('form#transferform #from').html(' ');
 		$("form#transferform #from").css("height","28px");
 		$("form#transferform #from").css("margin-bottom","0px");
 		$("form#transferform #from").css("border","none");
@@ -906,7 +907,7 @@ function depoSelectTransF(depoName) {
 }
 function depoSelectTransT(depoName) {
 	transt = depoName;
-	if(selectTTOpen == 0) {
+	if(selectTTOpen === 0) {
 		$("form#transferform #to").css("z-index","99");
 		$("form#transferform #to").css("margin-bottom","10px");
 		$("form#transferform #to").css("height","231px");
@@ -914,7 +915,7 @@ function depoSelectTransT(depoName) {
 		selectTTOpen = 1;
 	} else {
 		transF = depoName;
-		$('form#transferform #to').html(' ')
+		$('form#transferform #to').html(' ');
 		$("form#transferform #to").css("height","28px");
 		$("form#transferform #to").css("margin-bottom","0px");
 		$("form#transferform #to").css("border","none");
@@ -956,9 +957,9 @@ function displayDeposits(){
 		while(incDate.between(firstDate,currentDate)){
 			//console.log(incDate);
 			if(i == -1) {
-				var sumOT = this.getStartAmount();
+				sumOT = this.getStartAmount();
 			} else {
-				var sumOT = amountArray[i];
+			  sumOT = amountArray[i];
 			}
 			//console.log(sumOT);
 			sumOT += DailySum('receive',this.getName(),incDate);
@@ -1229,4 +1230,17 @@ function repositionTransactions(){
 	// console.log(transactionList[newest(0)].getDate());
 	// console.log(transactionList[newest(1)].getDate());
 	// console.log(transactionList[newest(2)].getDate());
+}
+function displayUpload() {
+	$(window).on('beforeunload', function(e) {
+		if(hasUnsaved()) {
+				return 'You have unsaved stuff. Are you sure to leave?';
+		}
+	});
+	console.log("animation fired");
+	$("#uplink img").attr('img', 'upload.gif');
+}
+function hideUpload() {
+	console.log("returned no normal uplink pic");
+	$("#uplink img").attr('img', 'uplink.png');
 }
