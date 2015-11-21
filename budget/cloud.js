@@ -16,6 +16,11 @@ function loadData(callback) {
 		$.each(data.recurringTransactions, function() {
 			budget.addRecurringTransaction(this.name,this.type,this.deposit,this.amount,this.date);
 		});
+		console.log("addingHistory0");
+		$.each(data.history, function() {
+			console.log("addingHistory");
+			budget.log(this.action,this.store,this.date);
+		});
 		//console.log(JSON.stringify(budget));
 		callback();
 	});
@@ -24,7 +29,7 @@ function loadData(callback) {
 function saveData(callback) {
 	displayUpload();
 	$.post('/apps/budget/savejson.php', {json: JSON.stringify(budget)});
-	callback();	
+	callback();
 }
 function processInput(callback) {
 	var name = $("input[type='text']").val();
