@@ -1,0 +1,32 @@
+<html lang="de" xml:lang="de">
+
+  <head>
+        <title>Tyma</title>
+		<!--Meta-->
+		<meta name="apple-mobile-web-app-title" content="Sandgasse">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Favicon -->
+    <link rel="shortcut icon" 	type="image/x-icon" href="http://www.thebluneproject.de/apps/budget/resources/favicon.ico">
+		<!-- CSS -->
+    <link rel="stylesheet" media="all" type="text/css" href="http://www.thebluneproject.de/apps/resources/normalize.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="style.css" />
+			<!-- Javascript -->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js" charset="UTF-8"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" charset="UTF-8"></script>
+    <script src="script.js" charset="UTF-8"></script>
+    <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+	</head>
+  <body>
+    <div id="welcome" style="display: none">
+      <span>Authorize access to Drive API</span>
+      <!--Button for the user to click to initiate auth sequence -->
+      <button id="authorize-button" onclick="handleAuthClick(event)">
+        Authorize
+      </button>
+    </div>    
+	</body>
+</html>
