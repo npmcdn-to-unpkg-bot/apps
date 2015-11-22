@@ -63,12 +63,18 @@ function getFile() {
   });
   request.execute(function(resp) {
     download_url = resp.exportLinks['text/csv'];
-    $.post('fetchfile.php', {url: download_url}, function() {
-      console.log("waiting for php script url:"+download_url);
-    })
-    .done(function( data ) {
-      alert( "Data Loaded: " + data );
-    });
+    console.log(download_url);
+    var accessToken = gapi.auth.getToken().access_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', file.downloadUrl);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+    xhr.onload = function() {
+      console.log(xhr.responseText);
+    };
+    xhr.onerror = function() {
+      console.log(xhr.statusText);
+    };
+    xhr.send();
   });
 }
 
