@@ -67,7 +67,7 @@ function getFile() {
     var accessToken = gapi.auth.getToken().access_token;
     var xhr = new XMLHttpRequest();
     if ("withCredentials" in xhr) {
-      xhr.open('GET',download_url + '?access_token=' + encodeURIComponent(oauthToken.access_token));
+      xhr.open('GET',download_url + '?access_token=' + encodeURIComponent(access_token));
       xhr.onload = function() {
         var responseText = xhr.responseText;
         console.log(responseText);
