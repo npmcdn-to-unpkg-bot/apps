@@ -1,0 +1,119 @@
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+position: relative;
+transition: all 0.6s ease-in-out 0s;
+font-family: helvetica, arial;
+}
+svg {
+  fill: currentColor;
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.nodrag {
+	pointer-events: none;
+}
+body {
+  background: none repeat scroll 0 0 white;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 30px;
+  position: fixed;
+}
+input {
+  font-size: 16px;
+}
+/************************************************************************
+Grid-Settings
+*************************************************************************/
+.loada {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background: #f1f1f1;
+}
+.loadasvgcontainer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: default;
+	pointer-events: none;
+  top: 0;
+	height: 100%;
+	transform: translate3d(0,50%,0);
+}
+.loadasvg {
+	display: block;
+	margin: 0 auto;
+}
+.loadasvgcontainer svg {
+  min-width: 100px;
+	max-width: 250px;
+	width: 25%;
+  height: auto;
+  transform: translate3d(0,-50%,0);
+}
+.loadasvgcontainer svg path {
+  fill: none;
+  stroke-width: 6;
+}
+.loadasvgcontainer svg path.loadasvg-circlebg {
+	stroke: #ddd;
+}
+.loadasvgcontainer svg path.loadasvg-circle {
+	transition: stroke-dashoffset 0.2s;
+	stroke: #ef6e7e;
+}
+.main {
+  height: 400px;
+  width: 400px;
+  background: #ef6e7e;
+  overflow: hidden;
+}
+/********
+Animations
+********/
+.loading .loadasvgcontainer {
+	opacity: 1;
+	animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
+}
+.loading .loadasvgcontainer {
+	animation-delay: 0.2s;
+}
+@keyframes animInitialHeader {
+	from {
+		opacity: 0;
+		transform: translate3d(0,800px,0);
+	}
+}
+.loaded .loadasvgcontainer {
+	opacity: 1;
+  animation: animLoadedLoader 0.5s cubic-bezier(0.7,0,0.3,1) forwards;
+}
+@keyframes animLoadedLoader {
+	to {
+		opacity: 0;
+		transform: translate3d(0,-100%,0) scale3d(0.3,0.3,1);
+	}
+}
+.loaded .loada {
+	animation: animLoadedHeader 1s cubic-bezier(0.7,0,0.3,1) forwards;
+}
+
+@keyframes animLoadedHeader {
+	to { transform: translate3d(0,-100%,0); }
+}
+.layout-switch .loada {
+	position: absolute;
+}
