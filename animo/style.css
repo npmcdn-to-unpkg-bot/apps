@@ -52,13 +52,17 @@ Grid-Settings
   left: -150px;
   opacity: 0;
   transition: all 0.6s ease-in-out, opacity 0.3s ease-in-out;
+  animation: in 1s ease 2s 1 forwards;
 }
-#wrapper:hover #box {
-  transform: rotate(0.25turn);
-  top: 2%;
-  left: 5%;
-  opacity: 1;
+@keyframes in {
+  100% {
+    transform: rotate(0.25turn);
+    top: 2%;
+    left: 5%;
+    opacity: 1;
+  }
 }
+
 #header {
   width: 400px;
   height: 100px;
@@ -69,12 +73,15 @@ Grid-Settings
   right: 50px;
   opacity: 0;
   transition: all 0.6s ease-in-out, opacity 0.3s ease-in-out;
+  animation: ina 1s ease 2s 1 forwards;
 }
-#wrapper:hover #header {
-  transform: rotate(0);
-  top: 2%;
-  right: 5%;
-  opacity: 1;
+@keyframes ina {
+  100% {
+    transform: rotate(0);
+    top: 2%;
+    right: 5%;
+    opacity: 1;
+  }
 }
 .text {
   width: 265px;
@@ -89,24 +96,30 @@ Grid-Settings
   top: 30%;
   left: -330px;
   transition: all 0.6s ease-in-out, opacity 0.3s ease-in-out;
+  animation: inb 1s ease 2s 1 forwards;
 }
-#wrapper:hover .left {
-  transform: rotate(0);
-  top: 16%;
-  left: 5%;
-  opacity: 1;
+@keyframes inb {
+  100% {
+    transform: rotate(0);
+    top: 16%;
+    left: 5%;
+    opacity: 1;
+  }
 }
 .right {
   transform: rotate(0.1turn);
   top: 10%;
   right: -350px;
   transition: all 0.6s ease-in-out, opacity 0.3s ease-in-out;
+  animation: inc 1s ease 2s 1 forwards;
 }
-#wrapper:hover .right {
-  transform: rotate(0);
-  top: 16%;
-  right: 5%;
-  opacity: 1;
+@keyframes inc {
+  100% {
+    transform: rotate(0);
+    top: 16%;
+    right: 5%;
+    opacity: 1;
+  }
 }
 .fulltext {
   width: 540px;
@@ -118,9 +131,12 @@ Grid-Settings
   top: 100%;
   opacity: 0;
   transition: all 0.6s ease-in-out, opacity 0.3s ease-in-out;
+  animation: ind 1s ease 2s 1 forwards;
 }
-#wrapper:hover .fulltext {
-  transform: translateY(0px);
-  top: 43%;
-  opacity: 1;
+@keyframes ind {
+  100% {
+    transform: translateY(0px);
+    top: 43%;
+    opacity: 1;
+  }
 }

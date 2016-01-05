@@ -21,7 +21,7 @@ svg {
 	pointer-events: none;
 }
 body {
-  background: none repeat scroll 0 0 white;
+  background: none repeat scroll 0 0 #f1f1f1;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -34,86 +34,30 @@ input {
 /************************************************************************
 Grid-Settings
 *************************************************************************/
-.loada {
+#wrapper {
+  width: 100%;
   height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 100;
-  background: #f1f1f1;
-}
-.loadasvgcontainer {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  cursor: default;
-	pointer-events: none;
-  top: 0;
-	height: 100%;
-	transform: translate3d(0,50%,0);
-}
-.loadasvg {
-	display: block;
-	margin: 0 auto;
-}
-.loadasvgcontainer svg {
-  min-width: 100px;
-	max-width: 250px;
-	width: 25%;
-  height: auto;
-  transform: translate3d(0,-50%,0);
-}
-.loadasvgcontainer svg path {
-  fill: none;
-  stroke-width: 6;
-}
-.loadasvgcontainer svg path.loadasvg-circlebg {
-	stroke: #ddd;
-}
-.loadasvgcontainer svg path.loadasvg-circle {
-	transition: stroke-dashoffset 0.2s;
-	stroke: #ef6e7e;
-}
-.main {
-  height: 400px;
-  width: 400px;
-  background: #ef6e7e;
+  background: white;
+  position: relative;
+  top: 50%;
+  margin: auto;
   overflow: hidden;
 }
-/********
-Animations
-********/
-.loading .loadasvgcontainer {
-	opacity: 1;
-	animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
-}
-.loading .loadasvgcontainer {
-	animation-delay: 0.2s;
-}
-@keyframes animInitialHeader {
-	from {
-		opacity: 0;
-		transform: translate3d(0,800px,0);
-	}
-}
-.loaded .loadasvgcontainer {
-	opacity: 1;
-  animation: animLoadedLoader 0.5s cubic-bezier(0.7,0,0.3,1) forwards;
-}
-@keyframes animLoadedLoader {
-	to {
-		opacity: 0;
-		transform: translate3d(0,-100%,0) scale3d(0.3,0.3,1);
-	}
-}
-.loaded .loada {
-	animation: animLoadedHeader 1s cubic-bezier(0.7,0,0.3,1) forwards;
-}
+#ring {
+  width: 300px;
+  background: #ef6e7e;
+  position: relative;
+  margin: auto;
 
-@keyframes animLoadedHeader {
-	to { transform: translate3d(0,-100%,0); }
+  /*transition: all 0.6s ease-in-out, opacity 0.3s ease-in-out;
+  animation: in 1s ease 2s 1 forwards;*/
 }
-.layout-switch .loada {
-	position: absolute;
+@keyframes in {
+  100% {
+    transform: rotate(0.25turn);
+    top: 2%;
+    left: 5%;
+    opacity: 1;
+  }
 }
+#circle
