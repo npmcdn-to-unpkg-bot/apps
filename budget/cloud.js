@@ -17,11 +17,11 @@ function loadData(callback) {
 		$.each(data.recurringTransactions, function() {
 			budget.addRecurringTransaction(this.name,this.type,this.deposit,this.amount,this.date);
 		});
-		console.log("addingHistory0");
-		$.each(data.history, function() {
-			console.log("addingHistory");
-			budget.log(this.action,this.store,this.date);
-		});
+		//console.log("addingHistory");
+		//$.each(data.history, function() {
+			//console.log("addingHistory");
+			//budget.log(this.action,this.store,this.date);
+		//});
 		//console.log(JSON.stringify(budget));
 		callback();
 	}, 'json');
