@@ -1,10 +1,10 @@
 $('document').ready(function() {
 	//authStatus = localStorage.getItem('Blunified');
 
-	if (authStatus !== 'true') {
-		alert("permission denied.");
-		return;
-	}
+	//if (authStatus !== 'true') {
+		//alert("permission denied.");
+		//return;
+	//}
 	//Global variables - StartUp Settings
 	monthStrings = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 	itemcount = 1;
