@@ -1,5 +1,5 @@
 $('document').ready(function() {
-	authStatus = localStorage.getItem('Blunified');
+	//authStatus = localStorage.getItem('Blunified');
 
 	if (authStatus !== 'true') {
 		alert("permission denied.");
