@@ -1,5 +1,5 @@
 function loadData(callback) {
-	$.getJSON( "/data/budget.json", function( data ) {
+	$.post( "/data/budget.json", function( data ) {
 		// var amount = data.startAmount;
 		// budget.setCurrentStartAmount(amount);
 		data.deposits = data.deposits.reverse();
@@ -23,7 +23,7 @@ function loadData(callback) {
 		});
 		//console.log(JSON.stringify(budget));
 		callback();
-	});
+	}, 'json');
 }
 
 function saveData(callback) {
