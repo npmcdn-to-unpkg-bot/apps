@@ -1,5 +1,5 @@
 function loadData(callback) {
-	$.post( "/data/budget.json", function( data ) {
+	$.post( "/data/budget.json", data, function( response ) {
 		// var amount = data.startAmount;
 		// budget.setCurrentStartAmount(amount);
 		data.deposits = data.deposits.reverse();
