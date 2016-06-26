@@ -1,0 +1,74 @@
+<html lang="de" xml:lang="de">
+
+  <head>
+        <title>Tyma</title>
+		<!--Meta-->
+		<meta name="apple-mobile-web-app-title" content="Sandgasse">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Favicon -->
+    <link rel="shortcut icon" 	type="image/x-icon" href="http://www.thebluneproject.de/apps/budget/resources/favicon.ico">
+		<!-- CSS -->
+    <link rel="stylesheet" media="all" type="text/css" href="http://www.thebluneproject.de/apps/resources/normalize.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="style.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.6.5/css/jquery.mmenu.all.min.css"/>
+		<link rel="stylesheet" media="all" type="text/css" href="menu.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="https://npmcdn.com/flickity@1.2/dist/flickity.min.css">
+		<!-- Javascript -->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js" charset="UTF-8"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" charset="UTF-8"></script>
+		<script src="/apps/resources/date.js/build/date-en-US.js" charset="UTF-8"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js" charset="UTF-8"></script>
+<!-- 		<script src="http://momentjs.com/downloads/moment-with-locales.js" charset="UTF-8"></script> -->
+    <!--Mmenu-->
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.6.5/js/jquery.mmenu.all.min.js" type="text/javascript"></script>
+		<script src="http://hammerjs.github.io/dist/hammer.min.js" charset="UTF-8"></script>
+		<script src="data.js" charset="UTF-8"></script>
+		<script src="constructor.js" charset="UTF-8"></script> 
+		<script src="script.js" charset="UTF-8"></script>  
+		<!--Flickity-->
+		<script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.min.js"></script>
+    
+	</head>
+  <body> 
+		<nav id="my-menu">
+			<ul>
+				<li><a onclick="plotDays();closeMenu()">Overview</a></li>
+			</ul>
+		</nav>
+		<div id="pagewrapper">
+			<header>
+				<a id="menulink" href="#my-menu">
+					<img id="menuimage" class="svg" src="resources/menu.svg" /> 
+				</a>
+				<div id="changedisplay" onClick="plotDayInBars()">
+					<img id="changeimage" class="svg" src="resources/chart.svg" /> 
+				</div>
+			</header>
+			<div class="js-flickity" data-flickity-options='{"setGallerySize": false,"prevNextButtons": false, "rightToLeft": true}'>
+				<div class="chartcontainer">
+					<canvas id="myChart01"></canvas>
+					<div class="charttext">
+						Today
+					</div>
+				</div>
+				<div class="chartcontainer">
+					<canvas id="myChart02"></canvas>
+					<div class="charttext">
+						Yesterday
+					</div>
+				</div>
+				<div class="chartcontainer">
+					<div class="finaltext">
+						End of records.
+					</div>
+				</div>
+			</div>
+			<div id="listcontainer">
+			</div>
+		</div>
+	</body>
+</html>

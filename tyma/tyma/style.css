@@ -1,0 +1,133 @@
+*, *:before, *:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+position: relative;
+/* transition: all 0.6s ease-in-out 0s; */
+font-family: helvetica, arial;
+}
+svg {
+  fill: currentColor;
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.nodrag {
+	pointer-events: none;
+}
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 30px;
+  position: fixed;
+  background: none repeat scroll 0 0 white;
+}
+input {
+  font-size: 16px;
+}
+/************************************************************************
+Basic-Settings
+*************************************************************************/
+#pagewrapper {
+	background: white;
+}
+header {
+	width: 100%;
+	height: 50px;
+	display: block;
+	background: none;
+	margin-bottom: 15px;
+}
+header a {
+	height: 36px;
+	width: 36px;
+	display: block;
+	position: relative;
+	top: 0;
+	padding: 7px;
+}
+header a#menulink{
+	float: left;
+}
+#menuimage{
+	width: 36px;
+	height: 36px;
+	display: block;
+	position: relative;
+	fill: black;
+	cursor:pointer;
+}
+header div#changedisplay{
+	height: 36px;
+	width: 36px;
+	display: block;
+	position: relative;
+	top: 0;
+	padding: 7px;
+	float: right;
+}
+#changeimage{
+	width: 50px;
+	height: 50px;
+	display: block;
+	position: relative;
+	left: -20px;
+		top: -5px;
+	fill: black;
+	cursor: pointer;
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+}
+.chartcontainer {
+  width: 180%;
+	display: block;
+	position: relative;
+	counter-increment: gallery-cell;
+}
+.charttext {
+	width: 22%;
+	height: 50px;
+	overflow: hidden;
+	position: absolute;
+	top: 46%;
+	left: 39%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+	font-size: 40px;
+	font-weight: bold
+}
+.finaltext {
+	width: 50%;
+	height: 50px;
+	overflow: hidden;
+	position: absolute;
+	top: 50px;
+	left: 25%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+	font-size: 40px;
+	font-weight: bold
+}
+#listcontainer {
+  width: 100%;
+	display: block;
+	position: relative;
+}
+/* .carousel { height: 100%; }
+.carousel-cell { height: 100% } */
+@media (max-width:700px) {
+	.charttext {
+		top: 43%;
+		font-size: 30px;
+	}
+}
